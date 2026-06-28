@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ASTRA LOKA — An AI Civilization. Ancient Wisdom. Future Intelligence. Built by Pranav Kumar.">
+<title>ASTRA LOKA — Ancient Wisdom. Future Intelligence.</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23030712'/><text y='25' x='4' font-size='22'>ॐ</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#03070f;--bg2:#060d1a;--bg3:rgba(255,255,255,.042);--bg4:rgba(255,255,255,.07);
+  --border:rgba(255,255,255,.065);--bgl:rgba(99,179,237,.28);
+  --blue:#3b82f6;--cyan:#06b6d4;--purple:#8b5cf6;--gold:#f59e0b;
+  --green:#10b981;--red:#ef4444;--pink:#ec4899;--orange:#f97316;
+  --txt:#f1f5f9;--txt2:#94a3b8;--txt3:#475569;
+  --fd:'Space Grotesk',sans-serif;--fm:'IBM Plex Mono',monospace;--fc:'Cinzel',serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;font-family:var(--fd);background:var(--bg);color:var(--txt)}
+a{color:inherit;text-decoration:none}button{font-family:inherit;border:none;background:none}
+ul{list-style:none}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(99,179,237,.22);border-radius:2px}
+
+/* ── CURSOR ── */
+#cd{position:fixed;width:8px;height:8px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:screen;transition:width .15s,height .15s;cursor:none}
+#cr{position:fixed;width:32px;height:32px;border:1px solid rgba(6,182,212,.38);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .28s,height .28s,border-color .28s;cursor:none}
+body{cursor:none}a,button{cursor:none}
+
+/* ── BOOT ── */
+#boot{position:fixed;inset:0;z-index:6000;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity .9s ease}
+#boot.out{opacity:0;pointer-events:none}
+.b-om{font-size:5.5rem;line-height:1;animation:omB 2.2s ease-in-out infinite alternate}
+@keyframes omB{from{filter:drop-shadow(0 0 18px rgba(245,158,11,.5)) drop-shadow(0 0 40px rgba(99,179,237,.2))}to{filter:drop-shadow(0 0 36px rgba(245,158,11,.9)) drop-shadow(0 0 80px rgba(245,158,11,.4)) drop-shadow(0 0 140px rgba(139,92,246,.3))}}
+.b-title{font-family:var(--fc);font-size:2.2rem;letter-spacing:.35em;background:linear-gradient(135deg,#f59e0b,#06b6d4,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.b-sub{font-family:var(--fm);font-size:.68rem;color:var(--txt3);letter-spacing:.28em;text-transform:uppercase}
+.b-term{width:440px;max-width:88vw;font-family:var(--fm);font-size:.74rem;min-height:148px;color:var(--green);line-height:1}
+.b-bl{line-height:2.1}
+.b-bw{width:320px;max-width:82vw;height:1px;background:rgba(255,255,255,.07);margin-top:4px}
+.b-bf{height:100%;background:linear-gradient(90deg,var(--gold),var(--cyan),var(--purple));width:0;transition:width .32s ease}
+.b-pct{font-family:var(--fm);font-size:.65rem;color:var(--txt3);letter-spacing:.06em}
+
+/* ── APP GRID ── */
+#app{position:fixed;inset:0;display:grid;grid-template-rows:52px 1fr 128px 20px;grid-template-columns:220px 1fr 262px;visibility:hidden}
+#app.show{visibility:visible}
+
+/* ── TOP NAV ── */
+#nav{grid-column:1/-1;grid-row:1;background:rgba(3,7,15,.92);backdrop-filter:blur(22px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 14px;gap:10px;z-index:200}
+.n-logo{display:flex;align-items:center;gap:8px;font-family:var(--fc);font-size:.92rem;letter-spacing:.1em;color:var(--gold);white-space:nowrap}
+.n-om{font-size:1.5rem;animation:omB 3s ease-in-out infinite alternate;display:inline-block}
+.n-div{width:1px;height:22px;background:var(--border);margin:0 4px;flex-shrink:0}
+.n-links{display:flex;gap:1px;flex:1}
+.n-lk{padding:5px 12px;font-size:.76rem;color:var(--txt3);border-radius:4px;transition:.2s;letter-spacing:.04em;white-space:nowrap}
+.n-lk:hover,.n-lk.on{color:var(--txt);background:rgba(255,255,255,.055)}
+.n-lk.on{position:relative}.n-lk.on::after{content:'';position:absolute;bottom:-1px;left:12px;right:12px;height:1px;background:var(--gold)}
+.n-r{display:flex;align-items:center;gap:7px;margin-left:auto}
+.n-kd{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border:1px solid var(--border);border-radius:4px;font-size:.72rem;color:var(--txt3);background:var(--bg3);transition:.2s;white-space:nowrap}
+.n-kd:hover{border-color:var(--bgl);color:var(--txt2)}
+.n-kd kbd{font-family:var(--fm);font-size:.58rem;padding:1px 4px;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:2px}
+.n-ib{width:28px;height:28px;border-radius:5px;display:flex;align-items:center;justify-content:center;color:var(--txt3);font-size:.82rem;transition:.2s;border:1px solid transparent;position:relative}
+.n-ib:hover{background:var(--bg3);border-color:var(--border);color:var(--txt2)}
+.n-nd{width:6px;height:6px;border-radius:50%;background:var(--red);position:absolute;top:2px;right:2px;box-shadow:0 0 5px var(--red)}
+.n-cmd{display:flex;align-items:center;gap:7px;padding:4px 9px;border:1px solid var(--border);border-radius:5px}
+.n-av{width:24px;height:24px;border-radius:50%;border:1px solid rgba(245,158,11,.4);overflow:hidden;flex-shrink:0;background:rgba(245,158,11,.08);display:flex;align-items:center;justify-content:center}
+.n-av img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.n-nm{font-size:.7rem;color:var(--txt2)}.n-rl{font-size:.6rem;color:var(--txt3);font-family:var(--fm)}
+
+/* ── LEFT PANEL ── */
+#lp{grid-column:1;grid-row:2;background:rgba(3,7,15,.86);backdrop-filter:blur(18px);border-right:1px solid var(--border);overflow-y:auto;padding:12px 11px;display:flex;flex-direction:column;gap:9px}
+.ls{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px 13px}
+.ls-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+.ls-t{font-size:.66rem;color:var(--txt3);letter-spacing:.14em;text-transform:uppercase;font-family:var(--fm)}
+.ls-lv{display:flex;align-items:center;gap:4px;font-family:var(--fm);font-size:.6rem;color:var(--green)}
+.ldot{width:5px;height:5px;border-radius:50%;background:currentColor;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.38;transform:scale(.6)}}
+.ls-os{font-size:.9rem;font-weight:600;margin-bottom:2px}.ls-ver{font-family:var(--fm);font-size:.62rem;color:var(--txt3)}
+.ls-up{font-family:var(--fm);font-size:.68rem;color:var(--txt2);margin-top:5px}
+.ls-big{font-family:var(--fd);font-size:1.55rem;font-weight:700;line-height:1;margin-bottom:3px}
+.ls-sub{font-size:.64rem;color:var(--txt3);font-family:var(--fm)}
+.ls-hlth{font-family:var(--fd);font-size:1.65rem;font-weight:700;color:var(--green);text-shadow:0 0 14px rgba(16,185,129,.38)}
+.sparkwrap{height:26px;margin-top:5px}
+.mi{margin-bottom:6px}.mi-hd{display:flex;justify-content:space-between;font-size:.7rem;margin-bottom:3px}
+.mi-nm{color:var(--txt2);font-weight:500}.mi-pct{font-family:var(--fm);font-size:.65rem}
+.mi-bar{height:3px;background:var(--border);border-radius:2px;overflow:hidden}
+.mi-f{height:100%;border-radius:2px}
+.see-btn{font-family:var(--fm);font-size:.6rem;color:var(--txt3);transition:.2s}.see-btn:hover{color:var(--cyan)}
+.lp-btn{width:100%;padding:7px;border:1px solid var(--border);border-radius:6px;font-size:.7rem;color:var(--txt2);background:var(--bg3);display:flex;align-items:center;justify-content:space-between;font-family:var(--fm);transition:.2s}
+.lp-btn:hover{border-color:var(--bgl);color:var(--txt)}
+
+/* ── CENTER ── */
+#center{grid-column:2;grid-row:2;position:relative;overflow:hidden;background:#000}
+#cosmos{position:absolute;inset:0;width:100%;height:100%;display:block}
+.ptip{position:absolute;background:rgba(3,7,18,.96);border:1px solid rgba(99,179,237,.26);border-radius:12px;padding:13px 15px;font-family:var(--fm);font-size:.73rem;pointer-events:none;z-index:300;min-width:206px;backdrop-filter:blur(20px);opacity:0;transition:opacity .18s;box-shadow:0 8px 32px rgba(0,0,0,.45)}
+.ptip.on{opacity:1}
+.pt-nm{font-family:var(--fd);font-size:.98rem;font-weight:700;margin-bottom:2px}
+.pt-rl{font-size:.62rem;color:var(--txt3);letter-spacing:.07em;text-transform:uppercase;margin-bottom:9px;font-family:var(--fm)}
+.pt-rw{display:flex;justify-content:space-between;gap:12px;margin-bottom:3px;font-size:.7rem}
+.pt-k{color:var(--txt3)}.pt-v{font-weight:500}
+.pt-bw{height:3px;background:var(--border);border-radius:2px;overflow:hidden;margin-top:7px;margin-bottom:2px}
+.pt-bf{height:100%;border-radius:2px}
+.pt-btns{display:flex;gap:5px;margin-top:9px}
+.pt-b{flex:1;padding:5px 7px;border-radius:5px;font-size:.66rem;font-family:var(--fm);text-align:center;border:1px solid var(--border);color:var(--txt2);transition:.2s}
+.pt-b:hover{background:var(--bg4);color:var(--txt)}
+.pt-b.pr{background:linear-gradient(135deg,var(--blue),var(--purple));border-color:transparent;color:#fff}
+
+/* ── RIGHT PANEL ── */
+#rp{grid-column:3;grid-row:2;background:rgba(3,7,15,.86);backdrop-filter:blur(18px);border-left:1px solid var(--border);overflow-y:auto;padding:12px 11px;display:flex;flex-direction:column;gap:9px}
+.rs{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px 13px}
+.rs-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+.rs-t{font-size:.66rem;color:var(--txt3);letter-spacing:.14em;text-transform:uppercase;font-family:var(--fm)}
+.rs-lv{font-family:var(--fm);font-size:.6rem;color:var(--cyan)}
+.li{display:flex;gap:7px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.035);align-items:flex-start}
+.li:last-child{border:none}
+.li-t{font-family:var(--fm);font-size:.6rem;color:var(--txt3);flex-shrink:0;margin-top:1px;white-space:nowrap}
+.li-m{font-size:.72rem;color:var(--txt2);line-height:1.4}
+.mr{margin-bottom:7px}.mr-hd{display:flex;justify-content:space-between;font-size:.7rem;margin-bottom:3px}
+.mr-nm{color:var(--txt2);font-weight:500}.mr-pct{font-family:var(--fm);font-size:.64rem}
+.mr-bar{height:3px;background:var(--border);border-radius:2px;overflow:hidden}
+.mr-f{height:100%;border-radius:2px}
+
+/* ── BOTTOM PANEL ── */
+#bp{grid-column:1/-1;grid-row:3;background:rgba(3,7,15,.93);backdrop-filter:blur(22px);border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr;z-index:100}
+.bs{padding:9px 13px;border-right:1px solid var(--border)}
+.bs:last-child{border-right:none}
+.bs-t{font-size:.61rem;color:var(--txt3);letter-spacing:.13em;text-transform:uppercase;font-family:var(--fm);margin-bottom:6px;display:flex;align-items:center;justify-content:space-between}
+.bcl{font-size:.72rem;color:var(--txt3);transition:.2s}.bcl:hover{color:var(--txt2)}
+
+/* Console */
+.con-out{height:52px;overflow-y:auto;font-family:var(--fm);font-size:.68rem;margin-bottom:5px}
+.cl{line-height:1.9}
+.cp2{color:var(--cyan)}.cok{color:var(--green)}.cw{color:var(--gold)}.ce{color:var(--red)}.cm{color:var(--txt2)}.cpu{color:var(--purple)}
+.con-in{display:flex;align-items:center;gap:6px;border-top:1px solid var(--border);padding-top:4px}
+.con-pr{color:var(--cyan);font-family:var(--fm);font-size:.68rem}
+.con-ip{flex:1;background:none;border:none;outline:none;color:var(--txt);font-family:var(--fm);font-size:.68rem;caret-color:var(--cyan)}
+
+/* Resource */
+.rm-gs{display:flex;gap:8px;justify-content:space-around;align-items:flex-end;height:70px}
+.rm-g{text-align:center}
+.rm-c{width:42px;height:42px;border-radius:50%;border:2px solid;display:flex;align-items:center;justify-content:center;font-family:var(--fm);font-size:.66rem;font-weight:600;margin:0 auto 3px}
+.rm-l{font-family:var(--fm);font-size:.56rem;color:var(--txt3);letter-spacing:.06em;text-transform:uppercase}
+
+/* Quick Launch */
+.ql{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+.qi{display:flex;flex-direction:column;align-items:center;gap:2px;padding:5px 3px;border-radius:6px;border:1px solid transparent;transition:.2s}
+.qi:hover{background:var(--bg4);border-color:var(--border)}
+.qi-ic{font-size:1.15rem}.qi-nm{font-size:.57rem;color:var(--txt3);font-family:var(--fm);text-align:center;white-space:nowrap}
+
+/* Music */
+.mu-info{display:flex;align-items:center;gap:7px;margin-bottom:5px}
+.mu-art{width:30px;height:30px;border-radius:5px;background:linear-gradient(135deg,var(--purple),var(--blue));display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
+.mu-tt{font-size:.74rem;font-weight:500}.mu-ar{font-size:.62rem;color:var(--txt3);font-family:var(--fm)}
+.mu-wave{height:20px;display:flex;align-items:flex-end;gap:2px;margin-bottom:5px}
+.mwb{width:3px;background:var(--cyan);border-radius:2px;animation:wv 1.3s ease-in-out infinite}
+@keyframes wv{0%,100%{height:3px}50%{height:17px}}
+.mu-ctl{display:flex;align-items:center;justify-content:center;gap:9px}
+.mc2{font-size:.88rem;color:var(--txt2);transition:.2s}.mc2:hover{color:var(--txt)}
+.mp{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;font-size:.78rem;transition:.2s}
+.mp:hover{transform:scale(1.1)}
+
+/* AI Assistant */
+.ai-st{font-family:var(--fm);font-size:.6rem;color:var(--green);display:flex;align-items:center;gap:4px;margin-bottom:5px}
+.ai-ic{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--cyan));display:flex;align-items:center;justify-content:center;font-size:.85rem;margin-bottom:5px}
+.ai-msg{font-size:.72rem;color:var(--txt2);line-height:1.5;margin-bottom:5px;min-height:28px}
+.ai-iw{display:flex;gap:5px;border-top:1px solid var(--border);padding-top:5px;margin-top:3px}
+.ai-ip{flex:1;background:none;border:none;outline:none;font-family:var(--fm);font-size:.68rem;color:var(--txt);caret-color:var(--cyan)}
+.ai-sd{font-size:.78rem;color:var(--cyan);transition:.2s}.ai-sd:hover{color:#fff}
+
+/* ── STATUS BAR ── */
+#sb{grid-column:1/-1;grid-row:4;background:rgba(3,7,15,.97);border-top:1px solid var(--border);display:flex;align-items:center;padding:0 12px;gap:16px;font-family:var(--fm);font-size:.59rem;color:var(--txt3);z-index:200}
+.sb-d{width:1px;height:10px;background:var(--border)}
+.sb-it{display:flex;align-items:center;gap:4px}
+.sb-dt{width:5px;height:5px;border-radius:50%}
+.sb-r{margin-left:auto;display:flex;align-items:center;gap:14px}
+
+/* ── COMMAND PALETTE ── */
+#cp{position:fixed;inset:0;z-index:3000;display:flex;align-items:flex-start;justify-content:center;padding-top:12vh;background:rgba(3,7,15,.9);backdrop-filter:blur(28px);opacity:0;pointer-events:none;transition:.28s}
+#cp.open{opacity:1;pointer-events:all}
+.cp-bx{width:570px;max-width:90vw;background:rgba(5,10,24,.97);border:1px solid rgba(99,179,237,.18);border-radius:16px;overflow:hidden;box-shadow:0 48px 96px rgba(0,0,0,.6);transform:translateY(-14px) scale(.96);transition:.28s}
+#cp.open .cp-bx{transform:translateY(0) scale(1)}
+.cp-s{display:flex;align-items:center;gap:9px;padding:13px 16px;border-bottom:1px solid var(--border)}
+.cp-ic{color:var(--txt3)}.cp-ip{flex:1;background:none;border:none;outline:none;font-family:var(--fm);font-size:.85rem;color:var(--txt);caret-color:var(--cyan)}
+.cp-es{font-family:var(--fm);font-size:.6rem;padding:2px 6px;background:var(--bg3);border:1px solid var(--border);border-radius:3px;color:var(--txt3)}
+.cp-ls{max-height:390px;overflow-y:auto;padding:6px}
+.cp-r{display:flex;align-items:center;gap:9px;padding:8px 11px;border-radius:5px;transition:.16s}
+.cp-r:hover,.cp-r.sel{background:var(--bg4)}
+.cp-ri{font-size:.88rem;width:20px;text-align:center}.cp-rn{font-size:.82rem;font-weight:500;flex:1}.cp-rt{font-size:.62rem;color:var(--txt3);font-family:var(--fm)}
+.cp-hl{padding:6px 11px 2px;font-size:.61rem;letter-spacing:.14em;text-transform:uppercase;color:var(--txt3);font-family:var(--fm)}
+
+/* ── TAGS ── */
+.tag{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border-radius:99px;font-family:var(--fm);font-size:.61rem;text-transform:uppercase}
+.tl{background:rgba(16,185,129,.1);color:var(--green);border:1px solid rgba(16,185,129,.18)}
+.tb{background:rgba(59,130,246,.1);color:var(--blue);border:1px solid rgba(59,130,246,.18)}
+.ts{background:rgba(245,158,11,.1);color:var(--gold);border:1px solid rgba(245,158,11,.18)}
+.td{background:rgba(139,92,246,.1);color:var(--purple);border:1px solid rgba(139,92,246,.18)}
+
+/* ── NOTIFICATIONS ── */
+.nw{position:fixed;top:58px;right:14px;z-index:1000;display:flex;flex-direction:column;gap:6px;pointer-events:none}
+.ni{padding:10px 12px;background:rgba(5,10,24,.96);border:1px solid var(--border);border-radius:10px;backdrop-filter:blur(18px);font-size:.76rem;max-width:255px;box-shadow:0 6px 24px rgba(0,0,0,.3);transform:translateX(108%);transition:transform .38s cubic-bezier(.34,1.56,.64,1)}
+.ni.on{transform:translateX(0)}.ni-t{font-weight:600;margin-bottom:1px;font-size:.76rem}.ni-b{color:var(--txt2);font-size:.68rem}
+</style>
+</head>
+<body>
+
+<!-- CURSORS -->
+<div id="cd"></div><div id="cr"></div>
+
+<!-- NOTIFICATIONS -->
+<div class="nw" id="nw"></div>
+
+<!-- BOOT -->
+<div id="boot">
+  <div class="b-om">ॐ</div>
+  <div class="b-title">ASTRA LOKA</div>
+  <div class="b-sub">Ancient Wisdom &nbsp;·&nbsp; Future Intelligence</div>
+  <div class="b-term" id="bt"></div>
+  <div class="b-bw"><div class="b-bf" id="bb"></div></div>
+  <div class="b-pct" id="bp2">0%</div>
+</div>
+
+<!-- COMMAND PALETTE -->
+<div id="cp" role="dialog">
+  <div class="cp-bx">
+    <div class="cp-s">
+      <span class="cp-ic">⌕</span>
+      <input id="cp-ip" class="cp-ip" type="text" placeholder="Search agents, missions, repos, commands..." autocomplete="off" spellcheck="false">
+      <span class="cp-es">ESC</span>
+    </div>
+    <div id="cp-ls" class="cp-ls"></div>
+  </div>
+</div>
+
+<!-- PLANET TOOLTIP -->
+<div class="ptip" id="ptip"></div>
+
+<!-- APP -->
+<div id="app">
+
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="n-logo">
+      <span class="n-om">ॐ</span>
+      ASTRA<br style="display:none"> LOKA
+    </div>
+    <span class="n-div"></span>
+    <div class="n-links">
+      <a href="#" class="n-lk on">MISSION CONTROL</a>
+      <a href="#" class="n-lk">AGENTS</a>
+      <a href="#" class="n-lk">REPOSITORIES</a>
+      <a href="#" class="n-lk">COMMAND CENTER</a>
+      <a href="#" class="n-lk">KNOWLEDGE CORE</a>
+      <a href="#" class="n-lk">ANALYTICS</a>
+      <a href="#" class="n-lk">SETTINGS</a>
+    </div>
+    <div class="n-r">
+      <button class="n-kd" id="pal-btn"><kbd>CTRL</kbd><kbd>K</kbd> Command Palette</button>
+      <button class="n-kd"><kbd>/</kbd> Search</button>
+      <button class="n-kd"><kbd>H</kbd> Shortcuts</button>
+      <span class="n-div"></span>
+      <div style="position:relative"><button class="n-ib">🔔<div class="n-nd"></div></button></div>
+      <button class="n-ib">⚙</button>
+      <div class="n-cmd">
+        <div class="n-av"><img src="data:image/jpeg;base64,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" alt="Pranav Kumar"></div>
+        <div><div class="n-nm">Pranav Kumar</div><div class="n-rl">Commander</div></div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- LEFT PANEL -->
+  <div id="lp">
+    <div class="ls">
+      <div class="ls-hd"><span class="ls-t">System Status</span><span class="ls-lv"><span class="ldot" style="color:var(--green)"></span>LIVE</span></div>
+      <div class="ls-os">ASTRA LOKA OS</div><div class="ls-ver">v 2.4.1</div>
+      <div class="ls-up">UPTIME &nbsp;<span id="upt">23h 47m 32s</span></div>
+    </div>
+    <div class="ls"><div class="ls-hd"><span class="ls-t">AI Agents</span><span class="ls-lv"><span class="ldot" style="color:var(--green)"></span></span></div>
+      <div class="ls-big" style="color:var(--cyan)" id="c-ag">14</div><div class="ls-sub">/ 14 Online</div></div>
+    <div class="ls"><div class="ls-hd"><span class="ls-t">Missions Active</span></div>
+      <div class="ls-big" style="color:var(--purple)" id="c-ms">07</div></div>
+    <div class="ls"><div class="ls-hd"><span class="ls-t">Tasks Executed</span></div>
+      <div class="ls-big" id="c-tk">1,248</div><div class="ls-sub">Today</div></div>
+    <div class="ls"><div class="ls-hd"><span class="ls-t">Hrs Saved</span></div>
+      <div class="ls-big" style="color:var(--gold)" id="c-hr">842</div><div class="ls-sub">This Week</div></div>
+    <div class="ls"><div class="ls-hd"><span class="ls-t">System Health</span></div>
+      <div class="ls-hlth">99.8%</div>
+      <canvas class="sparkwrap" id="spk" style="width:100%;height:26px"></canvas>
+    </div>
+    <div class="ls">
+      <div class="ls-hd"><span class="ls-t">Active Missions</span><span class="see-btn">SEE ALL ›</span></div>
+      <div class="mi"><div class="mi-hd"><span class="mi-nm">Market Expansion</span><span class="mi-pct" style="color:var(--cyan)">78%</span></div><div class="mi-bar"><div class="mi-f" style="width:78%;background:linear-gradient(90deg,var(--cyan),var(--blue))"></div></div></div>
+      <div class="mi"><div class="mi-hd"><span class="mi-nm">Career Transform OS</span><span class="mi-pct" style="color:var(--green)">92%</span></div><div class="mi-bar"><div class="mi-f" style="width:92%;background:linear-gradient(90deg,var(--green),var(--cyan))"></div></div></div>
+      <div class="mi"><div class="mi-hd"><span class="mi-nm">AI Automation Suite</span><span class="mi-pct" style="color:var(--purple)">64%</span></div><div class="mi-bar"><div class="mi-f" style="width:64%;background:linear-gradient(90deg,var(--purple),var(--pink))"></div></div></div>
+      <div class="mi"><div class="mi-hd"><span class="mi-nm">Analytics Revamp</span><span class="mi-pct" style="color:var(--blue)">88%</span></div><div class="mi-bar"><div class="mi-f" style="width:88%;background:linear-gradient(90deg,var(--blue),var(--purple))"></div></div></div>
+      <div class="mi"><div class="mi-hd"><span class="mi-nm">Content Engine</span><span class="mi-pct" style="color:var(--gold)">71%</span></div><div class="mi-bar"><div class="mi-f" style="width:71%;background:linear-gradient(90deg,var(--gold),var(--orange))"></div></div></div>
+    </div>
+    <button class="lp-btn">VIEW ALL METRICS <span>›</span></button>
+  </div>
+
+  <!-- CENTER CANVAS -->
+  <div id="center">
+    <canvas id="cosmos"></canvas>
+    <div class="ptip" id="ptip"></div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div id="rp">
+    <div class="rs">
+      <div class="rs-hd"><span class="rs-t">Mission Log</span><span class="rs-lv">LIVE FEED</span></div>
+      <div id="mlog">
+        <div class="li"><span class="li-t">10:24:53</span><span class="li-m">ॐ Core synchronized · All agents nominal</span></div>
+        <div class="li"><span class="li-t">10:24:18</span><span class="li-m">Garuda completed market research · 42 targets</span></div>
+        <div class="li"><span class="li-t">10:23:47</span><span class="li-m">Sarathi updated revenue forecast Q3</span></div>
+        <div class="li"><span class="li-t">10:23:11</span><span class="li-m">Agni deployed commit to ASTRA-LOKA</span></div>
+        <div class="li"><span class="li-t">10:22:45</span><span class="li-m">Veda updated knowledge base · 2,400 docs</span></div>
+        <div class="li"><span class="li-t">10:22:01</span><span class="li-m">Vajra triggered 9 automation workflows</span></div>
+      </div>
+      <button class="lp-btn" style="margin-top:8px">VIEW FULL LOGS <span>›</span></button>
+    </div>
+    <div class="rs">
+      <div class="rs-hd"><span class="rs-t">Active Missions</span><span class="see-btn">SEE ALL ›</span></div>
+      <div class="mr"><div class="mr-hd"><span class="mr-nm">Market Expansion</span><span class="mr-pct" style="color:var(--cyan)">78%</span></div><div class="mr-bar"><div class="mr-f" style="width:78%;background:linear-gradient(90deg,var(--cyan),var(--blue))"></div></div></div>
+      <div class="mr"><div class="mr-hd"><span class="mr-nm">Career OS</span><span class="mr-pct" style="color:var(--green)">92%</span></div><div class="mr-bar"><div class="mr-f" style="width:92%;background:linear-gradient(90deg,var(--green),var(--cyan))"></div></div></div>
+      <div class="mr"><div class="mr-hd"><span class="mr-nm">AI Automation</span><span class="mr-pct" style="color:var(--purple)">64%</span></div><div class="mr-bar"><div class="mr-f" style="width:64%;background:linear-gradient(90deg,var(--purple),var(--pink))"></div></div></div>
+      <div class="mr"><div class="mr-hd"><span class="mr-nm">Analytics Revamp</span><span class="mr-pct" style="color:var(--blue)">88%</span></div><div class="mr-bar"><div class="mr-f" style="width:88%;background:linear-gradient(90deg,var(--blue),var(--purple))"></div></div></div>
+      <div class="mr"><div class="mr-hd"><span class="mr-nm">Content Engine</span><span class="mr-pct" style="color:var(--gold)">71%</span></div><div class="mr-bar"><div class="mr-f" style="width:71%;background:linear-gradient(90deg,var(--gold),var(--orange))"></div></div></div>
+    </div>
+    <div class="rs">
+      <div class="rs-hd"><span class="rs-t">GitHub Activity</span><span class="rs-lv">CONNECT-PRANAV</span></div>
+      <div class="li"><span class="li-t" style="color:var(--green)">✓</span><span class="li-m"><a href="https://connect-pranav.github.io/ASTRA-LOKA" target="_blank" style="color:var(--cyan)">ASTRA-LOKA</a> · 3 min ago</span></div>
+      <div class="li"><span class="li-t" style="color:var(--green)">✓</span><span class="li-m"><a href="https://connect-pranav.github.io/-Career-Transformation-OS" target="_blank" style="color:var(--cyan)">Career-OS</a> · 3 days ago</span></div>
+      <div class="li"><span class="li-t" style="color:var(--green)">✓</span><span class="li-m"><a href="https://connect-pranav.github.io/MARKETO-AI" target="_blank" style="color:var(--cyan)">MARKETO-AI</a> · 2 weeks ago</span></div>
+      <div class="li"><span class="li-t" style="color:var(--gold)">↑</span><span class="li-m"><a href="https://connect-pranav.github.io/Arena-Intelligence" target="_blank" style="color:var(--cyan)">Arena-Intelligence</a> · 2 weeks</span></div>
+      <div class="li"><span class="li-t" style="color:var(--gold)">↑</span><span class="li-m"><a href="https://connect-pranav.github.io/HEIMDALL-AI" target="_blank" style="color:var(--cyan)">HEIMDALL-AI</a> · 3 weeks</span></div>
+    </div>
+    <div class="rs">
+      <div class="rs-hd"><span class="rs-t">Agent Comms</span><span class="ls-lv"><span class="ldot" style="color:var(--green)"></span>ACTIVE</span></div>
+      <div class="li"><span class="li-t">🦅</span><span class="li-m">Garuda → Brahma: 42 targets identified</span></div>
+      <div class="li"><span class="li-t">⚡</span><span class="li-m">Vajra → Nakshatra: Workflow 9 complete</span></div>
+      <div class="li"><span class="li-t">🔥</span><span class="li-m">Agni → Veda: Commit pushed, docs update</span></div>
+      <div class="li"><span class="li-t">🎯</span><span class="li-m">Sarathi → Brahma: Pipeline +₹2.4Cr</span></div>
+    </div>
+  </div>
+
+  <!-- BOTTOM PANEL -->
+  <div id="bp">
+    <div class="bs">
+      <div class="bs-t">SYSTEM CONSOLE <button class="bcl">✕</button></div>
+      <div class="con-out" id="co">
+        <div class="cl"><span class="cok">&gt; Initializing Astra Loka OS...</span></div>
+        <div class="cl"><span class="cok">&gt; Loading AI Agents... [14/14]</span></div>
+        <div class="cl"><span class="cok">&gt; Connecting Knowledge Core...</span></div>
+        <div class="cl"><span class="cok">&gt; System Ready.</span></div>
+        <div class="cl"><span class="cpu">&gt; Welcome back, Commander Pranav.</span></div>
+      </div>
+      <div class="con-in"><span class="con-pr">&gt;_</span><input id="ci" class="con-ip" type="text" placeholder="Type a command..." autocomplete="off" spellcheck="false"></div>
+    </div>
+    <div class="bs">
+      <div class="bs-t">RESOURCE MONITOR</div>
+      <div class="rm-gs">
+        <div class="rm-g"><div class="rm-c" style="border-color:var(--blue);color:var(--blue)">34%</div><div class="rm-l">CPU</div></div>
+        <div class="rm-g"><div class="rm-c" style="border-color:var(--purple);color:var(--purple)">62%</div><div class="rm-l">MEMORY</div></div>
+        <div class="rm-g"><div class="rm-c" style="border-color:var(--cyan);color:var(--cyan)">72%</div><div class="rm-l">NETWORK</div></div>
+        <div class="rm-g"><div class="rm-c" style="border-color:var(--gold);color:var(--gold)">58%</div><div class="rm-l">AI LOAD</div></div>
+      </div>
+    </div>
+    <div class="bs">
+      <div class="bs-t">QUICK LAUNCH</div>
+      <div class="ql">
+        <a href="#" class="qi"><div class="qi-ic">🤖</div><div class="qi-nm">Agents</div></a>
+        <a href="https://github.com/Connect-Pranav" target="_blank" class="qi"><div class="qi-ic">🐙</div><div class="qi-nm">Repos</div></a>
+        <a href="#" class="qi"><div class="qi-ic">📊</div><div class="qi-nm">Analytics</div></a>
+        <a href="#" class="qi"><div class="qi-ic">⌨</div><div class="qi-nm">Terminal</div></a>
+        <a href="#" class="qi"><div class="qi-ic">💬</div><div class="qi-nm">AI Chat</div></a>
+        <a href="https://connect-pranav.github.io/MARKETO-AI" target="_blank" class="qi"><div class="qi-ic">💰</div><div class="qi-nm">Finance</div></a>
+        <a href="https://connect-pranav.github.io/-Career-Transformation-OS" target="_blank" class="qi"><div class="qi-ic">🏹</div><div class="qi-nm">Career</div></a>
+        <a href="https://connect-pranav.github.io/Sales-Dashboard" target="_blank" class="qi"><div class="qi-ic">🎯</div><div class="qi-nm">Sales</div></a>
+        <a href="https://connect-pranav.github.io/HEIMDALL-AI" target="_blank" class="qi"><div class="qi-ic">👁</div><div class="qi-nm">Watch</div></a>
+        <a href="https://connect-pranav.github.io/Portfolio" target="_blank" class="qi"><div class="qi-ic">✦</div><div class="qi-nm">Portfolio</div></a>
+      </div>
+    </div>
+    <div class="bs">
+      <div class="bs-t">NOW PLAYING <button class="bcl">✕</button></div>
+      <div class="mu-info">
+        <div class="mu-art">🎵</div>
+        <div><div class="mu-tt">Cosmic Alignment</div><div class="mu-ar">Astra Loka Sounds</div></div>
+      </div>
+      <div class="mu-wave" id="mw"></div>
+      <div class="mu-ctl">
+        <button class="mc2">⏮</button><button class="mc2">⏪</button>
+        <button class="mp" id="mpl">⏸</button>
+        <button class="mc2">⏩</button><button class="mc2">⏭</button>
+      </div>
+    </div>
+    <div class="bs">
+      <div class="bs-t">ASTRA AI ASSISTANT</div>
+      <div class="ai-st"><span class="ldot" style="color:var(--green)"></span>ONLINE</div>
+      <div class="ai-ic">🌌</div>
+      <div class="ai-msg" id="aim">How can I assist you, Commander?</div>
+      <div class="ai-iw">
+        <input id="aip" class="ai-ip" type="text" placeholder="Ask anything..." autocomplete="off" spellcheck="false">
+        <button class="ai-sd" id="ais">↑</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATUS BAR -->
+  <div id="sb">
+    <div class="sb-it"><span class="sb-dt" style="background:var(--green)"></span>ASTRA LOKA OS · LIVE</div>
+    <span class="sb-d"></span>
+    <div class="sb-it">CTRL + K &nbsp;Command Palette</div>
+    <div class="sb-it">/ &nbsp;Search Anything</div>
+    <div class="sb-it">H &nbsp;Show Shortcuts</div>
+    <div class="sb-r">
+      <div class="sb-it"><span class="sb-dt" style="background:var(--green)"></span>14/14 Agents</div>
+      <div class="sb-it"><span class="sb-dt" style="background:var(--blue)"></span>12 Repos</div>
+      <div class="sb-it"><span class="sb-dt" style="background:var(--gold)"></span>7 Missions</div>
+      <span class="sb-d"></span>
+      <div id="clk" style="font-size:.61rem;color:var(--txt2)">10:24 AM</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+'use strict';
+
+/* ══════════════════════════════════════
+   BOOT SEQUENCE
+══════════════════════════════════════ */
+(function(){
+  const STEPS=[
+    {t:0,   s:'<span style="color:#334155">[ASTRA LOKA v2.4.1] Genesis Protocol initiated...</span>',p:4},
+    {t:280, s:'<span style="color:#334155">Loading BRAHMA Core Intelligence...</span>',p:14},
+    {t:540, s:'<span style="color:#10b981">✓ BRAHMA online · ॐ Core synchronized</span>',p:25},
+    {t:780, s:'<span style="color:#334155">Synchronizing 13 specialist agents...</span>',p:37},
+    {t:1010,s:'<span style="color:#10b981">✓ Vajra · Sarathi · Garuda · Arjun online</span>',p:50},
+    {t:1220,s:'<span style="color:#10b981">✓ Vak · Sudarshan · Veda · Vayu online</span>',p:62},
+    {t:1420,s:'<span style="color:#10b981">✓ Agni · Vistara · Sangam · Kavach online</span>',p:74},
+    {t:1600,s:'<span style="color:#8b5cf6">↳ Nakshatra: calibrating orbital network...</span>',p:86},
+    {t:1760,s:'<span style="color:#10b981">✓ All 14 agents synchronized · ॐ Core stable</span>',p:95},
+    {t:1920,s:'<span style="color:#06b6d4">✦ Mission Control ready · Welcome, Commander Pranav.</span>',p:100},
+  ];
+  const term=document.getElementById('bt'),bar=document.getElementById('bb'),pct=document.getElementById('bp2');
+  STEPS.forEach(s=>setTimeout(()=>{
+    const d=document.createElement('div');d.className='b-bl';d.innerHTML=s.s;
+    term.appendChild(d);term.scrollTop=term.scrollHeight;
+    bar.style.width=s.p+'%';pct.textContent=s.p+'%';
+  },s.t));
+  setTimeout(()=>{
+    const boot=document.getElementById('boot');
+    boot.classList.add('out');
+    setTimeout(()=>{
+      boot.style.display='none';
+      const app=document.getElementById('app');
+      app.classList.add('show');
+      // KEY FIX: init canvas AFTER app is visible and has layout
+      requestAnimationFrame(()=>requestAnimationFrame(()=>{
+        initCosmos();
+        initSparkline();
+        initNotifs();
+        startClock();
+        startUptime();
+        animateCounters();
+      }));
+    },900);
+  },2400);
+})();
+
+/* ══════════════════════════════════════
+   CURSOR
+══════════════════════════════════════ */
+(function(){
+  const d=document.getElementById('cd'),r=document.getElementById('cr');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;d.style.left=mx+'px';d.style.top=my+'px'});
+  (function a(){rx+=(mx-rx)*.11;ry+=(my-ry)*.11;r.style.left=rx+'px';r.style.top=ry+'px';requestAnimationFrame(a)})();
+  const expand=()=>{d.style.width='12px';d.style.height='12px';r.style.width='44px';r.style.height='44px';r.style.borderColor='rgba(6,182,212,.7)'};
+  const shrink=()=>{d.style.width='8px';d.style.height='8px';r.style.width='32px';r.style.height='32px';r.style.borderColor='rgba(6,182,212,.38)'};
+  document.querySelectorAll('a,button,.qi,.n-lk,.ls,.rs,.cp-r').forEach(el=>{
+    el.addEventListener('mouseenter',expand);el.addEventListener('mouseleave',shrink);
+  });
+})();
+
+/* ══════════════════════════════════════
+   COSMOS — SOLAR SYSTEM (called after layout)
+══════════════════════════════════════ */
+function initCosmos(){
+  const cv=document.getElementById('cosmos');
+  const ctx=cv.getContext('2d');
+  const tip=document.getElementById('ptip');
+  let W,H,T=0,hov=null;
+  let stars=[],dust=[],nebulae=[];
+
+  const AGENTS=[
+    {id:'vajra',     nm:'VAJRA',     ic:'⚡',rl:'Automation Engine',      col:'#f59e0b',gl:'rgba(245,158,11,',  or:.13,spd:.24,sz:17,load:88,st:'Active', ms:'Workflow Automation', url:'https://connect-pranav.github.io/ASTRA-LOKA',         ring:false},
+    {id:'sarathi',   nm:'SARATHI',   ic:'🎯',rl:'Strategy Advisor',       col:'#f97316',gl:'rgba(249,115,22,',  or:.18,spd:.16,sz:15,load:69,st:'Active', ms:'Sales Forecast Q3',   url:'https://connect-pranav.github.io/Sales-Dashboard',    ring:false},
+    {id:'sudarshan', nm:'SUDARSHAN', ic:'📊',rl:'Analytics Commander',    col:'#3b82f6',gl:'rgba(59,130,246,',  or:.23,spd:.12,sz:16,load:71,st:'Active', ms:'KPI Dashboards',      url:'https://connect-pranav.github.io/Linkedin-Dashboard', ring:true},
+    {id:'veda',      nm:'VEDA',      ic:'📖',rl:'Knowledge Engine',       col:'#eab308',gl:'rgba(234,179,8,',   or:.28,spd:.10,sz:14,load:43,st:'Beta',   ms:'Knowledge Base',      url:'https://connect-pranav.github.io/Portfolio',          ring:false},
+    {id:'garuda',    nm:'GARUDA',    ic:'🦅',rl:'Research Commander',     col:'#06b6d4',gl:'rgba(6,182,212,',   or:.33,spd:.14,sz:18,load:76,st:'Active', ms:'Market Research',     url:'https://connect-pranav.github.io/Arena-Intelligence', ring:false},
+    {id:'vayu',      nm:'VAYU',      ic:'🌬',rl:'Communication Officer',  col:'#10b981',gl:'rgba(16,185,129,',  or:.37,spd:.11,sz:15,load:60,st:'Active', ms:'LinkedIn Outreach',   url:'https://connect-pranav.github.io/Portfolio',          ring:false},
+    {id:'agni',      nm:'AGNI',      ic:'🔥',rl:'Code Architect',         col:'#ef4444',gl:'rgba(239,68,68,',   or:.41,spd:.18,sz:16,load:78,st:'Active', ms:'Deploy ASTRA-LOKA',   url:'https://connect-pranav.github.io/ASTRA-LOKA',         ring:false},
+    {id:'arjun',     nm:'ARJUN',     ic:'🏹',rl:'Career Agent',           col:'#60a5fa',gl:'rgba(96,165,250,',  or:.29,spd:.15,sz:15,load:82,st:'Active', ms:'Career OS',           url:'https://connect-pranav.github.io/-Career-Transformation-OS',ring:false},
+    {id:'vistara',   nm:'VISTARA',   ic:'🌍',rl:'Expansion Intelligence', col:'#22c55e',gl:'rgba(34,197,94,',   or:.43,spd:.09,sz:17,load:30,st:'Soon',   ms:'Market Expansion',    url:'https://connect-pranav.github.io/New-Market-Dashboard',ring:false},
+    {id:'sangam',    nm:'SANGAM',    ic:'🤝',rl:'Partner Network',        col:'#c084fc',gl:'rgba(192,132,252,', or:.21,spd:.13,sz:14,load:25,st:'Soon',   ms:'Partner Mapping',     url:'https://connect-pranav.github.io/Linkedin-Dashboard', ring:false},
+    {id:'kavach',    nm:'KAVACH',    ic:'🛡',rl:'Security Guardian',      col:'#94a3b8',gl:'rgba(148,163,184,', or:.46,spd:.08,sz:15,load:100,st:'Planning',ms:'Security Audit',    url:'https://connect-pranav.github.io/HEIMDALL-AI',        ring:true},
+    {id:'nakshatra', nm:'NAKSHATRA', ic:'🌌',rl:'Orchestrator',           col:'#a855f7',gl:'rgba(168,85,247,',  or:.49,spd:.07,sz:19,load:50,st:'Dev',    ms:'Multi-Agent Network', url:'https://connect-pranav.github.io/ASTRA-LOKA',         ring:true},
+    {id:'vak',       nm:'VAK',       ic:'🗣',rl:'Marketing Studio',       col:'#ec4899',gl:'rgba(236,72,153,',  or:.25,spd:.17,sz:14,load:55,st:'Beta',   ms:'Content Calendar',    url:'https://connect-pranav.github.io/Channel-IH',         ring:false},
+  ];
+  AGENTS.forEach((a,i)=>{a.ang=(i/AGENTS.length)*Math.PI*2;a.sr=Math.random()*Math.PI*2;});
+
+  function resize(){
+    const rect=cv.parentElement.getBoundingClientRect();
+    W=cv.width=Math.floor(rect.width);
+    H=cv.height=Math.floor(rect.height);
+    if(W>0&&H>0){mkStars();mkDust();mkNebulae();}
+  }
+
+  function mkStars(){
+    stars=Array.from({length:340},()=>({
+      x:Math.random()*W,y:Math.random()*H,
+      r:Math.random()*.85+.12,a:Math.random()*.6+.1,
+      ph:Math.random()*Math.PI*2,sp:Math.random()*.025+.006
+    }));
+  }
+  function mkDust(){
+    dust=Array.from({length:80},()=>({
+      x:Math.random()*W,y:Math.random()*H,
+      r:.6+Math.random()*.5,a:Math.random()*.18+.04,
+      dx:(Math.random()-.5)*.12,dy:(Math.random()-.5)*.08
+    }));
+  }
+  function mkNebulae(){
+    const cols=['#0f1f40','#1a0f35','#0a2218','#2a1200','#12082a','#001830','#1a0a20'];
+    nebulae=Array.from({length:9},()=>({
+      x:Math.random()*W,y:Math.random()*H,
+      rx:80+Math.random()*200,ry:40+Math.random()*130,
+      rot:Math.random()*Math.PI,
+      col:cols[Math.floor(Math.random()*cols.length)],
+      a:.04+Math.random()*.07,
+      dx:(Math.random()-.5)*.06,dy:(Math.random()-.5)*.04
+    }));
+  }
+
+  const CX=()=>W/2, CY=()=>H/2, OR=r=>Math.min(W,H)*r;
+
+  /* ─ BACKGROUND ─ */
+  function drawBG(){
+    const bg=ctx.createRadialGradient(CX(),CY(),0,CX(),CY(),Math.max(W,H)*.8);
+    bg.addColorStop(0,'#0c0820');bg.addColorStop(.38,'#060410');bg.addColorStop(.75,'#030208');bg.addColorStop(1,'#010105');
+    ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+
+    // Nebulae
+    nebulae.forEach(n=>{
+      n.x+=n.dx;n.y+=n.dy;
+      if(n.x<-n.rx)n.x=W+n.rx;if(n.x>W+n.rx)n.x=-n.rx;
+      if(n.y<-n.ry)n.y=H+n.ry;if(n.y>H+n.ry)n.y=-n.ry;
+      ctx.save();ctx.globalAlpha=n.a;ctx.translate(n.x,n.y);ctx.rotate(n.rot+(T*.002));
+      ctx.filter=`blur(${n.rx*.38}px)`;
+      ctx.beginPath();ctx.ellipse(0,0,n.rx,n.ry,0,0,Math.PI*2);
+      ctx.fillStyle=n.col;ctx.fill();
+      ctx.filter='none';ctx.restore();
+    });
+
+    // Stars
+    stars.forEach(s=>{
+      const tw=.72+Math.sin(T*s.sp+s.ph)*.28;
+      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(200,215,255,${s.a*tw})`;ctx.fill();
+    });
+
+    // Dust particles
+    dust.forEach(d=>{
+      d.x+=d.dx;d.y+=d.dy;
+      if(d.x<0)d.x=W;if(d.x>W)d.x=0;if(d.y<0)d.y=H;if(d.y>H)d.y=0;
+      ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(200,190,255,${d.a*(0.6+Math.sin(T*.02+d.x)*.4)})`;ctx.fill();
+    });
+
+    // Shooting star
+    if(Math.random()<.0035){
+      const sx=Math.random()*W,sy=Math.random()*(H*.45);
+      const sl=55+Math.random()*110;
+      ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(sx+sl,sy+sl*.22);
+      const sg=ctx.createLinearGradient(sx,sy,sx+sl,sy+sl*.22);
+      sg.addColorStop(0,'transparent');sg.addColorStop(.5,'rgba(255,255,255,.55)');sg.addColorStop(1,'transparent');
+      ctx.strokeStyle=sg;ctx.lineWidth=1.2;ctx.stroke();
+    }
+  }
+
+  /* ─ OM CORE ─ */
+  function drawCore(){
+    const x=CX(),y=CY();
+    const pulse=1+Math.sin(T*.72)*.042;
+    const CR=Math.min(W,H)*.092*pulse;
+    if(CR<10)return;
+
+    // Volumetric rays
+    for(let i=0;i<18;i++){
+      const ang=i*(Math.PI*2/18)+T*.022;
+      const rl=CR*(3.1+Math.sin(T*.38+i*.35)*.55);
+      ctx.save();ctx.globalAlpha=.015+Math.sin(T*.28+i*.4)*.009;
+      ctx.beginPath();ctx.moveTo(x,y);
+      ctx.lineTo(x+Math.cos(ang-.055)*rl,y+Math.sin(ang-.055)*rl);
+      ctx.lineTo(x+Math.cos(ang+.055)*rl,y+Math.sin(ang+.055)*rl);
+      ctx.closePath();
+      const rg=ctx.createRadialGradient(x,y,0,x,y,rl);
+      rg.addColorStop(0,'rgba(245,158,11,.85)');rg.addColorStop(.5,'rgba(99,179,237,.2)');rg.addColorStop(1,'transparent');
+      ctx.fillStyle=rg;ctx.fill();ctx.restore();
+    }
+
+    // Outer halos
+    for(let i=7;i>=0;i--){
+      const hr=CR*(2.1+i*.8);
+      const hg=ctx.createRadialGradient(x,y,CR*.15,x,y,hr);
+      hg.addColorStop(0,`rgba(245,158,11,${.15-i*.017})`);
+      hg.addColorStop(.3,`rgba(99,179,237,${.1-i*.011})`);
+      hg.addColorStop(.65,`rgba(139,92,246,${.055-i*.006})`);
+      hg.addColorStop(1,'transparent');
+      ctx.beginPath();ctx.arc(x,y,hr,0,Math.PI*2);ctx.fillStyle=hg;ctx.fill();
+    }
+
+    // ═══ 3 MANTRA RINGS ═══
+    const MANTRA='ॐ नमः शिवाय  ';
+    [
+      {r:CR*1.62,spd:.0085,dir:1, fs:11.5,a:.58,col:'rgba(245,158,11,'},
+      {r:CR*2.02,spd:.0055,dir:-1,fs:10,  a:.40,col:'rgba(147,197,253,'},
+      {r:CR*2.46,spd:.0035,dir:1, fs:9,   a:.26,col:'rgba(245,158,11,'},
+    ].forEach(ring=>{
+      const chars=(MANTRA.repeat(9)).split('');
+      const total=Math.floor((Math.PI*2*ring.r)/(ring.fs*1.42));
+      ctx.save();ctx.translate(x,y);ctx.rotate(T*ring.spd*ring.dir);
+      ctx.font=`${ring.fs}px serif`;
+      ctx.textAlign='center';ctx.textBaseline='middle';
+      for(let i=0;i<Math.min(chars.length,total);i++){
+        const ang=(i/total)*Math.PI*2-(Math.PI/2);
+        const fa=ring.a*(0.5+Math.sin(T*.38+i*.25)*.5);
+        ctx.save();ctx.rotate(ang);ctx.translate(0,-ring.r);ctx.rotate(Math.PI/2);
+        ctx.fillStyle=ring.col+fa+')';
+        ctx.fillText(chars[i%chars.length],0,0);ctx.restore();
+      }
+      ctx.restore();
+      // Ring particle emitters
+      for(let i=0;i<5;i++){
+        const pa=(T*ring.spd*ring.dir+i*1.26)%(Math.PI*2);
+        const px2=x+Math.cos(pa)*ring.r,py2=y+Math.sin(pa)*ring.r;
+        const pg=ctx.createRadialGradient(px2,py2,0,px2,py2,5);
+        pg.addColorStop(0,ring.col+(ring.a*.9)+')');pg.addColorStop(1,'transparent');
+        ctx.beginPath();ctx.arc(px2,py2,5,0,Math.PI*2);ctx.fillStyle=pg;ctx.fill();
+      }
+    });
+
+    // Spinning rings around core
+    [[CR*1.16,.26,1.4,'rgba(245,158,11,.48)'],[CR*1.3,-.15,1,'rgba(99,179,237,.3)']].forEach(([r,sp,lw,col])=>{
+      ctx.save();ctx.translate(x,y);ctx.rotate(T*sp);
+      ctx.beginPath();ctx.arc(0,0,r,-.35,Math.PI*1.65);
+      ctx.strokeStyle=col;ctx.lineWidth=lw;ctx.stroke();ctx.restore();
+    });
+
+    // Core body
+    const cg=ctx.createRadialGradient(x,y,0,x,y,CR);
+    cg.addColorStop(0,'rgba(219,234,254,.98)');cg.addColorStop(.2,'rgba(147,197,253,.92)');
+    cg.addColorStop(.5,'rgba(59,130,246,.68)');cg.addColorStop(.8,'rgba(99,179,237,.22)');cg.addColorStop(1,'transparent');
+    ctx.beginPath();ctx.arc(x,y,CR,0,Math.PI*2);ctx.fillStyle=cg;ctx.fill();
+
+    // Particle cluster
+    for(let i=0;i<24;i++){
+      const pa=T*.32+i*(Math.PI*2/24);
+      const pd=CR*(.28+Math.sin(T*.5+i*.42)*.32);
+      ctx.beginPath();ctx.arc(x+Math.cos(pa)*pd,y+Math.sin(pa)*pd,1.5+Math.sin(T+i)*.5,0,Math.PI*2);
+      ctx.fillStyle=`rgba(224,242,255,${.42+Math.sin(T*.6+i)*.32})`;ctx.fill();
+    }
+
+    // OM symbol
+    ctx.save();
+    ctx.font=`bold ${CR*.92}px serif`;
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.shadowColor='rgba(245,158,11,.95)';ctx.shadowBlur=20+Math.sin(T*.38)*10;
+    ctx.fillStyle=`rgba(251,191,36,${.83+Math.sin(T*.48)*.12})`;
+    ctx.fillText('ॐ',x,y);ctx.restore();
+
+    // Subtitle
+    ctx.save();ctx.font=`${11+Math.sin(T*.22)*.5}px serif`;
+    ctx.textAlign='center';ctx.textBaseline='top';
+    ctx.shadowColor='rgba(245,158,11,.55)';ctx.shadowBlur=9;
+    ctx.fillStyle=`rgba(245,158,11,${.52+Math.sin(T*.32)*.14})`;
+    ctx.fillText('ॐ नमः शिवाय',x,y+CR+14);ctx.restore();
+  }
+
+  /* ─ PLANET ─ */
+  function drawPlanet(a){
+    const r=OR(a.or);
+    const px=CX()+Math.cos(a.ang)*r;
+    const py=CY()+Math.sin(a.ang)*r;
+    const isH=hov===a.id;
+    a.px=px;a.py=py;
+    const sz=a.sz*(isH?1.45:1);
+
+    // Orbit path
+    ctx.beginPath();ctx.arc(CX(),CY(),r,0,Math.PI*2);
+    ctx.strokeStyle=isH?`${a.gl}.2)`:`${a.gl}.065)`;
+    ctx.lineWidth=isH?1.1:.45;ctx.setLineDash([2,8]);ctx.stroke();ctx.setLineDash([]);
+
+    // Outer glow
+    const og=ctx.createRadialGradient(px,py,0,px,py,sz*4);
+    og.addColorStop(0,`${a.gl}${isH?.6:.22})`);og.addColorStop(1,`${a.gl}0)`);
+    ctx.beginPath();ctx.arc(px,py,sz*4,0,Math.PI*2);ctx.fillStyle=og;ctx.fill();
+
+    // Atmosphere
+    const ah=ctx.createRadialGradient(px,py,sz*.45,px,py,sz*1.8);
+    ah.addColorStop(0,`${a.gl}.1)`);ah.addColorStop(1,`${a.gl}0)`);
+    ctx.beginPath();ctx.arc(px,py,sz*1.8,0,Math.PI*2);ctx.fillStyle=ah;ctx.fill();
+
+    // Planet body
+    const pg=ctx.createRadialGradient(px-sz*.28,py-sz*.28,sz*.08,px,py,sz);
+    pg.addColorStop(0,a.col+'ff');pg.addColorStop(.44,a.col+'cc');pg.addColorStop(.82,a.col+'66');pg.addColorStop(1,a.col+'0a');
+    ctx.beginPath();ctx.arc(px,py,sz,0,Math.PI*2);ctx.fillStyle=pg;ctx.fill();
+
+    // Specular highlight
+    const hl=ctx.createRadialGradient(px-sz*.3,py-sz*.3,sz*.04,px-sz*.12,py-sz*.12,sz*.52);
+    hl.addColorStop(0,'rgba(255,255,255,.3)');hl.addColorStop(1,'transparent');
+    ctx.beginPath();ctx.arc(px,py,sz,0,Math.PI*2);ctx.fillStyle=hl;ctx.fill();
+
+    // Planet rings
+    if(a.ring){
+      ctx.save();ctx.translate(px,py);ctx.rotate(a.sr*.3+.55);
+      ctx.beginPath();ctx.ellipse(0,0,sz*1.9,sz*.3,Math.PI*.16,0,Math.PI*2);
+      ctx.strokeStyle=`${a.gl}.45)`;ctx.lineWidth=1.8;ctx.stroke();
+      ctx.beginPath();ctx.ellipse(0,0,sz*2.15,sz*.38,Math.PI*.16,0,Math.PI*2);
+      ctx.strokeStyle=`${a.gl}.18)`;ctx.lineWidth=.8;ctx.stroke();
+      ctx.restore();
+    }
+
+    // Moon
+    {const ma=a.sr*3.4,md=sz*1.7;
+     ctx.beginPath();ctx.arc(px+Math.cos(ma)*md,py+Math.sin(ma)*md,sz*.17,0,Math.PI*2);
+     ctx.fillStyle=`${a.gl}.52)`;ctx.fill();}
+
+    // Hover connection line
+    if(isH){
+      const lg=ctx.createLinearGradient(CX(),CY(),px,py);
+      lg.addColorStop(0,`${a.gl}0)`);lg.addColorStop(.5,`${a.gl}.28)`);lg.addColorStop(1,`${a.gl}.65)`);
+      ctx.beginPath();ctx.moveTo(CX(),CY());ctx.lineTo(px,py);
+      ctx.strokeStyle=lg;ctx.lineWidth=1.1;ctx.stroke();
+    }
+
+    // Label
+    ctx.save();
+    ctx.font=`${isH?'600 ':''}${isH?11.5:9}px 'Space Grotesk',sans-serif`;
+    ctx.fillStyle=isH?'rgba(241,245,249,.96)':'rgba(148,163,184,.7)';
+    ctx.textAlign='center';ctx.textBaseline='top';
+    ctx.shadowColor=a.col;ctx.shadowBlur=isH?7:2;
+    ctx.fillText(`${a.ic} ${a.nm}`,px,py+sz+5);
+    if(isH){ctx.font=`8.5px 'IBM Plex Mono',sans-serif`;ctx.fillStyle=`${a.gl}.62)`;ctx.shadowBlur=0;ctx.fillText(a.rl,px,py+sz+18);}
+    ctx.restore();
+
+    a.sr+=.0055;a.ang+=a.spd*.0052;
+  }
+
+  /* ─ TOOLTIP ─ */
+  cv.addEventListener('mousemove',e=>{
+    const rc=cv.getBoundingClientRect();
+    const mx=e.clientX-rc.left,my=e.clientY-rc.top;
+    let found=null;
+    AGENTS.forEach(a=>{if(a.px&&Math.hypot(mx-a.px,my-a.py)<a.sz*2.5)found=a.id;});
+    hov=found;
+    if(found){
+      const a=AGENTS.find(x=>x.id===found);
+      const sc=a.st==='Active'?'#10b981':a.st==='Beta'?'#3b82f6':a.st==='Dev'?'#8b5cf6':'#f59e0b';
+      tip.innerHTML=`<div class="pt-nm">${a.ic} ${a.nm}</div><div class="pt-rl">${a.rl}</div>
+        <div class="pt-rw"><span class="pt-k">Status</span><span class="pt-v" style="color:${sc}">${a.st}</span></div>
+        <div class="pt-rw"><span class="pt-k">Mission</span><span class="pt-v">${a.ms}</span></div>
+        <div class="pt-rw"><span class="pt-k">CPU Load</span><span class="pt-v">${a.load}%</span></div>
+        <div class="pt-bw"><div class="pt-bf" style="width:${a.load}%;background:${a.col}"></div></div>
+        <div class="pt-btns">
+          <a href="${a.url}" target="_blank" class="pt-b pr">🚀 Open Live</a>
+          <a href="https://github.com/Connect-Pranav" target="_blank" class="pt-b">🐙 GitHub</a>
+        </div>`;
+      tip.style.left=Math.min(mx+14,W-220)+'px';
+      tip.style.top=Math.max(my-110,4)+'px';
+      tip.classList.add('on');cv.style.cursor='pointer';
+    } else {tip.classList.remove('on');cv.style.cursor='none';}
+  });
+  cv.addEventListener('mouseleave',()=>{hov=null;tip.classList.remove('on');});
+  cv.addEventListener('click',()=>{if(hov){const a=AGENTS.find(x=>x.id===hov);if(a)window.open(a.url,'_blank');}});
+
+  /* ─ MOUSE GRAVITY RIPPLE ─ */
+  let mouseX=-999,mouseY=-999;
+  document.addEventListener('mousemove',e=>{
+    const rc=cv.getBoundingClientRect();
+    mouseX=e.clientX-rc.left;mouseY=e.clientY-rc.top;
+  });
+
+  /* ─ FRAME LOOP ─ */
+  function frame(){
+    T+=.011;
+    drawBG();
+    drawCore();
+    AGENTS.forEach(drawPlanet);
+    requestAnimationFrame(frame);
+  }
+
+  // Resize observer for robustness
+  const ro=new ResizeObserver(()=>resize());
+  ro.observe(cv.parentElement);
+  resize();
+  frame();
+  addEventListener('resize',resize);
+}
+
+/* ══════════════════════════════════════
+   SPARKLINE
+══════════════════════════════════════ */
+function initSparkline(){
+  const cv=document.getElementById('spk');
+  if(!cv)return;
+  const ctx=cv.getContext('2d');
+  const pts=Array.from({length:42},(_,i)=>95.5+Math.sin(i*.75)*.18+Math.random()*.5);
+  function draw(){
+    const W=cv.offsetWidth,H=cv.offsetHeight;
+    if(!W||!H)return;
+    cv.width=W;cv.height=H;
+    ctx.clearRect(0,0,W,H);
+    const step=W/(pts.length-1);
+    ctx.beginPath();
+    pts.forEach((p,i)=>{const x=i*step,y=H-(p-90)/12*H;i?ctx.lineTo(x,y):ctx.moveTo(x,y)});
+    ctx.strokeStyle='rgba(16,185,129,.72)';ctx.lineWidth=1.4;ctx.stroke();
+    const g=ctx.createLinearGradient(0,0,0,H);
+    g.addColorStop(0,'rgba(16,185,129,.2)');g.addColorStop(1,'rgba(16,185,129,0)');
+    ctx.lineTo(W,H);ctx.lineTo(0,H);ctx.closePath();ctx.fillStyle=g;ctx.fill();
+    pts.shift();pts.push(95+Math.sin(Date.now()*.0008)*2.5+Math.random()*.6);
+  }
+  setInterval(draw,200);draw();
+}
+
+/* ══════════════════════════════════════
+   CLOCK + UPTIME + COUNTERS
+══════════════════════════════════════ */
+function startClock(){
+  const el=document.getElementById('clk');
+  setInterval(()=>{el.textContent=new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});},1000);
+  el.textContent=new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+}
+let UP=23*3600+47*60+32;
+function startUptime(){
+  const el=document.getElementById('upt');
+  setInterval(()=>{UP++;const h=Math.floor(UP/3600),m=Math.floor((UP%3600)/60),s=UP%60;el.textContent=`${h}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`;},1000);
+}
+function animateCounters(){
+  [[document.getElementById('c-ag'),14,''],[document.getElementById('c-ms'),7,'0'],[document.getElementById('c-tk'),1248,','],[document.getElementById('c-hr'),842,'']].forEach(([el,t,fmt])=>{
+    if(!el)return;let c=0;const step=t/55;
+    const iv=setInterval(()=>{c=Math.min(c+step,t);const v=Math.floor(c);el.textContent=fmt===','?v.toLocaleString():fmt==='0'?(v<10?'0'+v:v):v;if(c>=t)clearInterval(iv);},18);
+  });
+}
+
+/* ══════════════════════════════════════
+   MUSIC WAVE
+══════════════════════════════════════ */
+(function(){
+  const w=document.getElementById('mw');if(!w)return;
+  for(let i=0;i<26;i++){const b=document.createElement('div');b.className='mwb';b.style.animationDelay=`${i*.055}s`;b.style.height=`${3+Math.random()*13}px`;w.appendChild(b);}
+  let playing=true;
+  document.getElementById('mpl').addEventListener('click',function(){
+    playing=!playing;this.textContent=playing?'⏸':'▶';
+    document.querySelectorAll('.mwb').forEach(b=>b.style.animationPlayState=playing?'running':'paused');
+  });
+})();
+
+/* ══════════════════════════════════════
+   CONSOLE
+══════════════════════════════════════ */
+(function(){
+  const out=document.getElementById('co'),inp=document.getElementById('ci');
+  if(!inp)return;
+  function cLog(h){const d=document.createElement('div');d.className='cl';d.innerHTML=h;out.appendChild(d);out.scrollTop=out.scrollHeight;}
+  const CMDS={
+    'help':()=>cLog('<span class="cok">Commands: list agents · run &lt;agent&gt; · status · clear · github · om</span>'),
+    'status':()=>cLog('<span class="cok">&gt; 14/14 agents online · 530h saved · 1,248 tasks · Health 99.8%</span>'),
+    'list agents':()=>cLog('<span class="cpu">&gt; 🧠 BRAHMA · ⚡ VAJRA · 🎯 SARATHI · 🦅 GARUDA · 📊 SUDARSHAN · 📖 VEDA · 🌬 VAYU · 🔥 AGNI · 🏹 ARJUN · 🌍 VISTARA · 🤝 SANGAM · 🛡 KAVACH · 🌌 NAKSHATRA · 🗣 VAK</span>'),
+    'github':()=>{window.open('https://github.com/Connect-Pranav','_blank');cLog('<span class="cok">&gt; Opening GitHub: Connect-Pranav</span>');},
+    'about':()=>cLog('<span class="cpu">&gt; ASTRA LOKA v2.4.1 · Commander: Pranav Kumar · Ancient Wisdom. Future Intelligence.</span>'),
+    'clear':()=>{out.innerHTML='';cLog('<span class="cok">&gt; Console cleared.</span>');},
+    'run garuda':()=>cLog('<span class="cok">&gt; 🦅 Garuda: 847 targets scanned · 42 companies identified · Intel ready</span>'),
+    'run vajra':()=>cLog('<span class="cok">&gt; ⚡ Vajra: 9 workflows triggered · 530h total saved · Pipeline active</span>'),
+    'run arjun':()=>cLog('<span class="cok">&gt; 🏹 Arjun: ATS optimized · 3 interviews confirmed · Career OS active</span>'),
+    'om':()=>cLog('<span style="color:#f59e0b;font-size:1.1em">&gt; ॐ नमः शिवाय · Ancient Wisdom awakened ✦</span>'),
+  };
+  inp.addEventListener('keydown',e=>{
+    if(e.key!=='Enter')return;const v=inp.value.trim().toLowerCase();if(!v)return;
+    cLog(`<span class="cp2">&gt;_</span> <span class="cm">${v}</span>`);
+    (CMDS[v]||(() =>cLog(`<span class="ce">&gt; Unknown: "${v}" · type help</span>`)))();
+    inp.value='';
+  });
+})();
+
+/* ══════════════════════════════════════
+   AI ASSISTANT
+══════════════════════════════════════ */
+(function(){
+  const inp=document.getElementById('aip'),btn=document.getElementById('ais'),msg=document.getElementById('aim');
+  if(!inp||!btn||!msg)return;
+  const RS=['Scanning agent network... Garuda reports 42 targets found, Commander.','Vajra active · 9 workflows running · 530 hours saved this cycle.','All 14 agents nominal · ॐ Core synchronized · Mission Control live.','Sarathi: Q3 pipeline updated · Revenue forecast looking strong.','Nakshatra is calibrating multi-agent orchestration · ETA Q3 2025.','Career OS active · Arjun has 3 interviews confirmed this week.'];
+  let ri=0;
+  function respond(){msg.style.opacity='.4';setTimeout(()=>{msg.textContent=RS[ri%RS.length];msg.style.opacity='1';ri++;},550);}
+  btn.addEventListener('click',()=>{if(inp.value.trim()){respond();inp.value='';}});
+  inp.addEventListener('keydown',e=>{if(e.key==='Enter'&&inp.value.trim()){respond();inp.value='';}});
+})();
+
+/* ══════════════════════════════════════
+   NAV LINKS
+══════════════════════════════════════ */
+document.querySelectorAll('.n-lk').forEach(a=>a.addEventListener('click',e=>{
+  e.preventDefault();document.querySelectorAll('.n-lk').forEach(l=>l.classList.remove('on'));a.classList.add('on');
+}));
+
+/* ══════════════════════════════════════
+   COMMAND PALETTE
+══════════════════════════════════════ */
+(function(){
+  const CMDS=[
+    {i:'📡',n:'Mission Control',t:'nav',a:()=>{}},
+    {i:'🤖',n:'All 14 Agents',t:'nav',a:()=>{}},
+    {i:'✦',n:'Project Constellation',t:'nav',a:()=>{}},
+    {i:'🐙',n:'GitHub — Connect-Pranav',t:'link',a:()=>window.open('https://github.com/Connect-Pranav','_blank')},
+    {i:'🌌',n:'ASTRA-LOKA — Open Live',t:'link',a:()=>window.open('https://connect-pranav.github.io/ASTRA-LOKA','_blank')},
+    {i:'⚡',n:'Career-Transformation-OS',t:'link',a:()=>window.open('https://connect-pranav.github.io/-Career-Transformation-OS','_blank')},
+    {i:'👑',n:'Job-Command-Center',t:'link',a:()=>window.open('https://connect-pranav.github.io/Job-Command-Center','_blank')},
+    {i:'🌸',n:'MARKETO-AI',t:'link',a:()=>window.open('https://connect-pranav.github.io/MARKETO-AI','_blank')},
+    {i:'⭐',n:'Share-Market-Navigator',t:'link',a:()=>window.open('https://connect-pranav.github.io/Marketo---Share-Market-Navigator','_blank')},
+    {i:'🔥',n:'Arena-Intelligence',t:'link',a:()=>window.open('https://connect-pranav.github.io/Arena-Intelligence','_blank')},
+    {i:'🏺',n:'Sales-Dashboard',t:'link',a:()=>window.open('https://connect-pranav.github.io/Sales-Dashboard','_blank')},
+    {i:'📡',n:'Channel-IH',t:'link',a:()=>window.open('https://connect-pranav.github.io/Channel-IH','_blank')},
+    {i:'👁',n:'HEIMDALL-AI',t:'link',a:()=>window.open('https://connect-pranav.github.io/HEIMDALL-AI','_blank')},
+    {i:'🤝',n:'Linkedin-Dashboard',t:'link',a:()=>window.open('https://connect-pranav.github.io/Linkedin-Dashboard','_blank')},
+    {i:'✦',n:'Portfolio',t:'link',a:()=>window.open('https://connect-pranav.github.io/Portfolio','_blank')},
+    {i:'⚡',n:'Vajra — Automation Engine',t:'agent',a:()=>window.open('https://connect-pranav.github.io/ASTRA-LOKA','_blank')},
+    {i:'🎯',n:'Sarathi — Strategy Advisor',t:'agent',a:()=>window.open('https://connect-pranav.github.io/Sales-Dashboard','_blank')},
+    {i:'🦅',n:'Garuda — Research Commander',t:'agent',a:()=>window.open('https://connect-pranav.github.io/Arena-Intelligence','_blank')},
+    {i:'📊',n:'Sudarshan — Analytics',t:'agent',a:()=>window.open('https://connect-pranav.github.io/Linkedin-Dashboard','_blank')},
+    {i:'🏹',n:'Arjun — Career Agent',t:'agent',a:()=>window.open('https://connect-pranav.github.io/-Career-Transformation-OS','_blank')},
+    {i:'🌌',n:'Nakshatra — Orchestrator',t:'agent',a:()=>window.open('https://connect-pranav.github.io/ASTRA-LOKA','_blank')},
+    {i:'ॐ',n:'Activate Om Console',t:'cmd',a:()=>{const c=document.getElementById('ci');if(c){c.value='om';c.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));}}},
+  ];
+  const pal=document.getElementById('cp'),inp=document.getElementById('cp-ip'),list=document.getElementById('cp-ls');
+  function open(){pal.classList.add('open');inp.value='';render('');setTimeout(()=>inp.focus(),50);}
+  function close(){pal.classList.remove('open');}
+  function render(q){
+    const fl=CMDS.filter(c=>c.n.toLowerCase().includes(q.toLowerCase()));
+    list.innerHTML='';
+    [{k:'nav',l:'Navigation'},{k:'link',l:'Open Live Projects'},{k:'agent',l:'Agents'},{k:'cmd',l:'Commands'}].forEach(({k,l})=>{
+      const items=fl.filter(c=>c.t===k);if(!items.length)return;
+      const lb=document.createElement('div');lb.className='cp-hl';lb.textContent=l;list.appendChild(lb);
+      items.forEach(cmd=>{
+        const d=document.createElement('div');d.className='cp-r';
+        d.innerHTML=`<span class="cp-ri">${cmd.i}</span><span class="cp-rn">${cmd.n}</span><span class="cp-rt">${cmd.t}</span>`;
+        d.onclick=()=>{close();cmd.a();};list.appendChild(d);
+      });
+    });
+  }
+  inp.addEventListener('input',()=>render(inp.value));
+  document.addEventListener('keydown',e=>{
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();pal.classList.contains('open')?close():open();}
+    if(e.key==='Escape')close();
+  });
+  pal.addEventListener('click',e=>{if(e.target===pal)close();});
+  document.getElementById('pal-btn').onclick=open;
+})();
+
+/* ══════════════════════════════════════
+   LIVE MISSION LOG
+══════════════════════════════════════ */
+(function(){
+  const log=document.getElementById('mlog');if(!log)return;
+  const ES=['Brahma: All agents synchronized · ॐ Core stable','Garuda: 42 Series B–D targets identified','Vajra: 9 workflows triggered · 530h total saved','Sarathi: Q3 pipeline +₹2.4Cr · Forecast updated','Agni: Commit pushed to ASTRA-LOKA main','Vak: 6 LinkedIn posts scheduled · Reach: 12K','Arjun: 3 interviews confirmed this week','Veda: 2,400 docs indexed · Recall 98.2%'];
+  let ei=0;
+  setInterval(()=>{
+    const d=document.createElement('div');d.className='li';
+    const now=new Date();
+    const t=now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+    d.innerHTML=`<span class="li-t">${t}</span><span class="li-m">${ES[ei%ES.length]}</span>`;
+    log.insertBefore(d,log.firstChild);
+    if(log.children.length>7)log.removeChild(log.lastChild);
+    ei++;
+  },4500);
+})();
+
+/* ══════════════════════════════════════
+   NOTIFICATIONS
+══════════════════════════════════════ */
+function initNotifs(){
+  const wrap=document.getElementById('nw');
+  const msgs=[{t:'⚡ Vajra Active',b:'9 workflows running · 530h saved'},{t:'🦅 Garuda Intel Ready',b:'42 companies identified'},{t:'🏹 Arjun Update',b:'3 interviews confirmed this week'},{t:'✦ ॐ Core Synchronized',b:'All 14 agents online · Civilization expanding'}];
+  let i=0;
+  function show(){if(i>=msgs.length)return;const m=msgs[i++];const el=document.createElement('div');el.className='ni';el.innerHTML=`<div class="ni-t">${m.t}</div><div class="ni-b">${m.b}</div>`;wrap.appendChild(el);requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add('on')));setTimeout(()=>{el.classList.remove('on');setTimeout(()=>el.remove(),400)},3800);if(i<msgs.length)setTimeout(show,4600);}
+  setTimeout(show,1200);
+}
+
+/* ══════════════════════════════════════
+   MOUSE GLOW
+══════════════════════════════════════ */
+(function(){
+  const g=document.createElement('div');
+  Object.assign(g.style,{position:'fixed',width:'480px',height:'480px',borderRadius:'50%',background:'radial-gradient(circle,rgba(59,130,246,.028),transparent 68%)',pointerEvents:'none',zIndex:'1',transform:'translate(-50%,-50%)',transition:'left .14s ease,top .14s ease',mixBlendMode:'screen'});
+  document.body.appendChild(g);
+  document.addEventListener('mousemove',e=>{g.style.left=e.clientX+'px';g.style.top=e.clientY+'px';});
+})();
+
+/* Konami */
+let ks=[];const KK=[38,38,40,40,37,39,37,39,66,65];
+document.addEventListener('keydown',e=>{ks.push(e.keyCode);if(ks.length>10)ks.shift();if(JSON.stringify(ks)===JSON.stringify(KK)){const c=document.getElementById('ci');if(c){c.value='om';c.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));}}});
+
+</script>
+</body>
+</html>
