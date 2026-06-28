@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ASTRA LOKA — An AI Civilization. Ancient Wisdom. Future Intelligence. Built by Pranav Kumar.">
+<meta name="author" content="Pranav Kumar">
+<meta property="og:title" content="ASTRA LOKA — An AI Civilization">
+<meta property="og:description" content="14 AI agents. Every agent a citizen. Every repository a city. Every project a mission.">
+<title>ASTRA LOKA — An AI Civilization</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%233b82f6'/><text y='23' x='6' font-size='18' fill='white'>✦</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#04070F;--bg2:#080f1e;--bg3:rgba(255,255,255,.038);--bg4:rgba(255,255,255,.065);
+  --border:rgba(255,255,255,.07);--bgl:rgba(99,179,237,.28);
+  --blue:#3b82f6;--cyan:#06b6d4;--purple:#8b5cf6;--gold:#f59e0b;
+  --green:#10b981;--red:#ef4444;--pink:#ec4899;--orange:#f97316;
+  --txt:#f1f5f9;--txt2:#94a3b8;--txt3:#475569;--txt4:#1e293b;
+  --fd:'Space Grotesk',sans-serif;--fb:'Inter',sans-serif;--fm:'IBM Plex Mono',monospace;
+  --r1:6px;--r2:12px;--r3:20px;--r4:28px;
+  --t:.28s cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--bg);color:var(--txt);overflow-x:hidden;line-height:1.6;cursor:none}
+a{color:inherit;text-decoration:none}
+button{cursor:none;font-family:inherit;border:none;background:none}
+ul{list-style:none}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:rgba(99,179,237,.3);border-radius:2px}
+
+/* Cursors */
+#cur-d{position:fixed;width:8px;height:8px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s,background .2s;mix-blend-mode:screen}
+#cur-r{position:fixed;width:36px;height:36px;border:1.5px solid rgba(6,182,212,.42);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s}
+
+/* Grid bg */
+.grid-bg{position:fixed;inset:0;background-image:linear-gradient(rgba(59,130,246,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,.022) 1px,transparent 1px);background-size:58px 58px;pointer-events:none;z-index:0}
+
+/* Noise */
+.noise{position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");pointer-events:none;z-index:1;opacity:.35}
+
+/* Utils */
+.container{max-width:1260px;margin:0 auto;padding:0 28px}
+.gt-blue{background:linear-gradient(135deg,var(--blue),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.gt-purple{background:linear-gradient(135deg,var(--purple),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.gt-gold{background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.gt-green{background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+.tag{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:99px;font-family:var(--fm);font-size:.67rem;letter-spacing:.08em;text-transform:uppercase;font-weight:500}
+.tl{background:rgba(16,185,129,.1);color:var(--green);border:1px solid rgba(16,185,129,.2)}
+.tb{background:rgba(59,130,246,.1);color:var(--blue);border:1px solid rgba(59,130,246,.2)}
+.ts{background:rgba(245,158,11,.1);color:var(--gold);border:1px solid rgba(245,158,11,.2)}
+.td{background:rgba(139,92,246,.1);color:var(--purple);border:1px solid rgba(139,92,246,.2)}
+.tn{background:rgba(236,72,153,.1);color:var(--pink);border:1px solid rgba(236,72,153,.2)}
+.pulse{width:5px;height:5px;border-radius:50%;background:currentColor;animation:pulse 2s infinite;display:inline-block}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.65)}}
+
+/* Glass */
+.gc{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r3);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);transition:var(--t);position:relative;overflow:hidden}
+.gc::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent)}
+.gc:hover{background:var(--bg4);border-color:var(--bgl);transform:translateY(-3px);box-shadow:0 20px 56px rgba(0,0,0,.32),0 0 0 1px rgba(99,179,237,.07)}
+
+/* Fade */
+.fi{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.fi.vis{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.4s}.d6{transition-delay:.48s}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 22px;border-radius:var(--r1);font-size:.875rem;font-weight:600;transition:var(--t);position:relative;overflow:hidden;cursor:none;white-space:nowrap;letter-spacing:.02em}
+.btn::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.07),transparent);opacity:0;transition:var(--t)}
+.btn:hover::after{opacity:1}
+.bp{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;box-shadow:0 4px 18px rgba(59,130,246,.26)}
+.bp:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(59,130,246,.4)}
+.bg{border:1px solid var(--border);color:var(--txt2);background:var(--bg3)}
+.bg:hover{border-color:var(--bgl);color:var(--txt);background:var(--bg4)}
+.bo{border:1px solid rgba(6,182,212,.32);color:var(--cyan)}
+.bo:hover{background:rgba(6,182,212,.06);border-color:var(--cyan);box-shadow:0 0 18px rgba(6,182,212,.16)}
+.bgold{border:1px solid rgba(245,158,11,.32);color:var(--gold)}
+.bgold:hover{background:rgba(245,158,11,.06)}
+
+/* Section */
+section{position:relative;z-index:2}
+.sl{display:inline-flex;align-items:center;gap:8px;font-family:var(--fm);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);margin-bottom:12px}
+.sl::before{content:'';display:block;width:20px;height:1px;background:var(--cyan)}
+.sh{font-family:var(--fd);font-size:clamp(1.75rem,3.2vw,2.7rem);font-weight:700;line-height:1.15;letter-spacing:-.025em;margin-bottom:12px}
+.ss{font-size:.93rem;color:var(--txt2);max-width:530px;line-height:1.75}
+.sp{padding:108px 0}
+
+/* ══ BOOT ══ */
+#boot{position:fixed;inset:0;z-index:3000;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;transition:opacity .9s ease}
+#boot.out{opacity:0;pointer-events:none}
+.boot-logo{font-family:var(--fd);font-size:clamp(2rem,6vw,3.2rem);font-weight:700;letter-spacing:.2em;background:linear-gradient(135deg,var(--blue),var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:logoP 2.5s ease-in-out infinite alternate}
+@keyframes logoP{from{filter:drop-shadow(0 0 10px rgba(59,130,246,.4))}to{filter:drop-shadow(0 0 30px rgba(139,92,246,.65))}}
+.boot-sub{font-family:var(--fm);font-size:.7rem;color:var(--txt3);letter-spacing:.22em;text-transform:uppercase}
+.boot-term{width:460px;max-width:88vw;background:rgba(0,0,0,.55);border:1px solid rgba(99,179,237,.15);border-radius:var(--r2);padding:22px;font-family:var(--fm);font-size:.75rem;min-height:180px;overflow:hidden}
+.boot-bw{width:340px;max-width:82vw;height:2px;background:var(--border);border-radius:2px;overflow:hidden}
+.boot-bf{height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan),var(--purple));border-radius:2px;width:0;transition:width .35s ease}
+.boot-pct{font-family:var(--fm);font-size:.68rem;color:var(--txt3);letter-spacing:.06em}
+.bl{line-height:2;margin:0}
+.bsys{color:var(--txt3)}.bok{color:var(--green)}.bcy{color:var(--cyan)}.bgd{color:var(--gold)}.bpu{color:var(--purple)}.brd{color:var(--red)}
+
+/* ══ NAV ══ */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 28px;height:62px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid transparent;transition:var(--t)}
+.nav.up{background:rgba(4,7,15,.92);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);border-color:var(--border)}
+.nav-logo{display:flex;align-items:center;gap:9px;font-family:var(--fd);font-weight:700;font-size:1rem;letter-spacing:.14em}
+.nav-mark{width:29px;height:29px;background:linear-gradient(135deg,var(--blue),var(--purple));border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;box-shadow:0 0 14px rgba(59,130,246,.32);flex-shrink:0}
+.nav-links{display:flex;align-items:center;gap:1px}
+.nav-links a{padding:5px 11px;font-size:.8rem;color:var(--txt2);border-radius:var(--r1);transition:var(--t);font-weight:500}
+.nav-links a:hover{color:var(--txt);background:var(--bg3)}
+.nav-r{display:flex;align-items:center;gap:7px}
+.nav-kbd{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border:1px solid var(--border);border-radius:var(--r1);font-size:.76rem;color:var(--txt3);background:var(--bg3);cursor:none;transition:var(--t)}
+.nav-kbd:hover{border-color:var(--bgl);color:var(--txt2)}
+.nav-kbd kbd{font-family:var(--fm);font-size:.6rem;padding:1px 5px;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:3px}
+
+/* ══ HERO ══ */
+#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:96px 28px 72px;text-align:center;position:relative;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(88px);pointer-events:none}
+.o1{width:700px;height:700px;background:radial-gradient(circle,rgba(59,130,246,.1),transparent 68%);top:-120px;left:-180px;animation:oD 18s ease-in-out infinite}
+.o2{width:550px;height:550px;background:radial-gradient(circle,rgba(139,92,246,.08),transparent 68%);top:0;right:-100px;animation:oD 18s ease-in-out infinite -7s}
+.o3{width:380px;height:380px;background:radial-gradient(circle,rgba(6,182,212,.07),transparent 68%);bottom:8%;left:18%;animation:oD 18s ease-in-out infinite -13s}
+@keyframes oD{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(26px,-18px) scale(1.03)}66%{transform:translate(-16px,26px) scale(.97)}}
+
+.hero-in{position:relative;z-index:2;max-width:940px;margin:0 auto}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border:1px solid rgba(6,182,212,.18);border-radius:99px;font-family:var(--fm);font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;color:var(--cyan);margin-bottom:30px;background:rgba(6,182,212,.04)}
+.hero-hl{font-family:var(--fd);font-size:clamp(3.5rem,10.5vw,8rem);font-weight:700;line-height:.88;letter-spacing:-.048em;margin-bottom:18px}
+.hl-a{background:linear-gradient(160deg,#e2e8f0,#94a3b8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
+.hl-b{background:linear-gradient(135deg,var(--blue),var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;font-size:.37em;letter-spacing:.4em;font-weight:400;margin-top:10px}
+.hero-civ{font-family:var(--fd);font-size:clamp(.9rem,2vw,1.2rem);color:var(--txt2);font-weight:300;margin-bottom:10px}
+.hero-civ em{font-style:normal;color:var(--gold);font-weight:500}
+.hero-desc{font-size:.92rem;color:var(--txt3);max-width:580px;margin:0 auto 40px;line-height:1.88}
+.hero-btns{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:26px}
+.hero-btns .btn{padding:12px 22px;font-size:.88rem}
+.hero-type{font-family:var(--fm);font-size:.8rem;color:var(--txt3);margin-bottom:52px}
+.hero-type span{color:var(--cyan)}
+.tcur{display:inline-block;width:2px;height:.82em;background:var(--cyan);margin-left:2px;vertical-align:text-bottom;animation:blink 1s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+.hero-stats{display:flex;align-items:center;justify-content:center;gap:36px;flex-wrap:wrap;padding:26px 0;border-top:1px solid var(--border)}
+.hstat{text-align:center}
+.hstat-v{font-family:var(--fd);font-size:1.8rem;font-weight:700;background:linear-gradient(135deg,var(--cyan),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hstat-l{font-size:.68rem;color:var(--txt3);text-transform:uppercase;letter-spacing:.1em;font-family:var(--fm);margin-top:3px}
+
+.scroll-h{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--txt3);font-family:var(--fm);font-size:.62rem;letter-spacing:.1em;animation:shb 2.5s ease-in-out infinite}
+.sh-ln{width:1px;height:30px;background:linear-gradient(to bottom,var(--cyan),transparent)}
+@keyframes shb{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+/* ══ NETWORK GRAPH ══ */
+#network-section{padding:108px 0;background:radial-gradient(ellipse 100% 70% at 50% 0%,rgba(59,130,246,.06),transparent)}
+.network-wrap{position:relative;width:100%;margin-top:56px}
+#net-canvas{width:100%;height:620px;display:block;border-radius:var(--r3);background:rgba(0,0,0,.25);border:1px solid var(--border);cursor:none}
+.net-tooltip{position:absolute;background:rgba(8,15,30,.95);border:1px solid var(--bgl);border-radius:var(--r2);padding:14px 16px;font-family:var(--fm);font-size:.75rem;pointer-events:none;z-index:50;min-width:200px;backdrop-filter:blur(16px);transition:opacity .2s;opacity:0}
+.net-tooltip.show{opacity:1}
+.nt-name{font-family:var(--fd);font-size:.95rem;font-weight:700;margin-bottom:6px;color:var(--txt)}
+.nt-role{font-size:.65rem;color:var(--txt3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;font-family:var(--fm)}
+.nt-row{display:flex;justify-content:space-between;gap:16px;margin-bottom:3px;font-size:.72rem}
+.nt-key{color:var(--txt3)}
+.nt-val{color:var(--cyan);font-weight:500}
+.nt-bar-wrap{margin-top:10px}
+.nt-bar{height:3px;background:var(--border);border-radius:2px;overflow:hidden;margin-top:3px}
+.nt-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--cyan));border-radius:2px}
+
+/* ══ MISSION CONTROL ══ */
+#mission{padding:108px 0}
+.mc-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:13px;margin-top:52px}
+.mc-m{grid-column:span 3;padding:22px}
+.mc-mv{font-family:var(--fd);font-size:2.4rem;font-weight:700;line-height:1;margin-bottom:6px;background:linear-gradient(135deg,var(--cyan),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.mc-ml{font-size:.7rem;color:var(--txt3);text-transform:uppercase;letter-spacing:.1em;font-family:var(--fm);margin-bottom:12px}
+.mc-bar{height:3px;background:var(--border);border-radius:2px;overflow:hidden}
+.mc-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan));border-radius:2px}
+.mc-trend{font-family:var(--fm);font-size:.66rem;color:var(--green);margin-top:6px}
+.mc-term{grid-column:span 8;padding:22px}
+.mc-al{grid-column:span 4;padding:18px}
+.mc-act{grid-column:span 6;padding:20px}
+.mc-repos{grid-column:span 6;padding:20px}
+.mc-cur{grid-column:span 12;padding:20px}
+.ph{font-family:var(--fd);font-size:.8rem;font-weight:600;color:var(--txt2);text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.pd{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 5px var(--green);animation:pulse 2s infinite}
+
+/* Term box */
+.tb{background:rgba(0,0,0,.45);border:1px solid var(--border);border-radius:var(--r2);padding:14px;font-family:var(--fm);font-size:.74rem;overflow:hidden}
+.th{display:flex;gap:5px;margin-bottom:10px}
+.tdot{width:9px;height:9px;border-radius:50%}
+.tl{line-height:1.9}
+.tp{color:var(--cyan)}.to{color:var(--txt3)}.tok{color:var(--green)}.tw{color:var(--gold)}.tpu{color:var(--purple)}.terr{color:var(--red)}
+
+/* Agent load */
+.al-row{display:flex;align-items:center;gap:7px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.al-row:last-child{border:none}
+.al-ic{font-size:.88rem;width:22px;text-align:center}
+.al-nm{font-size:.78rem;font-weight:500;flex:1;font-family:var(--fd)}
+.al-bar{width:56px;height:3px;background:var(--border);border-radius:2px;overflow:hidden}
+.al-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--cyan));border-radius:2px;animation:sh 2.5s ease-in-out infinite}
+@keyframes sh{0%,100%{opacity:.6}50%{opacity:1}}
+.al-pct{font-family:var(--fm);font-size:.65rem;color:var(--txt3);width:26px;text-align:right}
+
+/* Activity */
+.act-it{display:flex;gap:9px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);align-items:flex-start}
+.act-it:last-child{border:none}
+.act-ic{width:24px;height:24px;border-radius:5px;background:var(--bg4);display:flex;align-items:center;justify-content:center;font-size:.78rem;flex-shrink:0;margin-top:1px}
+.act-nm{font-size:.8rem;font-weight:500;margin-bottom:1px}
+.act-t{font-size:.66rem;color:var(--txt3);font-family:var(--fm)}
+
+/* ══ AGENTS ══ */
+#agents{padding:108px 0;background:radial-gradient(ellipse 80% 50% at 20% 50%,rgba(139,92,246,.04),transparent)}
+.brahma-wrap{background:linear-gradient(135deg,rgba(59,130,246,.07),rgba(139,92,246,.07));border:1px solid rgba(139,92,246,.18);border-radius:var(--r3);padding:28px;margin-bottom:56px;display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;position:relative;overflow:hidden}
+.brahma-wrap::before{content:'';position:absolute;top:-60%;right:-20%;width:250px;height:250px;background:radial-gradient(circle,rgba(139,92,246,.13),transparent 70%);border-radius:50%}
+.brahma-ic{font-size:3.5rem}
+.brahma-nm{font-family:var(--fd);font-size:1.6rem;font-weight:700;margin-bottom:4px}
+.brahma-rl{font-family:var(--fm);font-size:.68rem;color:var(--purple);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
+.brahma-ds{font-size:.86rem;color:var(--txt2);line-height:1.7;max-width:560px}
+.brahma-stat{text-align:center;padding:0 16px}
+.bs-v{font-family:var(--fd);font-size:1.6rem;font-weight:700;color:var(--purple);text-shadow:0 0 16px rgba(139,92,246,.4)}
+.bs-l{font-family:var(--fm);font-size:.62rem;color:var(--txt3);letter-spacing:.08em;text-transform:uppercase;margin-top:4px}
+
+.ag-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:13px}
+.ag{padding:0;cursor:none}
+.ag-bn{height:5px;border-radius:var(--r3) var(--r3) 0 0}
+.ag-bd{padding:20px;display:flex;flex-direction:column;gap:11px}
+.ag-tp{display:flex;align-items:flex-start;gap:10px}
+.ag-iw{width:42px;height:42px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;position:relative;flex-shrink:0}
+.ag-gl{position:absolute;inset:0;border-radius:inherit;opacity:0;transition:var(--t);filter:blur(6px)}
+.ag:hover .ag-gl{opacity:.65}
+.ag-nm{font-family:var(--fd);font-size:.98rem;font-weight:700;letter-spacing:-.01em;margin-bottom:1px}
+.ag-rl{font-size:.66rem;color:var(--txt3);font-family:var(--fm);letter-spacing:.05em;text-transform:uppercase}
+.ag-ds{font-size:.82rem;color:var(--txt2);line-height:1.6}
+
+/* Agent thinking animation */
+.ag-think{background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-family:var(--fm);font-size:.68rem;color:var(--txt2)}
+.ag-think-label{color:var(--txt3);margin-bottom:6px;font-size:.65rem}
+.ag-think-bar{height:3px;background:var(--border);border-radius:2px;overflow:hidden;margin-bottom:4px}
+.ag-think-fill{height:100%;border-radius:2px;animation:think 2.2s ease-in-out infinite}
+@keyframes think{0%{width:20%}50%{width:85%}100%{width:55%}}
+.ag-think-status{font-size:.63rem;color:var(--txt3)}
+
+.ag-feats{display:flex;flex-wrap:wrap;gap:4px}
+.af{padding:2px 8px;border-radius:3px;font-size:.65rem;font-family:var(--fm);color:var(--txt3);background:rgba(255,255,255,.03);border:1px solid var(--border);transition:var(--t)}
+.ag:hover .af{border-color:rgba(99,179,237,.1);color:var(--txt2)}
+.ag-ft{display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid var(--border);font-family:var(--fm);font-size:.66rem;color:var(--txt3)}
+.ag-lk{display:inline-flex;align-items:center;gap:4px;color:var(--txt3);transition:var(--t)}
+.ag-lk:hover{color:var(--cyan)}
+
+/* ══ PROJECTS ══ */
+#builds{padding:108px 0}
+.pf-bar{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:32px 0 24px}
+.pf{padding:6px 14px;border-radius:99px;font-family:var(--fm);font-size:.7rem;letter-spacing:.06em;border:1px solid var(--border);color:var(--txt3);background:var(--bg3);cursor:none;transition:var(--t)}
+.pf:hover{border-color:var(--bgl);color:var(--txt2)}
+.pf.on{background:linear-gradient(135deg,var(--blue),var(--purple));border-color:transparent;color:#fff;box-shadow:0 3px 12px rgba(59,130,246,.26)}
+.pg{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:13px}
+.pc{padding:0;cursor:none}
+.pc-bn{height:5px;border-radius:var(--r3) var(--r3) 0 0}
+.pc-bd{padding:20px;display:flex;flex-direction:column;gap:11px}
+.pc-th{display:flex;align-items:center;gap:9px}
+.pc-ic{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.25rem;position:relative;flex-shrink:0}
+.pc-icg{position:absolute;inset:0;border-radius:inherit;opacity:0;transition:var(--t);filter:blur(6px)}
+.pc:hover .pc-icg{opacity:.58}
+.pc-mn{font-family:var(--fd);font-size:.95rem;font-weight:700;letter-spacing:-.01em;margin-bottom:1px}
+.pc-ms{font-size:.63rem;color:var(--txt3);font-family:var(--fm);letter-spacing:.05em;text-transform:uppercase}
+.pc-rp{font-family:var(--fm);font-size:.64rem;color:var(--txt3);padding:2px 7px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:3px;width:fit-content}
+.pc-ds{font-size:.81rem;color:var(--txt2);line-height:1.62;flex:1}
+.pc-mx{display:flex;gap:12px;padding:9px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.pc-m{flex:1;text-align:center}
+.pc-mv{font-family:var(--fd);font-size:.96rem;font-weight:700;color:var(--txt)}
+.pc-ml{font-family:var(--fm);font-size:.57rem;color:var(--txt3);letter-spacing:.06em;text-transform:uppercase;margin-top:1px}
+.pc-tg{display:flex;flex-wrap:wrap;gap:4px}
+.pc-t{padding:2px 7px;border-radius:3px;font-size:.64rem;font-family:var(--fm);color:var(--txt3);background:rgba(255,255,255,.03);border:1px solid var(--border);transition:var(--t)}
+.pc:hover .pc-t{border-color:rgba(99,179,237,.1);color:var(--txt2)}
+.pc-ft{display:flex;align-items:center;justify-content:space-between;padding-top:9px}
+.pc-gh{display:inline-flex;align-items:center;gap:4px;font-family:var(--fm);font-size:.68rem;color:var(--txt3);padding:4px 9px;border:1px solid var(--border);border-radius:var(--r1);transition:var(--t);cursor:none}
+.pc-gh:hover{border-color:var(--bgl);color:var(--txt2);background:var(--bg4)}
+.pcount{font-family:var(--fm);font-size:.7rem;color:var(--txt3);margin-left:auto}
+
+/* ══ MISSION TIMELINE ══ */
+#timeline{padding:108px 0;background:radial-gradient(ellipse 80% 50% at 80% 50%,rgba(59,130,246,.04),transparent)}
+.tl-wrap{position:relative;margin-top:56px;padding-left:40px}
+.tl-wrap::before{content:'';position:absolute;left:15px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--blue),var(--purple),transparent)}
+.tl-it{position:relative;margin-bottom:48px;padding-left:28px}
+.tl-node{position:absolute;left:-32px;top:3px;width:18px;height:18px;border-radius:50%;border:2px solid var(--border);background:var(--bg);transition:var(--t)}
+.tl-node.dn{background:var(--blue);border-color:var(--cyan);box-shadow:0 0 10px rgba(6,182,212,.32)}
+.tl-node.ip{border-color:var(--purple);box-shadow:0 0 10px rgba(139,92,246,.32);animation:nP 2s infinite}
+@keyframes nP{0%,100%{box-shadow:0 0 10px rgba(139,92,246,.32)}50%{box-shadow:0 0 22px rgba(139,92,246,.6)}}
+.tl-hd{display:flex;align-items:center;gap:10px;margin-bottom:7px;flex-wrap:wrap}
+.tl-num{font-family:var(--fm);font-size:.66rem;color:var(--txt3);letter-spacing:.1em}
+.tl-tt{font-family:var(--fd);font-size:1.1rem;font-weight:700}
+.tl-sub{font-size:.83rem;color:var(--txt2);margin-bottom:9px}
+.tl-its{display:flex;flex-wrap:wrap;gap:6px}
+.tl-i{padding:3px 9px;background:var(--bg3);border:1px solid var(--border);border-radius:3px;font-size:.73rem;color:var(--txt2);font-family:var(--fm)}
+
+/* ══ GITHUB ══ */
+#github{padding:108px 0}
+.rg{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:13px;margin-top:48px}
+.rc{padding:20px;cursor:none}
+.rc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:9px}
+.rc-ic{width:36px;height:36px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.rc-nm{font-family:var(--fd);font-size:.9rem;font-weight:700;margin-bottom:7px}
+.rc-ds{font-size:.79rem;color:var(--txt2);line-height:1.58;margin-bottom:12px}
+
+/* Language bars */
+.rc-langs{margin-bottom:12px}
+.rc-lang-row{display:flex;align-items:center;gap:8px;margin-bottom:5px;font-family:var(--fm);font-size:.68rem}
+.rc-lang-nm{color:var(--txt3);width:32px;flex-shrink:0}
+.rc-lang-bar{flex:1;height:3px;background:var(--border);border-radius:2px;overflow:hidden}
+.rc-lang-fill{height:100%;border-radius:2px}
+.rc-lang-pct{color:var(--txt3);width:26px;text-align:right}
+
+.rc-meta{display:flex;align-items:center;gap:14px;font-family:var(--fm);font-size:.68rem;color:var(--txt3);margin-bottom:12px}
+.rc-lb{display:inline-flex;align-items:center;gap:4px}
+.rc-btn{display:inline-flex;align-items:center;gap:5px;padding:6px 13px;border:1px solid var(--border);border-radius:var(--r1);font-size:.74rem;font-family:var(--fm);color:var(--txt2);transition:var(--t);cursor:none}
+.rc-btn:hover{border-color:var(--bgl);color:var(--txt);background:var(--bg4)}
+
+/* ══ ABOUT ══ */
+#about{padding:108px 0;background:radial-gradient(ellipse 80% 50% at 50% 100%,rgba(59,130,246,.04),transparent)}
+.ab-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;margin-top:52px}
+.av-wrap{display:flex;justify-content:center;align-items:center;position:relative}
+.av-ring{width:248px;height:248px;border-radius:50%;border:1px solid rgba(59,130,246,.16);display:flex;align-items:center;justify-content:center;position:relative}
+.av-ring::before{content:'';position:absolute;inset:8px;border-radius:50%;border:1px solid rgba(139,92,246,.1)}
+.av-in{width:200px;height:200px;border-radius:50%;border:2px solid rgba(99,179,237,.25);overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:0 0 32px rgba(59,130,246,.2)}
+.av-in img{width:100%;height:100%;object-fit:cover;object-position:center top;filter:saturate(1.1) contrast(1.05)}
+.av-orbit{position:absolute;width:290px;height:290px;border:1px dashed rgba(99,179,237,.1);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);animation:oS 22s linear infinite}
+.av-dot{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--blue);top:-3.5px;left:50%;transform:translateX(-50%);box-shadow:0 0 7px var(--blue)}
+@keyframes oS{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+.av-tag{position:absolute;padding:5px 10px;border-radius:var(--r1);font-family:var(--fm);font-size:.64rem;white-space:nowrap}
+.avt1{top:-14px;right:-44px;background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.16);color:var(--blue)}
+.avt2{bottom:8px;right:-56px;background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.16);color:var(--purple)}
+.avt3{bottom:-14px;left:-28px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.16);color:var(--gold)}
+.ab-nm{font-family:var(--fd);font-size:2.1rem;font-weight:700;letter-spacing:-.025em;margin-bottom:4px}
+.ab-ti{font-size:.74rem;color:var(--cyan);font-family:var(--fm);letter-spacing:.1em;margin-bottom:18px;text-transform:uppercase}
+.ab-bi{font-size:.88rem;color:var(--txt2);line-height:1.8;margin-bottom:16px}
+.traits{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px}
+.trait{padding:4px 11px;border:1px solid var(--border);border-radius:var(--r1);font-size:.74rem;color:var(--txt2);background:var(--bg3);font-family:var(--fm)}
+
+/* ══ CONTACT ══ */
+#contact{padding:108px 0;text-align:center}
+.cl-links{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:36px}
+.cl{display:flex;align-items:center;gap:8px;padding:11px 18px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r2);font-size:.82rem;font-weight:500;color:var(--txt2);transition:var(--t);cursor:none}
+.cl:hover{background:var(--bg4);border-color:var(--bgl);color:var(--txt);transform:translateY(-2px)}
+.cl-p{background:linear-gradient(135deg,var(--blue),var(--purple));border-color:transparent;color:#fff}
+.cl-p:hover{box-shadow:0 7px 22px rgba(59,130,246,.32)}
+
+/* ══ COMMAND PALETTE ══ */
+#cp{position:fixed;inset:0;z-index:500;display:flex;align-items:flex-start;justify-content:center;padding-top:13vh;background:rgba(4,7,15,.9);backdrop-filter:blur(28px);opacity:0;pointer-events:none;transition:var(--t)}
+#cp.open{opacity:1;pointer-events:all}
+.cp-bx{width:580px;max-width:90vw;background:rgba(8,15,32,.97);border:1px solid rgba(99,179,237,.17);border-radius:var(--r4);overflow:hidden;box-shadow:0 48px 96px rgba(0,0,0,.55);transform:translateY(-16px) scale(.96);transition:var(--t)}
+#cp.open .cp-bx{transform:translateY(0) scale(1)}
+.cp-s{display:flex;align-items:center;gap:10px;padding:15px 18px;border-bottom:1px solid var(--border)}
+.cp-si{color:var(--txt3);font-size:.92rem}
+.cp-in{flex:1;background:none;border:none;outline:none;font-family:var(--fm);font-size:.86rem;color:var(--txt);caret-color:var(--cyan);cursor:none}
+.cp-esc{font-family:var(--fm);font-size:.6rem;padding:2px 6px;background:var(--bg3);border:1px solid var(--border);border-radius:3px;color:var(--txt3)}
+.cp-ls{max-height:400px;overflow-y:auto;padding:7px}
+.cp-r{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:var(--r1);cursor:none;transition:var(--t)}
+.cp-r:hover,.cp-r.sel{background:var(--bg4)}
+.cp-ri{font-size:.92rem;width:22px;text-align:center}
+.cp-rn{font-size:.83rem;font-weight:500;flex:1}
+.cp-rt{font-size:.64rem;color:var(--txt3);font-family:var(--fm)}
+.cp-hl{padding:6px 12px 2px;font-size:.63rem;letter-spacing:.13em;text-transform:uppercase;color:var(--txt3);font-family:var(--fm)}
+
+/* ══ CONSOLE ══ */
+#console-wrap{position:fixed;bottom:0;left:0;right:0;z-index:150;transform:translateY(100%);transition:.4s cubic-bezier(.4,0,.2,1)}
+#console-wrap.open{transform:translateY(0)}
+.console-box{background:rgba(4,7,15,.97);border-top:1px solid var(--border);backdrop-filter:blur(24px);padding:14px 20px;font-family:var(--fm);font-size:.78rem}
+.console-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.console-title{color:var(--cyan);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase}
+.console-close{color:var(--txt3);cursor:none;font-size:1rem;transition:var(--t)}
+.console-close:hover{color:var(--txt)}
+.console-out{max-height:120px;overflow-y:auto;margin-bottom:10px}
+.console-in{display:flex;align-items:center;gap:8px;border-top:1px solid var(--border);padding-top:10px}
+.console-prompt{color:var(--cyan)}
+.console-input{flex:1;background:none;border:none;outline:none;color:var(--txt);font-family:var(--fm);font-size:.78rem;caret-color:var(--cyan);cursor:none}
+
+/* ══ FAB + Notif ══ */
+#fab{position:fixed;bottom:24px;right:24px;z-index:200;width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));border:none;cursor:none;display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:0 7px 26px rgba(59,130,246,.36);transition:var(--t);animation:fabF 3.5s ease-in-out infinite}
+#fab:hover{transform:scale(1.1);box-shadow:0 11px 34px rgba(59,130,246,.48)}
+@keyframes fabF{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.kh{position:fixed;bottom:80px;right:24px;z-index:100;font-family:var(--fm);font-size:.6rem;color:var(--txt3);pointer-events:none;text-align:right}
+
+.notif-wrap{position:fixed;top:76px;right:22px;z-index:400;display:flex;flex-direction:column;gap:7px;pointer-events:none}
+.notif-it{padding:11px 14px;background:rgba(8,15,30,.96);border:1px solid var(--border);border-radius:var(--r2);backdrop-filter:blur(18px);font-size:.8rem;max-width:270px;box-shadow:0 8px 28px rgba(0,0,0,.28);transform:translateX(110%);transition:transform .4s cubic-bezier(.34,1.56,.64,1);pointer-events:all}
+.notif-it.show{transform:translateX(0)}
+.notif-ti{font-weight:600;margin-bottom:2px;font-size:.8rem}
+.notif-bd{color:var(--txt2);font-size:.73rem}
+
+/* ══ EASTER EGG (Konami) ══ */
+#matrix-overlay{position:fixed;inset:0;z-index:2500;background:rgba(0,0,0,.95);display:none;align-items:center;justify-content:center;flex-direction:column;gap:20px}
+#matrix-overlay.show{display:flex}
+#matrix-canvas{position:absolute;inset:0;z-index:0;opacity:.4}
+.matrix-msg{position:relative;z-index:1;font-family:var(--fm);font-size:clamp(1rem,4vw,2rem);color:var(--green);text-align:center;text-shadow:0 0 20px var(--green);animation:matPulse 1.5s ease-in-out infinite}
+.matrix-sub{position:relative;z-index:1;font-family:var(--fm);font-size:.8rem;color:rgba(16,185,129,.6);text-align:center;letter-spacing:.1em}
+@keyframes matPulse{0%,100%{opacity:1}50%{opacity:.6}}
+.matrix-close{position:relative;z-index:1;margin-top:20px;padding:8px 20px;border:1px solid var(--green);border-radius:var(--r1);font-family:var(--fm);font-size:.78rem;color:var(--green);background:transparent;cursor:none;transition:var(--t)}
+.matrix-close:hover{background:rgba(16,185,129,.1)}
+
+/* ══ FOOTER ══ */
+footer{padding:32px 0;border-top:1px solid var(--border);position:relative;z-index:2}
+.ft-in{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.ft-cp{font-size:.74rem;color:var(--txt3);font-family:var(--fm)}
+.ft-lk{display:flex;gap:18px}
+.ft-lk a{font-size:.74rem;color:var(--txt3);transition:var(--t)}
+.ft-lk a:hover{color:var(--txt2)}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:1100px){
+  .mc-grid{grid-template-columns:repeat(6,1fr)}
+  .mc-m{grid-column:span 3}.mc-term{grid-column:span 6}.mc-al{grid-column:span 3}.mc-act{grid-column:span 3}.mc-repos{grid-column:span 6}.mc-cur{grid-column:span 6}
+  .brahma-wrap{grid-template-columns:auto 1fr}
+  .brahma-stat{display:none}
+}
+@media(max-width:768px){
+  .nav-links{display:none}.nav-r .bg{display:none}
+  .mc-grid{grid-template-columns:1fr 1fr}
+  .mc-m{grid-column:span 1}.mc-term,.mc-al,.mc-act,.mc-repos,.mc-cur{grid-column:span 2}
+  .ag-grid,.pg,.rg{grid-template-columns:1fr}
+  .ab-grid{grid-template-columns:1fr;gap:36px;text-align:center}
+  .av-wrap{justify-content:center}
+  .avt1,.avt2,.avt3{display:none}
+  .cl-links{flex-direction:column;align-items:stretch}.cl{justify-content:center}
+  .hero-stats{gap:18px}
+  .brahma-wrap{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .mc-grid{grid-template-columns:1fr}.mc-m,.mc-term,.mc-al,.mc-act,.mc-repos,.mc-cur{grid-column:span 1}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+
+<!-- BOOT -->
+<div id="boot">
+  <div class="boot-logo">ASTRA LOKA</div>
+  <div class="boot-sub">An AI Civilization · Ancient Wisdom · Future Intelligence</div>
+  <div class="boot-term" id="boot-term"></div>
+  <div class="boot-bw"><div class="boot-bf" id="boot-bf"></div></div>
+  <div class="boot-pct" id="boot-pct">0%</div>
+</div>
+
+<!-- MATRIX EASTER EGG -->
+<div id="matrix-overlay">
+  <canvas id="matrix-canvas"></canvas>
+  <div class="matrix-msg">DEVELOPER MODE ACTIVATED</div>
+  <div class="matrix-sub">Welcome to the ASTRA LOKA Debug Console</div>
+  <button class="matrix-close" onclick="closeMatrix()">EXIT MATRIX MODE</button>
+</div>
+
+<!-- CURSORS -->
+<div id="cur-d"></div><div id="cur-r"></div>
+
+<!-- BG -->
+<div class="grid-bg"></div>
+<div class="noise"></div>
+<canvas id="cc" style="position:fixed;inset:0;z-index:0;pointer-events:none"></canvas>
+
+<!-- NOTIFICATIONS -->
+<div class="notif-wrap" id="nw"></div>
+
+<!-- COMMAND PALETTE -->
+<div id="cp" role="dialog" aria-modal="true">
+  <div class="cp-bx">
+    <div class="cp-s">
+      <span class="cp-si">⌕</span>
+      <input id="cp-in" class="cp-in" type="text" placeholder="Search agents, projects, missions, commands..." autocomplete="off" spellcheck="false">
+      <span class="cp-esc">ESC</span>
+    </div>
+    <div id="cp-ls" class="cp-ls"></div>
+  </div>
+</div>
+
+<!-- AI CONSOLE -->
+<div id="console-wrap">
+  <div class="console-box">
+    <div class="console-hd">
+      <span class="console-title">⬡ ASTRA Console</span>
+      <button class="console-close" onclick="toggleConsole()">✕</button>
+    </div>
+    <div class="console-out" id="console-out"></div>
+    <div class="console-in">
+      <span class="console-prompt">brahma@astra:~$</span>
+      <input id="console-inp" class="console-input" type="text" placeholder="run garuda · list agents · status · help" spellcheck="false" autocomplete="off">
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a class="nav-logo" href="#hero">
+    <div class="nav-mark">✦</div> ASTRA LOKA
+  </a>
+  <ul class="nav-links">
+    <li><a href="#network-section">Network</a></li>
+    <li><a href="#mission">Mission Control</a></li>
+    <li><a href="#agents">Agents</a></li>
+    <li><a href="#builds">Projects</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+    <li><a href="#github">GitHub</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+  <div class="nav-r">
+    <button class="nav-kbd" id="pal-btn"><kbd>⌘K</kbd> Search</button>
+    <button class="nav-kbd bg" onclick="toggleConsole()" style="border-color:rgba(6,182,212,.2);color:var(--cyan)">⬡ Console</button>
+    <a href="#mission" class="btn bp">⚡ Enter OS</a>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="hero-in">
+    <div class="hero-badge fi"><span class="pulse" style="color:var(--green)"></span> AI Civilization · 14 Agents · Commander Pranav</div>
+    <h1 class="hero-hl fi d1">
+      <span class="hl-a">ASTRA</span>
+      <span class="hl-b">An AI Civilization</span>
+    </h1>
+    <p class="hero-civ fi d2"><em>Ancient Wisdom.</em> &nbsp;Future Intelligence.</p>
+    <p class="hero-desc fi d3">14 AI agents. Every agent a citizen. Every repository a city. Every project a mission. Every deployment expands the civilization.</p>
+    <div class="hero-btns fi d3">
+      <a href="#mission" class="btn bp">🚀 Enter Mission Control</a>
+      <a href="#network-section" class="btn bo">🕸 View Agent Network</a>
+      <a href="#agents" class="btn bg">🤖 Meet 14 Agents</a>
+      <a href="#builds" class="btn bgold">✦ 12 Projects</a>
+    </div>
+    <div class="hero-type fi d4">// <span id="ty-t"></span><span class="tcur"></span></div>
+    <div class="hero-stats fi d5">
+      <div class="hstat"><div class="hstat-v" data-n="14" data-s="">14</div><div class="hstat-l">AI Citizens</div></div>
+      <div class="hstat"><div class="hstat-v" data-n="12" data-s="">12</div><div class="hstat-l">Repositories</div></div>
+      <div class="hstat"><div class="hstat-v" data-n="530" data-s="h">530h</div><div class="hstat-l">Hours Saved</div></div>
+      <div class="hstat"><div class="hstat-v" data-n="147" data-s="">147</div><div class="hstat-l">Jobs Applied</div></div>
+      <div class="hstat"><div class="hstat-v" data-n="6" data-s="">6</div><div class="hstat-l">Mission Phases</div></div>
+    </div>
+  </div>
+  <div class="scroll-h"><span>ENTER</span><div class="sh-ln"></div></div>
+</section>
+
+<!-- ═══ AGENT NETWORK GRAPH ═══ -->
+<section id="network-section">
+<div class="container">
+  <div class="fi">
+    <div class="sl">Agent Network</div>
+    <h2 class="sh">The <span class="gt-blue">Living Graph</span> of Intelligence.</h2>
+    <p class="ss">Every agent glows. Every connection carries live intelligence. Hover any node to inspect status, tasks, and metrics.</p>
+  </div>
+  <div class="network-wrap fi d2">
+    <canvas id="net-canvas"></canvas>
+    <div class="net-tooltip" id="net-tt"></div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ MISSION CONTROL ═══ -->
+<section id="mission">
+<div class="container">
+  <div class="fi">
+    <div class="sl">Mission Control</div>
+    <h2 class="sh">The Heart of <span class="gt-blue">ASTRA LOKA.</span></h2>
+    <p class="ss">Live metrics, agent loads, terminal feed, and active mission status — the entire OS at a glance.</p>
+  </div>
+  <div class="mc-grid">
+    <div class="gc mc-m fi"><div class="mc-mv" data-n="32">32</div><div class="mc-ml">Projects Built</div><div class="mc-bar"><div class="mc-fill" style="width:80%"></div></div><div class="mc-trend">↑ +4 this month</div></div>
+    <div class="gc mc-m fi"><div class="mc-mv" data-n="14">14</div><div class="mc-ml">Agents Online</div><div class="mc-bar"><div class="mc-fill" style="width:100%"></div></div><div class="mc-trend">↑ All green</div></div>
+    <div class="gc mc-m fi"><div class="mc-mv" data-n="147">147</div><div class="mc-ml">Jobs Applied</div><div class="mc-bar"><div class="mc-fill" style="width:68%"></div></div><div class="mc-trend">↑ +12 this week</div></div>
+    <div class="gc mc-m fi"><div class="mc-mv" data-n="530" data-s="h">530h</div><div class="mc-ml">Hours Saved</div><div class="mc-bar"><div class="mc-fill" style="width:93%"></div></div><div class="mc-trend">↑ +38h this week</div></div>
+
+    <div class="gc mc-term fi">
+      <div class="ph"><div class="pd"></div> System Terminal</div>
+      <div class="tb" style="min-height:200px">
+        <div class="th"><div class="tdot" style="background:#ef4444"></div><div class="tdot" style="background:#f59e0b"></div><div class="tdot" style="background:#10b981"></div></div>
+        <div id="live-term"></div>
+      </div>
+    </div>
+    <div class="gc mc-al fi">
+      <div class="ph"><div class="pd" style="background:var(--purple);box-shadow:0 0 5px var(--purple)"></div> Agent Load</div>
+      <div class="al-row"><span class="al-ic">🧠</span><span class="al-nm">Brahma</span><div class="al-bar"><div class="al-fill" style="width:95%"></div></div><span class="al-pct">95%</span></div>
+      <div class="al-row"><span class="al-ic">⚡</span><span class="al-nm">Vajra</span><div class="al-bar"><div class="al-fill" style="width:88%"></div></div><span class="al-pct">88%</span></div>
+      <div class="al-row"><span class="al-ic">🦅</span><span class="al-nm">Garuda</span><div class="al-bar"><div class="al-fill" style="width:76%"></div></div><span class="al-pct">76%</span></div>
+      <div class="al-row"><span class="al-ic">🏹</span><span class="al-nm">Arjun</span><div class="al-bar"><div class="al-fill" style="width:82%"></div></div><span class="al-pct">82%</span></div>
+      <div class="al-row"><span class="al-ic">🎯</span><span class="al-nm">Sarathi</span><div class="al-bar"><div class="al-fill" style="width:69%"></div></div><span class="al-pct">69%</span></div>
+      <div class="al-row"><span class="al-ic">🗣</span><span class="al-nm">Vak</span><div class="al-bar"><div class="al-fill" style="width:55%"></div></div><span class="al-pct">55%</span></div>
+      <div class="al-row"><span class="al-ic">📊</span><span class="al-nm">Sudarshan</span><div class="al-bar"><div class="al-fill" style="width:71%"></div></div><span class="al-pct">71%</span></div>
+    </div>
+
+    <div class="gc mc-act fi">
+      <div class="ph"><div class="pd"></div> Live Activity</div>
+      <div class="act-it"><div class="act-ic">⚡</div><div style="flex:1"><div class="act-nm">Vajra triggered job outreach workflow</div><div class="act-t">2 min ago · Automation</div></div><span class="tag tl">Done</span></div>
+      <div class="act-it"><div class="act-ic">🦅</div><div style="flex:1"><div class="act-nm">Garuda compiled market intelligence brief</div><div class="act-t">14 min ago · Research</div></div><span class="tag tl">Done</span></div>
+      <div class="act-it"><div class="act-ic">🔥</div><div style="flex:1"><div class="act-nm">Agni pushed commit to ASTRA-LOKA</div><div class="act-t">1 hr ago · Dev</div></div><span class="tag tb">Running</span></div>
+      <div class="act-it"><div class="act-ic">🗣</div><div style="flex:1"><div class="act-nm">Vak scheduled 6 LinkedIn posts</div><div class="act-t">2 hrs ago · Content</div></div><span class="tag tl">Done</span></div>
+      <div class="act-it"><div class="act-ic">🎯</div><div style="flex:1"><div class="act-nm">Sarathi updated Q3 sales forecast</div><div class="act-t">4 hrs ago · Sales</div></div><span class="tag tl">Done</span></div>
+    </div>
+    <div class="gc mc-repos fi">
+      <div class="ph"><div class="pd" style="background:var(--blue);box-shadow:0 0 5px var(--blue)"></div> Active Missions</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:5px;background:rgba(16,185,129,.04);border:1px solid rgba(16,185,129,.13)"><span>🌌</span><span style="font-size:.8rem;flex:1;font-weight:500">Brahmaanda — ASTRA-LOKA</span><span class="tag tl">Live</span></div>
+        <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:5px;background:rgba(245,158,11,.04);border:1px solid rgba(245,158,11,.13)"><span>⚡</span><span style="font-size:.8rem;flex:1;font-weight:500">Karmayoga — Career OS</span><span class="tag tb">Running</span></div>
+        <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:5px;background:rgba(59,130,246,.04);border:1px solid rgba(59,130,246,.13)"><span>🌸</span><span style="font-size:.8rem;flex:1;font-weight:500">Lakshmi — MARKETO-AI</span><span class="tag tb">Beta</span></div>
+        <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:5px;background:rgba(139,92,246,.04);border:1px solid rgba(139,92,246,.13)"><span>👁</span><span style="font-size:.8rem;flex:1;font-weight:500">Drishti — HEIMDALL-AI</span><span class="tag tl">Live</span></div>
+        <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:5px;background:var(--bg3);border:1px solid var(--border)"><span>🌌</span><span style="font-size:.8rem;flex:1;font-weight:500">Nakshatra — Orchestration</span><span class="tag td">Dev</span></div>
+      </div>
+    </div>
+    <div class="gc mc-cur fi">
+      <div class="ph"><div class="pd" style="background:var(--gold);box-shadow:0 0 5px var(--gold)"></div> Current Mission — Senior PM Outreach Q3</div>
+      <div class="tb">
+        <div class="tl"><span class="tp">brahma@astra:~$ </span><span style="color:var(--txt)">mission run --name "Senior PM Outreach Q3" --agents garuda,vak,vajra</span></div>
+        <div class="tl to">&nbsp;&nbsp;↳ Garuda: Scanning 847 targets on LinkedIn...</div>
+        <div class="tl tok">&nbsp;&nbsp;✓ 42 Series B–D companies identified</div>
+        <div class="tl to">&nbsp;&nbsp;↳ Vak: Generating personalized outreach...</div>
+        <div class="tl tok">&nbsp;&nbsp;✓ 14 messages drafted · 9 sent · 5 replies</div>
+        <div class="tl to">&nbsp;&nbsp;↳ Vajra: Logging to CRM, updating Sudarshan...</div>
+        <div class="tl tok">&nbsp;&nbsp;✓ 3 interviews scheduled · 1 offer pipeline</div>
+        <div class="tl tw">&nbsp;&nbsp;⚡ Mission 78% complete · Nakshatra coordinating final phase</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ AGENTS ═══ -->
+<section id="agents">
+<div class="container">
+  <div class="fi">
+    <div class="sl">Agent Constellation</div>
+    <h2 class="sh">14 Citizens. <span class="gt-purple">One Civilization.</span></h2>
+    <p class="ss">Each agent is named after a timeless Indian concept, purpose-built for one domain of intelligence — all governed by BRAHMA.</p>
+  </div>
+
+  <!-- BRAHMA MASTER -->
+  <div class="brahma-wrap fi d2">
+    <div class="brahma-ic">🧠</div>
+    <div>
+      <div class="brahma-nm">BRAHMA — Master Intelligence</div>
+      <div class="brahma-rl">CORE · CREATOR · ORCHESTRATOR OF ALL AGENTS</div>
+      <p class="brahma-ds">The creator-mind that breathes life into every other agent. BRAHMA receives missions, decomposes them into specialized tasks, delegates to 13 specialist agents, synthesizes outputs into unified intelligence, and evolves the entire civilization.</p>
+      <div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:12px">
+        <span class="tag tl"><span class="pulse"></span>Master Online</span>
+        <span class="tag tn">Creator Intelligence</span>
+        <span class="tag td">Always Active</span>
+      </div>
+    </div>
+    <div class="brahma-stat">
+      <div class="bs-v">95%</div><div class="bs-l">Load</div>
+    </div>
+    <div class="brahma-stat">
+      <div class="bs-v">13</div><div class="bs-l">Agents Under</div>
+    </div>
+    <div class="brahma-stat">
+      <div class="bs-v">∞</div><div class="bs-l">Intelligence</div>
+    </div>
+  </div>
+
+  <div class="ag-grid" id="ag-grid">
+
+    <article class="gc ag fi">
+      <div class="ag-bn" style="background:linear-gradient(90deg,var(--gold),#f97316)"></div>
+      <div class="ag-bd">
+        <div class="ag-tp"><div class="ag-iw" style="background:rgba(245,158,11,.1)">🎯<div class="ag-gl" style="background:var(--gold)"></div></div><div style="flex:1"><div class="ag-nm">Sarathi</div><div class="ag-rl">SALES INTELLIGENCE</div></div><span class="tag tl"><span class="pulse"></span>Live</span></div>
+        <p class="ag-ds">The strategic charioteer guiding revenue teams through the sales battlefield. CRM intelligence, pipeline forecasting, deal velocity, and revenue dashboards.</p>
+        <div class="ag-think"><div class="ag-think-label">Forecasting Q3 Revenue...</div><div class="ag-think-bar"><div class="ag-think-fill" style="background:linear-gradient(90deg,var(--gold),var(--orange))"></div></div><div class="ag-think-status">Confidence: 97% · ₹ Pipeline: Active</div></div>
+        <div class="ag-feats"><span class="af">CRM</span><span class="af">Forecasting</span><span class="af">Pipeline</span><span class="af">Revenue AI</span></div>
+        <div class="ag-ft"><a href="https://connect-pranav.github.io/Sales-Dashboard" target="_blank" rel="noopener" class="ag-lk">🔗 sarathi ↗</a><span style="color:var(--gold);font-size:.66rem">↗ Active</span></div>
+      </div>
+    </article>
+
+    <article class="gc ag fi">
+      <div class="ag-bn" style="background:linear-gradient(90deg,var(--blue),var(--cyan))"></div>
+      <div class="ag-bd">
+        <div class="ag-tp"><div class="ag-iw" style="background:rgba(59,130,246,.1)">🏹<div class="ag-gl" style="background:var(--blue)"></div></div><div style="flex:1"><div class="ag-nm">Arjun</div><div class="ag-rl">CAREER INTELLIGENCE</div></div><span class="tag tl"><span class="pulse"></span>Live</span></div>
+        <p class="ag-ds">The focused warrior who never misses. Builds resumes, tracks applications, coaches interviews, optimizes ATS, and transforms LinkedIn into a career weapon.</p>
+        <div class="ag-think"><div class="ag-think-label">Optimizing ATS Score...</div><div class="ag-think-bar"><div class="ag-think-fill" style="background:linear-gradient(90deg,var(--blue),var(--cyan))"></div></div><div class="ag-think-status">Interviews: 3 this week · Applications: 147</div></div>
+        <div class="ag-feats"><span class="af">Resume</span><span class="af">Job Tracker</span><span class="af">ATS</span><span class="af">Interview Coach</span></div>
+        <div class="ag-ft"><a href="https://connect-pranav.github.io/-Career-Transformation-OS" target="_blank" rel="noopener" class="ag-lk">🔗 arjun ↗</a><span style="color:var(--blue);font-size:.66rem">↗ Active</span></div>
+      </div>
+    </article>
+
+    <article class="gc ag fi">
+      <div class="ag-bn" style="background:linear-gradient(90deg,var(--pink),var(--purple))"></div>
+      <div class="ag-bd">
+        <div class="ag-tp"><div class="ag-iw" style="background:rgba(236,72,153,.1)">🗣<div class="ag-gl" style="background:var(--pink)"></div></div><div style="flex:1"><div class="ag-nm">Vak</div><div class="ag-rl">MARKETING STUDIO</div></div><span class="tag tb"><span class="pulse"></span>Beta</span></div>
+        <p class="ag-ds">Goddess of speech and expression. Creates content, builds brand narratives, manages SEO, runs social campaigns, and produces converting ad copy across every channel.</p>
+        <div class="ag-think"><div class="ag-think-label">Scheduling LinkedIn Content...</div><div class="ag-think-bar"><div class="ag-think-fill" style="background:linear-gradient(90deg,var(--pink),var(--purple))"></div></div><div class="ag-think-status">6 posts queued · Reach: 12K estimated</div></div>
+        <div class="ag-feats"><span class="af">Content</span><span class="af">Branding</span><span class="af">SEO</span><span class="af">Social</span></div>
+        <div class="ag-ft"><a href="https://connect-pranav.github.io/Channel-IH" target="_blank" rel="noopener" class="ag-lk">🔗 vak ↗</a><span style="color:var(--pink);font-size:.66rem">↗ Beta</span></div>
+      </div>
+    </article>
+
+    <article class="gc ag fi">
+      <div class="ag-bn" style="background:linear-gradient(90deg,var(--cyan),var(--blue))"></div>
+      <div class="ag-bd">
+        <div class="ag-tp"><div class="ag-iw" style="background:rgba(6,182,212,.1)">🦅<div class="ag-gl" style="background:var(--cyan)"></div></div><div style="flex:1"><div class="ag-nm">Garuda</div><div class="ag-rl">RESEARCH INTELLIGENCE</div></div><span class="tag tl"><span class="pulse"></span>Live</span></div>
+        <p class="ag-ds">Eagle of vast perception — sees what others cannot. Scours the web for market research, competitor analysis, and trend signals in minutes, not hours.</p>
+        <div class="ag-think"><div class="ag-think-label">Researching 847 companies...</div><div class="ag-think-bar"><div class="ag-think-fill" style="background:linear-gradient(90deg,var(--cyan),var(--blue))"></div></div><div class="ag-think-status">42 targets found · Intel: 32 sources</div></div>
+        <div class="ag-feats"><span class="af">Market Research</span><span class="af">Competitor Intel</span><span class="af">Trends</span></div>
+        <div class="ag-ft"><a href="https://connect-pranav.github.io/Arena-Intelligence" target="_blank" rel="noopener" class="ag-lk">🔗 garuda ↗</a><span style="color:var(--cyan);font-size:.66rem">↗ Active</span></div>
+      </div>
+    </article>
+
+    <article class="gc ag fi">
+      <div class="ag-bn" style="background:linear-gradient(90deg,var(--green),#0ea5e9)"></div>
+      <div class="ag-bd">
+        <div class="ag-tp"><div class="ag-iw" style="background:rgba(16,185,129,.1)">🌍<div class="ag-gl" style="background:var(--green)"></div></div><div style="flex:1"><div class="ag-nm">Vistara</div><div class="ag-rl">EXPANSION INTELLIGENCE</div></div><span class="tag ts"><span class="pulse"></span>Soon</span></div>
+        <p class="ag-ds">Vistara — expansion and infinite reach. Identifies new markets, maps growth opportunities, and models the economics of entering new territories with precision.</p>
+        <div class="ag-think"><div class="ag-think-label">Mapping expansion territories...</div><div class="ag-think-bar"><div class="ag-think-fill" style="background:linear-gradient(90deg,var(--green),#0ea5e9)"></div></div><div class="ag-think-status">5 markets identified · TAM: ₹2.4Cr</div></div>
+        <div class="ag-feats"><span class="af">New Markets</span><span class="af">GTM Strategy</span><span class="af">TAM Analysis</span></div>
+        <div class="ag-ft"><a href="https://connect-pranav.github.io/New-Market-Dashboard" target="_blank" rel="noopener" class="ag-lk">🔗 vistara ↗</a><span style="color:var(--green);font-size:.66rem">↗ Building</span></div>
+      </div>
+    </article>
+
+    <article class="gc ag fi">
+      <div class="ag-bn" style="background:linear-gradient(90deg,var(--blue),var(--purple))"></div>
+      <div class="ag-bd">
+        <div class="ag-tp"><div class="ag-iw" style="background:rgba(59,130,246,.1)">📊<div class="ag-gl" style="background:var(--blue)"></div></div><div style="flex:1"><div class="ag-nm">Sudarshan</div><div class="ag-rl">ANALYTICS PLATFORM</div></div><span class="tag tl"><span class="pulse"></span>Live</span></div>
+        <p class="ag-ds">Spinning disc of omniscient sight. Builds live dashboards, tracks KPIs, creates forecasting models, and turns raw data into actionable intelligence.</p>
+        <div class="ag-think"><div class="ag-think-label">Building KPI Dashboard...</div><div class="ag-think-bar"><div class="ag-think-fill" style="background:linear-gradient(90deg,var(--blue),var(--purple))"></div></div><div class="ag-think-status">Revenue: ↑18% · Conversion: 4.2%</div></div>
+        <div class="ag-feats"><span class="af">Dashboards</span><span class="af">KPI</span><span class="af">Forecasting</span></div>
+        <div class="ag-ft"><a href="https://connect-pranav.github.io/Linkedin-Dashboard" target="_blank" rel="noopener" class="ag-lk">🔗 sudarshan ↗</a><span style="color:var(--blue);font-size:.66rem">↗ Active</span></div>
+      </div>
+    </article>
+
+    <article class="gc ag fi">
+      <div class="ag-bn" style="background:linear-gradient(90deg,var(--gold),var(--green))"></div>
+      <div class="ag-bd">
+        <div class="ag-tp"><div class="ag-iw" style="background:rgba(245,158,11,.1)">📖<div class="ag-gl" style="background:var(--gold)"></div></div><div style="flex:1"><div class="ag-nm">Veda</div><div class="ag-rl">KNOWLEDGE HUB</div></div><span class="tag tb"><span class="pulse"></span>Beta</span></div>
+        <p class="ag-ds">Eternal source of knowledge. Stores institutional memory, builds documentation, creates SOPs, maintains a living knowledge graph, answers from organizational memory.</p>
+        <div class="ag-think"><div class="ag-think-label">Indexing knowledge base...</div><div class="ag-think-bar"><div class="ag-think-fill" style="background:linear-gradient(90deg,var(--gold),var(--green))"></div></div><div class="ag-think-status">2,400 docs indexed · Recall: 98.2%</div></div>
+        <div class="ag-feats"><span class="af">RAG</span><span class="af">Docs</span><span class="af">SOPs</span><span class="af">Memory</span></div>
+        <div class="ag-ft"><a href="https://connect-pranav.github.io/Portfolio" target="_blank" rel="noopener" class="ag-lk">🔗 veda ↗</a><span style="color:var(--gold);font-size:.66rem">↗ Beta</span></div>
+      </div>
+    </article>
+
+    <article class="gc ag fi">
+      <div class="ag-bn" style="background:linear-gradient(90deg,var(--gold),var(--red))"></div>
+      <div class="ag-bd">
+        <div class="ag-tp"><div class="ag-iw" style="background:rgba(245,158,11,.1)">⚡<div class="ag-gl" style="background:var(--gold)"></div></div><div style="flex:1"><div class="ag-nm">Vajra</div><div class="ag-rl">AUTOMATION ENGINE</div></div><span class="tag tl"><span class="pulse"></span>Live</span></div>
+        <p class="ag-ds">Thunderbolt of unstoppable force. Automates complex workflows across n8n, Make, Zapier, and custom APIs — triggering the right agent at the right moment.</p>
+        <div class="ag-think"><div class="ag-think-label">Running outreach pipeline...</div><div class="ag-think-bar"><div class="ag-think-fill" style="background:linear-gradient(90deg,var(--gold),var(--red))"></div></div><div class="ag-think-status">9 workflows active · 530h saved total</div></div>
+        <div class="ag-feats"><span class="af">n8n</span><span class="af">Make</span><span class="af">APIs</span><span class="af">Triggers</span></div>
+        <div class="ag-ft"><a href="https://connect-pranav.github.io/ASTRA-LOKA" target="_blank" rel="noopener" class="ag-lk">🔗 vajra ↗</a><span style="color:var(--gold);font-size:.66rem">↗ Active</span></div>
+      </div>
+    </article>
+
+    <article class="gc ag fi">
+      <div class="ag-bn" style="background:linear-gradient(90deg,var(--blue),#0ea5e9)"></div>
+      <div class="ag-bd">
+        <div class="ag-tp"><div class="ag-iw" style="background:rgba(59,130,246,.1)">🛡<div class="ag-gl" style="background:var(--blue)"></div></div><div style="flex:1"><div class="ag-nm">Kavach</div><div class="ag-rl">SECURITY PLATFORM</div></div><span class="tag ts"><span class="pulse"></span>Soon</span></div>
+        <p class="ag-ds">Divine armour that repels all threats. Monitors systems for anomalies, manages authentication, runs security audits, and guards every component of ASTRA LOKA.</p>
+        <div class="ag-think"><div class="ag-think-label">Security scan in progress...</div><div class="ag-think-bar"><div class="ag-think-fill" style="background:linear-gradient(90deg,var(--blue),#0ea5e9)"></div></div><div class="ag-think-status">0 threats · Health: 100%</div></div>
+        <div class="ag-feats"><span class="af">Monitoring</span><span class="af">Auth</span><span class="af">Audit</span></div>
+        <div class="ag-ft"><a href="https://connect-pranav.github.io/HEIMDALL-AI" target="_blank" rel="noopener" class="ag-lk">🔗 kavach ↗</a><span style="color:var(--blue);font-size:.66rem">↗ Planning</span></div>
+      </div>
+    </article>
+
+    <article class="gc ag fi">
+      <div class="ag-bn" style="background:linear-gradient(90deg,var(--green),var(--cyan))"></div>
+      <div class="ag-bd">
+        <div class="ag-tp"><div class="ag-iw" style="background:rgba(16,185,129,.1)">🌬<div class="ag-gl" style="background:var(--green)"></div></div><div style="flex:1"><div class="ag-nm">Vayu</div><div class="ag-rl">PERSONAL BRAND</div></div><span class="tag tl"><span class="pulse"></span>Live</span></div>
+        <p class="ag-ds">The breath connecting all living things. Builds and maintains personal brand across LinkedIn, portfolio, and content channels — Pranav's voice reaching everywhere.</p>
+        <div class="ag-think"><div class="ag-think-label">Optimizing LinkedIn presence...</div><div class="ag-think-bar"><div class="ag-think-fill" style="background:linear-gradient(90deg,var(--green),var(--cyan))"></div></div><div class="ag-think-status">Profile views: ↑340% · Connections: growing</div></div>
+        <div class="ag-feats"><span class="af">LinkedIn</span><span class="af">Portfolio</span><span class="af">Brand</span></div>
+        <div class="ag-ft"><a href="https://connect-pranav.github.io/Portfolio" target="_blank" rel="noopener" class="ag-lk">🔗 vayu ↗</a><span style="color:var(--green);font-size:.66rem">↗ Active</span></div>
+      </div>
+    </article>
+
+    <article class="gc ag fi">
+      <div class="ag-bn" style="background:linear-gradient(90deg,var(--purple),var(--pink))"></div>
+      <div class="ag-bd">
+        <div class="ag-tp"><div class="ag-iw" style="background:rgba(139,92,246,.1)">🤝<div class="ag-gl" style="background:var(--purple)"></div></div><div style="flex:1"><div class="ag-nm">Sangam</div><div class="ag-rl">PARTNER NETWORK</div></div><span class="tag ts"><span class="pulse"></span>Soon</span></div>
+        <p class="ag-ds">The sacred confluence. Maps partner ecosystems, identifies channel opportunities, tracks network expansion, and models growth potential of strategic alliances.</p>
+        <div class="ag-think"><div class="ag-think-label">Mapping partner network...</div><div class="ag-think-bar"><div class="ag-think-fill" style="background:linear-gradient(90deg,var(--purple),var(--pink))"></div></div><div class="ag-think-status">18 partners identified · 4 active</div></div>
+        <div class="ag-feats"><span class="af">Partners</span><span class="af">Channels</span><span class="af">Network</span></div>
+        <div class="ag-ft"><a href="https://connect-pranav.github.io/Linkedin-Dashboard" target="_blank" rel="noopener" class="ag-lk">🔗 sangam ↗</a><span style="color:var(--purple);font-size:.66rem">↗ Building</span></div>
+      </div>
+    </article>
+
+    <article class="gc ag fi">
+      <div class="ag-bn" style="background:linear-gradient(90deg,var(--red),var(--gold))"></div>
+      <div class="ag-bd">
+        <div class="ag-tp"><div class="ag-iw" style="background:rgba(239,68,68,.1)">🔥<div class="ag-gl" style="background:var(--red)"></div></div><div style="flex:1"><div class="ag-nm">Agni</div><div class="ag-rl">DEVELOPER LAB</div></div><span class="tag tl"><span class="pulse"></span>Live</span></div>
+        <p class="ag-ds">Transformative fire that forges all things. Experiments with Python, trains AI models, builds integrations, pushes to GitHub, keeps ASTRA LOKA evolving at speed.</p>
+        <div class="ag-think"><div class="ag-think-label">Building automation script...</div><div class="ag-think-bar"><div class="ag-think-fill" style="background:linear-gradient(90deg,var(--red),var(--gold))"></div></div><div class="ag-think-status">12 repos · Latest: ASTRA-LOKA</div></div>
+        <div class="ag-feats"><span class="af">Python</span><span class="af">AI Models</span><span class="af">GitHub</span></div>
+        <div class="ag-ft"><a href="https://connect-pranav.github.io/ASTRA-LOKA" target="_blank" rel="noopener" class="ag-lk">🔗 agni ↗</a><span style="color:var(--red);font-size:.66rem">↗ Active</span></div>
+      </div>
+    </article>
+
+    <article class="gc ag fi" style="grid-column:span 1">
+      <div class="ag-bn" style="background:linear-gradient(90deg,var(--purple),var(--blue),var(--cyan))"></div>
+      <div class="ag-bd">
+        <div class="ag-tp"><div class="ag-iw" style="background:rgba(139,92,246,.12)">🌌<div class="ag-gl" style="background:var(--purple)"></div></div><div style="flex:1"><div class="ag-nm">Nakshatra</div><div class="ag-rl">MULTI-AGENT ORCHESTRATOR</div></div><span class="tag td"><span class="pulse"></span>Dev</span></div>
+        <p class="ag-ds">Celestial constellation mapping the cosmos. Coordinates all 13 agents, visualises execution graphs, and ensures every mission runs in perfect autonomous synchrony.</p>
+        <div class="ag-think"><div class="ag-think-label">Coordinating agent network...</div><div class="ag-think-bar"><div class="ag-think-fill" style="background:linear-gradient(90deg,var(--purple),var(--blue),var(--cyan))"></div></div><div class="ag-think-status">13 agents coordinated · Graph: live</div></div>
+        <div class="ag-feats"><span class="af">Orchestration</span><span class="af">Agent Routing</span><span class="af">Graph</span><span class="af">Memory</span></div>
+        <div class="ag-ft"><a href="https://connect-pranav.github.io/ASTRA-LOKA" target="_blank" rel="noopener" class="ag-lk">🔗 nakshatra ↗</a><span style="color:var(--purple);font-size:.66rem">↗ In Dev</span></div>
+      </div>
+    </article>
+
+  </div>
+</div>
+</section>
+<!-- ═══ PROJECTS ═══ -->
+<section id="builds">
+<div class="container">
+  <div class="fi"><div class="sl">Project Constellation</div><h2 class="sh">12 Mythological Builds.<br><span class="gt-gold">Each One a Universe.</span></h2><p class="ss">Every project carries the spirit of an ancient Indian concept — forged in public, shipped with purpose.</p></div>
+  <div class="pf-bar fi">
+    <button class="pf on" data-f="all">✦ All</button>
+    <button class="pf" data-f="ai">🤖 AI</button>
+    <button class="pf" data-f="finance">📈 Finance</button>
+    <button class="pf" data-f="career">🎯 Career</button>
+    <button class="pf" data-f="dashboard">🌀 Dashboards</button>
+    <button class="pf" data-f="platform">🏛 Platforms</button>
+    <span class="pcount" id="pc">12 projects</span>
+  </div>
+  <div class="pg" id="pg">
+    <article class="gc pc fi" data-c="platform ai"><div class="pc-bn" style="background:linear-gradient(90deg,var(--blue),var(--purple))"></div><div class="pc-bd"><div class="pc-th"><div class="pc-ic" style="background:rgba(139,92,246,.1)">🌌<div class="pc-icg" style="background:var(--purple)"></div></div><div style="flex:1"><div class="pc-mn">Brahmaanda</div><div class="pc-ms">THE COSMIC EGG</div></div><span class="tag tl" style="margin-left:auto"><span class="pulse"></span>Live</span></div><span class="pc-rp">📁 ASTRA-LOKA</span><p class="pc-ds">The Realm of Intelligent Systems — master OS housing all agents, interfaces, and intelligence layers. The universe containing every other project.</p><div class="pc-mx"><div class="pc-m"><div class="pc-mv">14</div><div class="pc-ml">Agents</div></div><div class="pc-m"><div class="pc-mv">∞</div><div class="pc-ml">Scale</div></div><div class="pc-m"><div class="pc-mv">#1</div><div class="pc-ml">Flagship</div></div></div><div class="pc-tg"><span class="pc-t">HTML</span><span class="pc-t">CSS</span><span class="pc-t">JS</span><span class="pc-t">Multi-Agent</span></div><div class="pc-ft"><a href="https://connect-pranav.github.io/ASTRA-LOKA" target="_blank" rel="noopener" class="pc-gh">🔗 ASTRA-LOKA ↗</a><span class="tag tl">Active</span></div></div></article>
+
+    <article class="gc pc fi" data-c="career ai"><div class="pc-bn" style="background:linear-gradient(90deg,var(--gold),var(--red))"></div><div class="pc-bd"><div class="pc-th"><div class="pc-ic" style="background:rgba(245,158,11,.1)">⚡<div class="pc-icg" style="background:var(--gold)"></div></div><div style="flex:1"><div class="pc-mn">Karmayoga</div><div class="pc-ms">PATH OF RIGHT ACTION</div></div><span class="tag tl" style="margin-left:auto"><span class="pulse"></span>Live</span></div><span class="pc-rp">📁 Career-Transformation-OS</span><p class="pc-ds">Complete AI-powered career OS — automating job discovery, resume tailoring, outreach. Embodies the Gita: right action relentlessly, without attachment to outcome.</p><div class="pc-mx"><div class="pc-m"><div class="pc-mv">147</div><div class="pc-ml">Applied</div></div><div class="pc-m"><div class="pc-mv">5×</div><div class="pc-ml">Faster</div></div><div class="pc-m"><div class="pc-mv">8</div><div class="pc-ml">Flows</div></div></div><div class="pc-tg"><span class="pc-t">HTML</span><span class="pc-t">n8n</span><span class="pc-t">AI</span></div><div class="pc-ft"><a href="https://connect-pranav.github.io/-Career-Transformation-OS" target="_blank" rel="noopener" class="pc-gh">🔗 Career-Transformation-OS ↗</a><span class="tag tl">Active</span></div></div></article>
+
+    <article class="gc pc fi" data-c="career dashboard"><div class="pc-bn" style="background:linear-gradient(90deg,var(--cyan),var(--blue))"></div><div class="pc-bd"><div class="pc-th"><div class="pc-ic" style="background:rgba(6,182,212,.1)">👑<div class="pc-icg" style="background:var(--cyan)"></div></div><div style="flex:1"><div class="pc-mn">Indraloka</div><div class="pc-ms">COMMAND REALM</div></div><span class="tag tl" style="margin-left:auto"><span class="pulse"></span>Live</span></div><span class="pc-rp">📁 Job-Command-Center</span><p class="pc-ds">War room for job seekers — tracking applications, pipeline stages, and follow-ups with complete visibility like Indra's heavenly command court.</p><div class="pc-mx"><div class="pc-m"><div class="pc-mv">360°</div><div class="pc-ml">Pipeline</div></div><div class="pc-m"><div class="pc-mv">Live</div><div class="pc-ml">Tracking</div></div><div class="pc-m"><div class="pc-mv">0</div><div class="pc-ml">Missed</div></div></div><div class="pc-tg"><span class="pc-t">HTML</span><span class="pc-t">JS</span><span class="pc-t">CRM</span></div><div class="pc-ft"><a href="https://connect-pranav.github.io/Job-Command-Center" target="_blank" rel="noopener" class="pc-gh">🔗 Job-Command-Center ↗</a><span class="tag tl">Active</span></div></div></article>
+
+    <article class="gc pc fi" data-c="finance dashboard"><div class="pc-bn" style="background:linear-gradient(90deg,var(--green),var(--cyan))"></div><div class="pc-bd"><div class="pc-th"><div class="pc-ic" style="background:rgba(16,185,129,.1)">💰<div class="pc-icg" style="background:var(--green)"></div></div><div style="flex:1"><div class="pc-mn">Vaishravana</div><div class="pc-ms">LORD OF WEALTH</div></div><span class="tag tb" style="margin-left:auto"><span class="pulse"></span>Beta</span></div><span class="pc-rp">📁 New-Market-Dashboard</span><p class="pc-ds">Live market intelligence dashboard with sector movements and trend signals. The celestial treasurer who sees wealth flowing before anyone else.</p><div class="pc-mx"><div class="pc-m"><div class="pc-mv">Live</div><div class="pc-ml">Data</div></div><div class="pc-m"><div class="pc-mv">Multi</div><div class="pc-ml">Sectors</div></div><div class="pc-m"><div class="pc-mv">Real-time</div><div class="pc-ml">Signals</div></div></div><div class="pc-tg"><span class="pc-t">JavaScript</span><span class="pc-t">APIs</span><span class="pc-t">Finance</span></div><div class="pc-ft"><a href="https://connect-pranav.github.io/New-Market-Dashboard" target="_blank" rel="noopener" class="pc-gh">🔗 New-Market-Dashboard ↗</a><span class="tag tb">Beta</span></div></div></article>
+
+    <article class="gc pc fi" data-c="finance ai"><div class="pc-bn" style="background:linear-gradient(90deg,var(--gold),var(--green))"></div><div class="pc-bd"><div class="pc-th"><div class="pc-ic" style="background:rgba(245,158,11,.1)">🌸<div class="pc-icg" style="background:var(--gold)"></div></div><div style="flex:1"><div class="pc-mn">Lakshmi</div><div class="pc-ms">GODDESS OF WEALTH</div></div><span class="tag tl" style="margin-left:auto"><span class="pulse"></span>Live</span></div><span class="pc-rp">📁 MARKETO-AI</span><p class="pc-ds">MARKETO AI™ — Personal Financial OS. AI stock research, portfolio intelligence, crypto analytics, CNBC live, and multi-agent investment assistant.</p><div class="pc-mx"><div class="pc-m"><div class="pc-mv">5+</div><div class="pc-ml">AI Modules</div></div><div class="pc-m"><div class="pc-mv">Live</div><div class="pc-ml">CNBC</div></div><div class="pc-m"><div class="pc-mv">Multi</div><div class="pc-ml">Assets</div></div></div><div class="pc-tg"><span class="pc-t">HTML</span><span class="pc-t">Agents</span><span class="pc-t">Crypto</span></div><div class="pc-ft"><a href="https://connect-pranav.github.io/MARKETO-AI" target="_blank" rel="noopener" class="pc-gh">🔗 MARKETO-AI ↗</a><span class="tag tl">Active</span></div></div></article>
+
+    <article class="gc pc fi" data-c="finance"><div class="pc-bn" style="background:linear-gradient(90deg,#0ea5e9,var(--green))"></div><div class="pc-bd"><div class="pc-th"><div class="pc-ic" style="background:rgba(14,165,233,.1)">⭐<div class="pc-icg" style="background:#0ea5e9"></div></div><div style="flex:1"><div class="pc-mn">Dhruva</div><div class="pc-ms">THE POLE STAR</div></div><span class="tag tl" style="margin-left:auto"><span class="pulse"></span>Live</span></div><span class="pc-rp">📁 Marketo-Share-Market-Navigator</span><p class="pc-ds">Share market navigator — the unwavering north star for investors. Tracks equities, identifies signals, cuts through market noise with fixed clarity.</p><div class="pc-mx"><div class="pc-m"><div class="pc-mv">NSE</div><div class="pc-ml">Markets</div></div><div class="pc-m"><div class="pc-mv">Signal</div><div class="pc-ml">Logic</div></div><div class="pc-m"><div class="pc-mv">Clean</div><div class="pc-ml">UI</div></div></div><div class="pc-tg"><span class="pc-t">Finance</span><span class="pc-t">Signals</span></div><div class="pc-ft"><a href="https://connect-pranav.github.io/Marketo---Share-Market-Navigator" target="_blank" rel="noopener" class="pc-gh">🔗 Share-Market-Navigator ↗</a><span class="tag tl">Active</span></div></div></article>
+
+    <article class="gc pc fi" data-c="ai platform"><div class="pc-bn" style="background:linear-gradient(90deg,var(--red),var(--purple))"></div><div class="pc-bd"><div class="pc-th"><div class="pc-ic" style="background:rgba(239,68,68,.1)">🔥<div class="pc-icg" style="background:var(--red)"></div></div><div style="flex:1"><div class="pc-mn">Akhada</div><div class="pc-ms">COMPETITIVE ARENA</div></div><span class="tag tb" style="margin-left:auto"><span class="pulse"></span>Beta</span></div><span class="pc-rp">📁 Arena-Intelligence</span><p class="pc-ds">Competitive intelligence arena — where only the best-prepared win. Maps rivals, benchmarks performance, reveals market gaps in real time.</p><div class="pc-mx"><div class="pc-m"><div class="pc-mv">360°</div><div class="pc-ml">Intel</div></div><div class="pc-m"><div class="pc-mv">AI</div><div class="pc-ml">Gaps</div></div><div class="pc-m"><div class="pc-mv">Live</div><div class="pc-ml">Data</div></div></div><div class="pc-tg"><span class="pc-t">JavaScript</span><span class="pc-t">AI</span></div><div class="pc-ft"><a href="https://connect-pranav.github.io/Arena-Intelligence" target="_blank" rel="noopener" class="pc-gh">🔗 Arena-Intelligence ↗</a><span class="tag tb">Beta</span></div></div></article>
+
+    <article class="gc pc fi" data-c="dashboard finance"><div class="pc-bn" style="background:linear-gradient(90deg,var(--gold),var(--purple))"></div><div class="pc-bd"><div class="pc-th"><div class="pc-ic" style="background:rgba(245,158,11,.1)">🏺<div class="pc-icg" style="background:var(--gold)"></div></div><div style="flex:1"><div class="pc-mn">Kubera</div><div class="pc-ms">GUARDIAN OF REVENUE</div></div><span class="tag tl" style="margin-left:auto"><span class="pulse"></span>Live</span></div><span class="pc-rp">📁 Sales-Dashboard</span><p class="pc-ds">Sales performance war room — pipeline, conversion rates, team quotas, revenue trends. Kubera guards every rupee in the revenue funnel.</p><div class="pc-mx"><div class="pc-m"><div class="pc-mv">KPI</div><div class="pc-ml">Revenue</div></div><div class="pc-m"><div class="pc-mv">Live</div><div class="pc-ml">Pipeline</div></div><div class="pc-m"><div class="pc-mv">Team</div><div class="pc-ml">Perf.</div></div></div><div class="pc-tg"><span class="pc-t">HTML</span><span class="pc-t">RevOps</span></div><div class="pc-ft"><a href="https://connect-pranav.github.io/Sales-Dashboard" target="_blank" rel="noopener" class="pc-gh">🔗 Sales-Dashboard ↗</a><span class="tag tl">Active</span></div></div></article>
+
+    <article class="gc pc fi" data-c="platform dashboard"><div class="pc-bn" style="background:linear-gradient(90deg,var(--cyan),var(--purple))"></div><div class="pc-bd"><div class="pc-th"><div class="pc-ic" style="background:rgba(6,182,212,.1)">📡<div class="pc-icg" style="background:var(--cyan)"></div></div><div style="flex:1"><div class="pc-mn">Sandesh</div><div class="pc-ms">DIVINE MESSENGER</div></div><span class="tag tl" style="margin-left:auto"><span class="pulse"></span>Live</span></div><span class="pc-rp">📁 Channel-IH</span><p class="pc-ds">Channel intelligence hub — monitoring and optimising communication channels. The divine messenger ensuring no signal is ever lost.</p><div class="pc-mx"><div class="pc-m"><div class="pc-mv">Multi</div><div class="pc-ml">Channel</div></div><div class="pc-m"><div class="pc-mv">Live</div><div class="pc-ml">Monitor</div></div><div class="pc-m"><div class="pc-mv">Hub</div><div class="pc-ml">Intel</div></div></div><div class="pc-tg"><span class="pc-t">HTML</span><span class="pc-t">Comms</span></div><div class="pc-ft"><a href="https://connect-pranav.github.io/Channel-IH" target="_blank" rel="noopener" class="pc-gh">🔗 Channel-IH ↗</a><span class="tag tl">Active</span></div></div></article>
+
+    <article class="gc pc fi" data-c="ai platform"><div class="pc-bn" style="background:linear-gradient(90deg,var(--blue),var(--cyan))"></div><div class="pc-bd"><div class="pc-th"><div class="pc-ic" style="background:rgba(59,130,246,.1)">👁<div class="pc-icg" style="background:var(--blue)"></div></div><div style="flex:1"><div class="pc-mn">Drishti</div><div class="pc-ms">ALL-SEEING EYE</div></div><span class="tag tl" style="margin-left:auto"><span class="pulse"></span>Live</span></div><span class="pc-rp">📁 HEIMDALL-AI</span><p class="pc-ds">AI-powered all-seeing watchman. Monitors systems, detects anomalies, provides foresight before problems materialise. Built as HEIMDALL, reborn with Indian soul.</p><div class="pc-mx"><div class="pc-m"><div class="pc-mv">AI</div><div class="pc-ml">Watch</div></div><div class="pc-m"><div class="pc-mv">Real-time</div><div class="pc-ml">Detection</div></div><div class="pc-m"><div class="pc-mv">0</div><div class="pc-ml">Threats</div></div></div><div class="pc-tg"><span class="pc-t">HTML</span><span class="pc-t">AI</span><span class="pc-t">Security</span></div><div class="pc-ft"><a href="https://connect-pranav.github.io/HEIMDALL-AI" target="_blank" rel="noopener" class="pc-gh">🔗 HEIMDALL-AI ↗</a><span class="tag tl">Active</span></div></div></article>
+
+    <article class="gc pc fi" data-c="career dashboard"><div class="pc-bn" style="background:linear-gradient(90deg,#0ea5e9,var(--blue))"></div><div class="pc-bd"><div class="pc-th"><div class="pc-ic" style="background:rgba(14,165,233,.1)">🤝<div class="pc-icg" style="background:#0ea5e9"></div></div><div style="flex:1"><div class="pc-mn">Mitra</div><div class="pc-ms">VEDIC GOD OF ALLIANCE</div></div><span class="tag tl" style="margin-left:auto"><span class="pulse"></span>Live</span></div><span class="pc-rp">📁 Linkedin-Dashboard</span><p class="pc-ds">LinkedIn performance intelligence — connections, post reach, outreach conversion. Mitra, deity of contracts and alliances, powers every professional bond.</p><div class="pc-mx"><div class="pc-m"><div class="pc-mv">50+</div><div class="pc-ml">Daily</div></div><div class="pc-m"><div class="pc-mv">3×</div><div class="pc-ml">Reply Rate</div></div><div class="pc-m"><div class="pc-mv">Live</div><div class="pc-ml">Intel</div></div></div><div class="pc-tg"><span class="pc-t">HTML</span><span class="pc-t">LinkedIn</span></div><div class="pc-ft"><a href="https://connect-pranav.github.io/Linkedin-Dashboard" target="_blank" rel="noopener" class="pc-gh">🔗 Linkedin-Dashboard ↗</a><span class="tag tl">Active</span></div></div></article>
+
+    <article class="gc pc fi" data-c="platform"><div class="pc-bn" style="background:linear-gradient(90deg,var(--purple),var(--gold))"></div><div class="pc-bd"><div class="pc-th"><div class="pc-ic" style="background:rgba(139,92,246,.1)">✦<div class="pc-icg" style="background:var(--purple)"></div></div><div style="flex:1"><div class="pc-mn">Swayambhu</div><div class="pc-ms">SELF-MANIFESTED ORIGIN</div></div><span class="tag tl" style="margin-left:auto"><span class="pulse"></span>Live</span></div><span class="pc-rp">📁 Portfolio</span><p class="pc-ds">Personal Portfolio — RevOps &amp; GTM Strategy. The self-created, self-existing origin point from which all other projects are launched into the world.</p><div class="pc-mx"><div class="pc-m"><div class="pc-mv">GTM</div><div class="pc-ml">Strategy</div></div><div class="pc-m"><div class="pc-mv">RevOps</div><div class="pc-ml">Expert</div></div><div class="pc-m"><div class="pc-mv">Origin</div><div class="pc-ml">Point</div></div></div><div class="pc-tg"><span class="pc-t">HTML</span><span class="pc-t">Portfolio</span><span class="pc-t">GTM</span></div><div class="pc-ft"><a href="https://connect-pranav.github.io/Portfolio" target="_blank" rel="noopener" class="pc-gh">🔗 Portfolio ↗</a><span class="tag tl">Active</span></div></div></article>
+  </div>
+</div>
+</section>
+
+<!-- ═══ MISSION TIMELINE ═══ -->
+<section id="timeline" class="sp">
+<div class="container">
+  <div class="fi"><div class="sl">Mission Timeline</div><h2 class="sh">Genesis to <span class="gt-purple">Civilization.</span></h2><p class="ss">Not a roadmap. A mission log. Each phase is a chapter in the ASTRA LOKA story.</p></div>
+  <div class="tl-wrap">
+    <div class="tl-it fi"><div class="tl-node dn"></div><div class="tl-hd"><span class="tl-num">MISSION 001</span><h3 class="tl-tt">Genesis</h3><span class="tag tl">Complete</span></div><p class="tl-sub">Foundation of ASTRA LOKA. First agents deployed. GitHub Pages live. The civilization begins.</p><div class="tl-its"><span class="tl-i">ASTRA OS Architecture</span><span class="tl-i">Vajra Automation</span><span class="tl-i">Garuda Research</span><span class="tl-i">Vayu Brand</span><span class="tl-i">Agni Dev Lab</span></div></div>
+    <div class="tl-it fi"><div class="tl-node dn"></div><div class="tl-hd"><span class="tl-num">MISSION 002</span><h3 class="tl-tt">Career OS</h3><span class="tag tl">Complete</span></div><p class="tl-sub">Arjun Career Intelligence deployed. 147 job applications automated. 3 interviews per week.</p><div class="tl-its"><span class="tl-i">Career-Transformation-OS</span><span class="tl-i">Job-Command-Center</span><span class="tl-i">ATS Optimization</span><span class="tl-i">LinkedIn Outreach</span></div></div>
+    <div class="tl-it fi"><div class="tl-node dn"></div><div class="tl-hd"><span class="tl-num">MISSION 003</span><h3 class="tl-tt">Financial Intelligence</h3><span class="tag tl">Complete</span></div><p class="tl-sub">MARKETO-AI, Share Market Navigator, and Market Dashboard deployed. Financial OS operational.</p><div class="tl-its"><span class="tl-i">MARKETO-AI (Lakshmi)</span><span class="tl-i">Dhruva Navigator</span><span class="tl-i">Vaishravana Dashboard</span><span class="tl-i">Kubera Sales</span></div></div>
+    <div class="tl-it fi"><div class="tl-node ip"></div><div class="tl-hd"><span class="tl-num">MISSION 004</span><h3 class="tl-tt">Intelligence Network</h3><span class="tag tb">Building</span></div><p class="tl-sub">Connecting all agents into a unified intelligence layer. Arena, HEIMDALL, and Channel-IH live.</p><div class="tl-its"><span class="tl-i">Akhada Arena Intel</span><span class="tl-i">Drishti HEIMDALL</span><span class="tl-i">Sandesh Channel</span><span class="tl-i">Mitra LinkedIn</span></div></div>
+    <div class="tl-it fi"><div class="tl-node"></div><div class="tl-hd"><span class="tl-num">MISSION 005</span><h3 class="tl-tt">Multi-Agent Orchestration</h3><span class="tag ts">Q3 2025</span></div><p class="tl-sub">Nakshatra coordinates all 14 agents into autonomous mission flows. Full OS consciousness.</p><div class="tl-its"><span class="tl-i">Nakshatra Orchestration</span><span class="tl-i">Vistara Expansion</span><span class="tl-i">Sangam Partners</span><span class="tl-i">Veda Knowledge</span></div></div>
+    <div class="tl-it fi"><div class="tl-node"></div><div class="tl-hd"><span class="tl-num">MISSION 006</span><h3 class="tl-tt">Voice + Mobile</h3><span class="tag ts">Q4 2025</span></div><p class="tl-sub">Voice-first interface and mobile app. Command the entire civilization with natural language.</p><div class="tl-its"><span class="tl-i">Voice Commands</span><span class="tl-i">iOS + Android</span><span class="tl-i">Meeting Intel</span><span class="tl-i">Real-time Transcription</span></div></div>
+    <div class="tl-it fi"><div class="tl-node"></div><div class="tl-hd"><span class="tl-num">MISSION 007</span><h3 class="tl-tt">Enterprise Civilization</h3><span class="tag ts">2026</span></div><p class="tl-sub">Kavach-secured enterprise platform. India's most practical AI workforce deployed to businesses globally.</p><div class="tl-its"><span class="tl-i">Kavach Security</span><span class="tl-i">Team Workspaces</span><span class="tl-i">API Access</span><span class="tl-i">Global Deploy</span></div></div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ GITHUB ═══ -->
+<section id="github" class="sp" style="background:radial-gradient(ellipse 80% 50% at 50% 100%,rgba(59,130,246,.05),transparent)">
+<div class="container">
+  <div class="fi"><div class="sl">GitHub · Connect-Pranav</div><h2 class="sh">12 Repositories. <span class="gt-green">All Open Source.</span></h2><p class="ss">Every city in the civilization — live, browsable, and open for contribution.</p></div>
+  <div class="rg">
+    <div class="gc rc fi"><div class="rc-top"><div class="rc-ic" style="background:rgba(139,92,246,.1)">🌌</div><span class="tag tl">Live</span></div><div class="rc-nm">ASTRA-LOKA</div><p class="rc-ds">The Realm of Intelligent Systems — master environment for all ASTRA agents and layers.</p><div class="rc-langs"><div class="rc-lang-row"><span class="rc-lang-nm">HTML</span><div class="rc-lang-bar"><div class="rc-lang-fill" style="width:72%;background:#f1e05a"></div></div><span class="rc-lang-pct">72%</span></div><div class="rc-lang-row"><span class="rc-lang-nm">CSS</span><div class="rc-lang-bar"><div class="rc-lang-fill" style="width:18%;background:#563d7c"></div></div><span class="rc-lang-pct">18%</span></div><div class="rc-lang-row"><span class="rc-lang-nm">JS</span><div class="rc-lang-bar"><div class="rc-lang-fill" style="width:10%;background:#f7df1e"></div></div><span class="rc-lang-pct">10%</span></div></div><div class="rc-meta"><span class="rc-lb">⭐ Flagship</span><span class="rc-lb">🔄 3 min ago</span></div><a href="https://connect-pranav.github.io/ASTRA-LOKA" target="_blank" rel="noopener" class="rc-btn">🚀 Open Live ↗</a></div>
+
+    <div class="gc rc fi"><div class="rc-top"><div class="rc-ic" style="background:rgba(245,158,11,.1)">⚡</div><span class="tag tl">Live</span></div><div class="rc-nm">Career-Transformation-OS</div><p class="rc-ds">Karmayoga — AI-powered career OS for automated job discovery and outreach.</p><div class="rc-langs"><div class="rc-lang-row"><span class="rc-lang-nm">HTML</span><div class="rc-lang-bar"><div class="rc-lang-fill" style="width:68%;background:#f1e05a"></div></div><span class="rc-lang-pct">68%</span></div><div class="rc-lang-row"><span class="rc-lang-nm">CSS</span><div class="rc-lang-bar"><div class="rc-lang-fill" style="width:22%;background:#563d7c"></div></div><span class="rc-lang-pct">22%</span></div><div class="rc-lang-row"><span class="rc-lang-nm">JS</span><div class="rc-lang-bar"><div class="rc-lang-fill" style="width:10%;background:#f7df1e"></div></div><span class="rc-lang-pct">10%</span></div></div><div class="rc-meta"><span class="rc-lb">🔄 3 days ago</span></div><a href="https://connect-pranav.github.io/-Career-Transformation-OS" target="_blank" rel="noopener" class="rc-btn">🚀 Open Live ↗</a></div>
+
+    <div class="gc rc fi"><div class="rc-top"><div class="rc-ic" style="background:rgba(245,158,11,.1)">🌸</div><span class="tag tl">Live</span></div><div class="rc-nm">MARKETO-AI</div><p class="rc-ds">Lakshmi — Personal Financial OS with AI stock research and multi-agent investment assistant.</p><div class="rc-langs"><div class="rc-lang-row"><span class="rc-lang-nm">HTML</span><div class="rc-lang-bar"><div class="rc-lang-fill" style="width:75%;background:#f1e05a"></div></div><span class="rc-lang-pct">75%</span></div><div class="rc-lang-row"><span class="rc-lang-nm">JS</span><div class="rc-lang-bar"><div class="rc-lang-fill" style="width:25%;background:#f7df1e"></div></div><span class="rc-lang-pct">25%</span></div></div><div class="rc-meta"><span class="rc-lb">🔄 2 weeks ago</span></div><a href="https://connect-pranav.github.io/MARKETO-AI" target="_blank" rel="noopener" class="rc-btn">🚀 Open Live ↗</a></div>
+
+    <div class="gc rc fi"><div class="rc-top"><div class="rc-ic" style="background:rgba(239,68,68,.1)">🔥</div><span class="tag tb">Beta</span></div><div class="rc-nm">Arena-Intelligence</div><p class="rc-ds">Akhada — competitive intelligence arena mapping rivals and revealing market gaps.</p><div class="rc-langs"><div class="rc-lang-row"><span class="rc-lang-nm">JS</span><div class="rc-lang-bar"><div class="rc-lang-fill" style="width:80%;background:#f7df1e"></div></div><span class="rc-lang-pct">80%</span></div><div class="rc-lang-row"><span class="rc-lang-nm">HTML</span><div class="rc-lang-bar"><div class="rc-lang-fill" style="width:20%;background:#f1e05a"></div></div><span class="rc-lang-pct">20%</span></div></div><div class="rc-meta"><span class="rc-lb">🔄 2 weeks ago</span></div><a href="https://connect-pranav.github.io/Arena-Intelligence" target="_blank" rel="noopener" class="rc-btn">🚀 Open Live ↗</a></div>
+
+    <div class="gc rc fi"><div class="rc-top"><div class="rc-ic" style="background:rgba(59,130,246,.1)">👁</div><span class="tag tl">Live</span></div><div class="rc-nm">HEIMDALL-AI</div><p class="rc-ds">Drishti — all-seeing AI watchman monitoring systems and detecting anomalies.</p><div class="rc-langs"><div class="rc-lang-row"><span class="rc-lang-nm">HTML</span><div class="rc-lang-bar"><div class="rc-lang-fill" style="width:70%;background:#f1e05a"></div></div><span class="rc-lang-pct">70%</span></div><div class="rc-lang-row"><span class="rc-lang-nm">JS</span><div class="rc-lang-bar"><div class="rc-lang-fill" style="width:30%;background:#f7df1e"></div></div><span class="rc-lang-pct">30%</span></div></div><div class="rc-meta"><span class="rc-lb">🔄 3 weeks ago</span></div><a href="https://connect-pranav.github.io/HEIMDALL-AI" target="_blank" rel="noopener" class="rc-btn">🚀 Open Live ↗</a></div>
+
+    <div class="gc rc fi"><div class="rc-top"><div class="rc-ic" style="background:rgba(16,185,129,.1)">💰</div><span class="tag tb">Beta</span></div><div class="rc-nm">New-Market-Dashboard</div><p class="rc-ds">Vaishravana — live market intelligence with real-time signals and sector movements.</p><div class="rc-langs"><div class="rc-lang-row"><span class="rc-lang-nm">JS</span><div class="rc-lang-bar"><div class="rc-lang-fill" style="width:85%;background:#f7df1e"></div></div><span class="rc-lang-pct">85%</span></div><div class="rc-lang-row"><span class="rc-lang-nm">HTML</span><div class="rc-lang-bar"><div class="rc-lang-fill" style="width:15%;background:#f1e05a"></div></div><span class="rc-lang-pct">15%</span></div></div><div class="rc-meta"><span class="rc-lb">🔄 last week</span></div><a href="https://connect-pranav.github.io/New-Market-Dashboard" target="_blank" rel="noopener" class="rc-btn">🚀 Open Live ↗</a></div>
+  </div>
+  <div style="text-align:center;margin-top:28px" class="fi">
+    <a href="https://github.com/Connect-Pranav" target="_blank" rel="noopener" class="btn bg" style="font-size:.88rem">🐙 View All 12 Repos on GitHub ↗</a>
+  </div>
+</div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about" class="sp">
+<div class="container">
+  <div class="fi"><div class="sl">The Builder</div></div>
+  <div class="ab-grid">
+    <div class="fi av-wrap"><div style="position:relative"><div class="av-ring"><div class="av-in"><img src="data:image/jpeg;base64,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" alt="Pranav Kumar" loading="lazy"></div></div><div class="av-orbit"><div class="av-dot"></div></div><div class="av-tag avt1">⚡ AI Builder</div><div class="av-tag avt2">🎯 Business Leader</div><div class="av-tag avt3">🌌 Bengaluru</div></div></div>
+    <div class="fi"><h2 class="ab-nm">Pranav Kumar</h2><p class="ab-ti">BUSINESS LEADER · AI BUILDER · CIVILIZATION ARCHITECT</p><p class="ab-bi">I'm building India's most practical AI workforce — a civilization of 14 intelligent agents that handle the repetitive, the analytical, and the complex, so business leaders operate at their absolute highest potential.</p><p class="ab-bi">ASTRA LOKA isn't a portfolio. It's a proof that AI can be rooted in deep Indian wisdom while driving measurable modern business outcomes. Every agent is a tool I use myself, built from real problems, shipped in public.</p><div class="traits"><span class="trait">Business Strategy</span><span class="trait">AI Automation</span><span class="trait">Product Thinking</span><span class="trait">RevOps</span><span class="trait">GTM</span><span class="trait">Prompt Engineering</span><span class="trait">Workflow Design</span></div><div style="display:flex;gap:9px;flex-wrap:wrap"><a href="#contact" class="btn bp">Get In Touch</a><a href="https://github.com/Connect-Pranav" target="_blank" rel="noopener" class="btn bg">🐙 GitHub</a></div></div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact" class="sp" style="text-align:center">
+<div class="container">
+  <div class="fi"><div class="sl" style="justify-content:center">Connect</div><h2 class="sh" style="text-align:center">Let's Build <span class="gt-blue">Extraordinary Things.</span></h2><p class="ss" style="text-align:center;margin:0 auto">Recruiter, founder, or builder — the civilization welcomes you.</p></div>
+  <div class="cl-links fi">
+    <a href="https://github.com/Connect-Pranav" target="_blank" rel="noopener" class="cl">🐙 GitHub · Connect-Pranav</a>
+    <a href="https://linkedin.com/in/pranavkumar" target="_blank" rel="noopener" class="cl">💼 LinkedIn</a>
+    <a href="mailto:pranav@astraloka.dev" class="cl">📬 pranav@astraloka.dev</a>
+    <a href="#" class="cl cl-p">📄 Download Resume</a>
+  </div>
+  <div class="fi" style="margin-top:48px;max-width:460px;margin-left:auto;margin-right:auto">
+    <div class="tb" style="text-align:left">
+      <div class="th"><div class="tdot" style="background:#ef4444"></div><div class="tdot" style="background:#f59e0b"></div><div class="tdot" style="background:#10b981"></div><span style="margin-left:7px;color:var(--txt3);font-size:.64rem">brahma — astra terminal</span></div>
+      <div class="tl"><span class="tp">brahma@astra:~$ </span><span style="color:var(--txt)">contact --commander pranav</span></div>
+      <div class="tl tok">&nbsp;&nbsp;✓ Open to: Senior PM · AI Strategy · Automation</div>
+      <div class="tl tok">&nbsp;&nbsp;✓ Location: Bengaluru · Remote Welcome</div>
+      <div class="tl tok">&nbsp;&nbsp;✓ Available: Immediately</div>
+      <div class="tl" style="color:var(--cyan)">&nbsp;&nbsp;→ ⌘K to explore · ` to open console</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<footer><div class="container"><div class="ft-in"><div class="ft-cp">© 2025 ASTRA LOKA · Built by Pranav Kumar · An AI Civilization</div><div class="ft-lk"><a href="#mission">Mission Control</a><a href="#agents">Agents</a><a href="#builds">Projects</a><a href="#github">GitHub</a><a href="#contact">Contact</a></div></div></div></footer>
+
+<button id="fab" title="Mission Control">🌌</button>
+<div class="kh">⌘K · Console: `</div>
+
+<script>
+'use strict';
+/* ════ BOOT ════ */
+(function(){
+  const steps=[
+    {t:0,   txt:'<span class="bsys">[ ASTRA LOKA ] Genesis Protocol v3.0 initiated...</span>',p:5},
+    {t:320, txt:'<span class="bsys">Loading BRAHMA Core Intelligence...</span>',p:16},
+    {t:600, txt:'<span class="bok">✓ BRAHMA online · Master orchestration active</span>',p:26},
+    {t:880, txt:'<span class="bsys">Synchronizing 13 specialist agents...</span>',p:38},
+    {t:1140,txt:'<span class="bok">✓ Sarathi · Arjun · Vak · Garuda online</span>',p:50},
+    {t:1380,txt:'<span class="bok">✓ Sudarshan · Veda · Vajra · Vayu online</span>',p:62},
+    {t:1600,txt:'<span class="bok">✓ Kavach · Vistara · Sangam · Agni online</span>',p:74},
+    {t:1820,txt:'<span class="bpu">↳ Nakshatra: calibrating agent network graph...</span>',p:85},
+    {t:2040,txt:'<span class="bok">✓ All 14 agents synchronized · Network live</span>',p:94},
+    {t:2240,txt:'<span class="bcy">✦ Mission Control ready · Welcome, Commander Pranav.</span>',p:100},
+  ];
+  const term=document.getElementById('boot-term');
+  const bar=document.getElementById('boot-bf');
+  const pct=document.getElementById('boot-pct');
+  const boot=document.getElementById('boot');
+  steps.forEach(s=>{
+    setTimeout(()=>{
+      const d=document.createElement('div');d.className='bl';d.innerHTML=s.txt;
+      term.appendChild(d);term.scrollTop=term.scrollHeight;
+      bar.style.width=s.p+'%';pct.textContent=s.p+'%';
+    },s.t);
+  });
+  setTimeout(()=>{
+    boot.classList.add('out');
+    setTimeout(()=>{boot.style.display='none';initNotifs();},950);
+  },2700);
+})();
+
+/* ════ CURSOR ════ */
+(function(){
+  const d=document.getElementById('cur-d'),r=document.getElementById('cur-r');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;d.style.left=mx+'px';d.style.top=my+'px'});
+  (function a(){rx+=(mx-rx)*.11;ry+=(my-ry)*.11;r.style.left=rx+'px';r.style.top=ry+'px';requestAnimationFrame(a)})();
+  document.querySelectorAll('a,button,.gc,.ag,.pc').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{d.style.width='12px';d.style.height='12px';r.style.width='46px';r.style.height='46px';r.style.borderColor='rgba(6,182,212,.7)'});
+    el.addEventListener('mouseleave',()=>{d.style.width='8px';d.style.height='8px';r.style.width='36px';r.style.height='36px';r.style.borderColor='rgba(6,182,212,.42)'});
+  });
+})();
+
+/* ════ CONSTELLATION ════ */
+(function(){
+  const cv=document.getElementById('cc'),ctx=cv.getContext('2d');
+  let W,H,stars=[],mouse={x:-999,y:-999};
+  const resize=()=>{W=cv.width=innerWidth;H=cv.height=innerHeight};
+  const mkS=()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.2,vy:(Math.random()-.5)*.12,r:Math.random()*1.3+.3,a:Math.random()*.42+.1});
+  const init=()=>{stars=Array.from({length:140},mkS)};
+  document.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY});
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    stars.forEach(s=>{
+      const dx=mouse.x-s.x,dy=mouse.y-s.y,dist=Math.hypot(dx,dy);
+      if(dist<180){s.vx+=dx/dist*.0015;s.vy+=dy/dist*.0015}
+      s.vx*=.993;s.vy*=.993;s.x+=s.vx;s.y+=s.vy;
+      if(s.x<0)s.x=W;if(s.x>W)s.x=0;if(s.y<0)s.y=H;if(s.y>H)s.y=0;
+      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(148,163,184,${s.a})`;ctx.fill();
+    });
+    for(let i=0;i<stars.length;i++)for(let j=i+1;j<stars.length;j++){
+      const d=Math.hypot(stars[i].x-stars[j].x,stars[i].y-stars[j].y);
+      if(d<120){ctx.beginPath();ctx.moveTo(stars[i].x,stars[i].y);ctx.lineTo(stars[j].x,stars[j].y);ctx.strokeStyle=`rgba(99,179,237,${(1-d/120)*.11})`;ctx.lineWidth=.5;ctx.stroke();}
+    }
+    requestAnimationFrame(draw);
+  }
+  resize();init();draw();
+  addEventListener('resize',()=>{resize();init()});
+})();
+
+/* ════ NETWORK GRAPH ════ */
+(function(){
+  const cv=document.getElementById('net-canvas');
+  if(!cv)return;
+  const ctx=cv.getContext('2d');
+  const tt=document.getElementById('net-tt');
+  let W,H,animT=0,hoveredNode=null;
+
+  const agents=[
+    {id:'brahma',   label:'BRAHMA',    icon:'🧠', role:'Master Intelligence',   color:'#8b5cf6', glow:'rgba(139,92,246,',  load:95, tasks:8,  status:'Online',  repo:'ASTRA-LOKA',           isCore:true},
+    {id:'sarathi',  label:'Sarathi',   icon:'🎯', role:'Sales Intelligence',    color:'#f59e0b', glow:'rgba(245,158,11,',  load:69, tasks:3,  status:'Active',  repo:'Sales-Dashboard',      isCore:false},
+    {id:'arjun',    label:'Arjun',     icon:'🏹', role:'Career Intelligence',   color:'#3b82f6', glow:'rgba(59,130,246,',  load:82, tasks:5,  status:'Active',  repo:'Career-OS',            isCore:false},
+    {id:'garuda',   label:'Garuda',    icon:'🦅', role:'Research Intel',        color:'#06b6d4', glow:'rgba(6,182,212,',   load:76, tasks:4,  status:'Active',  repo:'Arena-Intelligence',   isCore:false},
+    {id:'vak',      label:'Vak',       icon:'🗣', role:'Marketing Studio',      color:'#ec4899', glow:'rgba(236,72,153,',  load:55, tasks:2,  status:'Beta',    repo:'Channel-IH',           isCore:false},
+    {id:'vajra',    label:'Vajra',     icon:'⚡', role:'Automation Engine',     color:'#f97316', glow:'rgba(249,115,22,',  load:88, tasks:6,  status:'Active',  repo:'ASTRA-LOKA',           isCore:false},
+    {id:'sudarshan',label:'Sudarshan', icon:'📊', role:'Analytics Platform',    color:'#0ea5e9', glow:'rgba(14,165,233,',  load:71, tasks:3,  status:'Active',  repo:'Linkedin-Dashboard',   isCore:false},
+    {id:'veda',     label:'Veda',      icon:'📖', role:'Knowledge Hub',         color:'#eab308', glow:'rgba(234,179,8,',   load:43, tasks:2,  status:'Beta',    repo:'Portfolio',            isCore:false},
+    {id:'vayu',     label:'Vayu',      icon:'🌬', role:'Personal Brand',        color:'#10b981', glow:'rgba(16,185,129,',  load:60, tasks:2,  status:'Active',  repo:'Portfolio',            isCore:false},
+    {id:'agni',     label:'Agni',      icon:'🔥', role:'Developer Lab',         color:'#ef4444', glow:'rgba(239,68,68,',   load:78, tasks:4,  status:'Active',  repo:'ASTRA-LOKA',           isCore:false},
+    {id:'nakshatra',label:'Nakshatra', icon:'🌌', role:'Orchestrator',          color:'#a855f7', glow:'rgba(168,85,247,',  load:50, tasks:3,  status:'Dev',     repo:'ASTRA-LOKA',           isCore:false},
+    {id:'vistara',  label:'Vistara',   icon:'🌍', role:'Expansion Intel',       color:'#22c55e', glow:'rgba(34,197,94,',   load:30, tasks:1,  status:'Soon',    repo:'Market-Dashboard',     isCore:false},
+    {id:'kavach',   label:'Kavach',    icon:'🛡', role:'Security Platform',     color:'#64748b', glow:'rgba(100,116,139,', load:100,tasks:0,  status:'Planning',repo:'HEIMDALL-AI',          isCore:false},
+    {id:'sangam',   label:'Sangam',    icon:'🤝', role:'Partner Network',       color:'#c084fc', glow:'rgba(192,132,252,', load:25, tasks:1,  status:'Soon',    repo:'Linkedin-Dashboard',   isCore:false},
+  ];
+
+  // Computed positions: core center, others in orbit
+  function computePositions(){
+    const cx=W/2, cy=H/2;
+    const core=agents.find(a=>a.isCore);
+    core.px=cx; core.py=cy;
+    const others=agents.filter(a=>!a.isCore);
+    const count=others.length;
+    const r1=Math.min(W,H)*0.34;
+    const r2=Math.min(W,H)*0.14;
+    // Inner ring: 5 closest agents
+    const inner=['sarathi','garuda','vajra','arjun','vak'];
+    const outer=others.filter(a=>!inner.includes(a.id));
+    inner.forEach((id,i)=>{
+      const a=agents.find(x=>x.id===id);
+      const angle=(i/inner.length)*Math.PI*2 - Math.PI/2;
+      a.px=cx+Math.cos(angle)*r2*2.2;
+      a.py=cy+Math.sin(angle)*r2*2.2;
+    });
+    outer.forEach((a,i)=>{
+      const angle=(i/outer.length)*Math.PI*2 - Math.PI/2 + 0.2;
+      a.px=cx+Math.cos(angle)*r1;
+      a.py=cy+Math.sin(angle)*r1;
+    });
+  }
+
+  function resize(){
+    W=cv.width=cv.offsetWidth;
+    H=cv.height=cv.offsetHeight;
+    computePositions();
+  }
+
+  // Particles flowing along edges
+  const particles=[];
+  function initParticles(){
+    particles.length=0;
+    agents.forEach(a=>{
+      if(a.isCore)return;
+      for(let i=0;i<3;i++){
+        particles.push({from:a,to:agents[0],t:Math.random(),speed:0.003+Math.random()*0.004,color:a.color});
+      }
+    });
+  }
+
+  function drawEdge(a,b,alpha,width){
+    ctx.beginPath();
+    ctx.moveTo(a.px,a.py);
+    // Slight curve
+    const mx=(a.px+b.px)/2+(a.py-b.py)*0.1;
+    const my=(a.py+b.py)/2-(a.px-b.px)*0.1;
+    ctx.quadraticCurveTo(mx,my,b.px,b.py);
+    ctx.strokeStyle=`rgba(99,179,237,${alpha})`;
+    ctx.lineWidth=width;
+    ctx.stroke();
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    animT+=0.008;
+
+    const core=agents[0];
+
+    // Draw outer ring edge glow
+    agents.forEach(a=>{
+      if(a.isCore)return;
+      const isH=hoveredNode===a.id||hoveredNode===core.id;
+      drawEdge(core,a,isH?0.45:0.12,isH?1.5:0.7);
+    });
+
+    // Cross-connections between nearby outer agents
+    const pairs=[['sarathi','arjun'],['garuda','vak'],['vajra','agni'],['sudarshan','veda'],['nakshatra','agni'],['vayu','vak'],['sangam','vak'],['vistara','garuda']];
+    pairs.forEach(([id1,id2])=>{
+      const a1=agents.find(x=>x.id===id1),a2=agents.find(x=>x.id===id2);
+      if(!a1||!a2)return;
+      const isH=hoveredNode===id1||hoveredNode===id2;
+      drawEdge(a1,a2,isH?0.3:0.06,0.5);
+    });
+
+    // Animate particles
+    particles.forEach(p=>{
+      p.t+=p.speed;
+      if(p.t>1)p.t=0;
+      const t=p.t;
+      const mx=(p.from.px+p.to.px)/2+(p.from.py-p.to.py)*0.1;
+      const my=(p.from.py+p.to.py)/2-(p.from.px-p.to.px)*0.1;
+      const bx=(1-t)*(1-t)*p.from.px+2*(1-t)*t*mx+t*t*p.to.px;
+      const by=(1-t)*(1-t)*p.from.py+2*(1-t)*t*my+t*t*p.to.py;
+      ctx.beginPath();ctx.arc(bx,by,2.5,0,Math.PI*2);
+      ctx.fillStyle=p.color+'cc';ctx.fill();
+      // Trail
+      ctx.beginPath();ctx.arc(bx,by,4,0,Math.PI*2);
+      ctx.fillStyle=p.color+'33';ctx.fill();
+    });
+
+    // Draw outer nodes first
+    agents.filter(a=>!a.isCore).forEach(a=>{
+      const isH=hoveredNode===a.id;
+      const pr=isH?18:13;
+      const pulseR=pr+Math.sin(animT*3+a.px*0.01)*3;
+
+      // Outer glow
+      const g2=ctx.createRadialGradient(a.px,a.py,0,a.px,a.py,pulseR*3);
+      g2.addColorStop(0,a.glow+(isH?'0.5)':'0.18)'));
+      g2.addColorStop(1,a.glow+'0)');
+      ctx.beginPath();ctx.arc(a.px,a.py,pulseR*3,0,Math.PI*2);
+      ctx.fillStyle=g2;ctx.fill();
+
+      // Ring
+      ctx.beginPath();ctx.arc(a.px,a.py,pr,0,Math.PI*2);
+      ctx.strokeStyle=a.color+(isH?'ff':'99');
+      ctx.lineWidth=isH?2:1.2;ctx.stroke();
+
+      // Inner dot
+      ctx.beginPath();ctx.arc(a.px,a.py,pr*0.55,0,Math.PI*2);
+      ctx.fillStyle=a.color+(isH?'ee':'77');ctx.fill();
+
+      // Label
+      ctx.font=`${isH?'600 ':''}${isH?11:9}px 'IBM Plex Mono',monospace`;
+      ctx.fillStyle=isH?'#f1f5f9':'#94a3b8';
+      ctx.textAlign='center';ctx.textBaseline='top';
+      ctx.fillText(a.icon+' '+a.label,a.px,a.py+pr+5);
+    });
+
+    // Draw BRAHMA core — large glowing hub like the reel
+    const pulseScale=1+Math.sin(animT*1.5)*0.04;
+    const coreR=Math.min(W,H)*0.09*pulseScale;
+
+    // Multiple glow layers
+    for(let i=4;i>=0;i--){
+      const g=ctx.createRadialGradient(core.px,core.py,0,core.px,core.py,coreR*(1.5+i*0.8));
+      g.addColorStop(0,`rgba(99,179,237,${0.18-i*0.032})`);
+      g.addColorStop(0.4,`rgba(59,130,246,${0.12-i*0.02})`);
+      g.addColorStop(1,'rgba(59,130,246,0)');
+      ctx.beginPath();ctx.arc(core.px,core.py,coreR*(1.5+i*0.8),0,Math.PI*2);
+      ctx.fillStyle=g;ctx.fill();
+    }
+
+    // Core spinning ring
+    ctx.save();
+    ctx.translate(core.px,core.py);
+    ctx.rotate(animT*0.4);
+    ctx.beginPath();ctx.arc(0,0,coreR*1.15,0,Math.PI*1.6);
+    ctx.strokeStyle='rgba(99,179,237,0.5)';ctx.lineWidth=1.5;ctx.stroke();
+    ctx.restore();
+    ctx.save();
+    ctx.translate(core.px,core.py);
+    ctx.rotate(-animT*0.25);
+    ctx.beginPath();ctx.arc(0,0,coreR*1.35,-0.5,Math.PI*1.2);
+    ctx.strokeStyle='rgba(139,92,246,0.35)';ctx.lineWidth=1;ctx.stroke();
+    ctx.restore();
+
+    // Core solid fill — particle cluster look
+    const cg=ctx.createRadialGradient(core.px,core.py,0,core.px,core.py,coreR);
+    cg.addColorStop(0,'rgba(147,197,253,0.95)');
+    cg.addColorStop(0.35,'rgba(99,179,237,0.8)');
+    cg.addColorStop(0.7,'rgba(59,130,246,0.5)');
+    cg.addColorStop(1,'rgba(59,130,246,0)');
+    ctx.beginPath();ctx.arc(core.px,core.py,coreR,0,Math.PI*2);
+    ctx.fillStyle=cg;ctx.fill();
+
+    // Micro-particles inside core
+    for(let i=0;i<12;i++){
+      const angle=animT*0.6+i*(Math.PI*2/12);
+      const dist=coreR*0.55*Math.random()*1;
+      const px2=core.px+Math.cos(angle)*dist*Math.sin(animT+i);
+      const py2=core.py+Math.sin(angle)*dist*Math.cos(animT*0.7+i);
+      ctx.beginPath();ctx.arc(px2,py2,1.5,0,Math.PI*2);
+      ctx.fillStyle=`rgba(219,234,254,${0.4+Math.sin(animT*2+i)*0.3})`;ctx.fill();
+    }
+
+    // BRAHMA label
+    ctx.font="bold 13px 'Space Grotesk',sans-serif";
+    ctx.fillStyle='rgba(241,245,249,0.9)';
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText('🧠 BRAHMA',core.px,core.py+coreR+18);
+    ctx.font="10px 'IBM Plex Mono',monospace";
+    ctx.fillStyle='rgba(148,163,184,0.7)';
+    ctx.fillText('MASTER INTELLIGENCE',core.px,core.py+coreR+32);
+
+    requestAnimationFrame(draw);
+  }
+
+  // Hover detection
+  cv.addEventListener('mousemove',e=>{
+    const rect=cv.getBoundingClientRect();
+    const mx=e.clientX-rect.left,my=e.clientY-rect.top;
+    let found=null;
+    agents.forEach(a=>{
+      const dist=Math.hypot(mx-a.px,my-a.py);
+      const r=a.isCore?Math.min(W,H)*0.09:18;
+      if(dist<r+10)found=a.id;
+    });
+    hoveredNode=found;
+    if(found){
+      const n=agents.find(x=>x.id===found);
+      tt.innerHTML=`<div class="nt-name">${n.icon} ${n.label}</div><div class="nt-role">${n.role}</div><div class="nt-row"><span class="nt-key">Status</span><span class="nt-val" style="color:${n.color}">${n.status}</span></div><div class="nt-row"><span class="nt-key">Tasks</span><span class="nt-val">${n.tasks} active</span></div><div class="nt-row"><span class="nt-key">Repository</span><span class="nt-val">${n.repo}</span></div><div class="nt-bar-wrap"><div class="nt-key" style="margin-bottom:4px">CPU Load · ${n.load}%</div><div class="nt-bar"><div class="nt-fill" style="width:${n.load}%;background:${n.color}"></div></div></div>`;
+      const tx=Math.min(mx+16,W-230);
+      const ty=Math.max(my-90,8);
+      tt.style.left=tx+'px';tt.style.top=ty+'px';
+      tt.classList.add('show');
+      cv.style.cursor='pointer';
+    } else {
+      tt.classList.remove('show');
+      cv.style.cursor='none';
+    }
+  });
+  cv.addEventListener('mouseleave',()=>{hoveredNode=null;tt.classList.remove('show')});
+  cv.addEventListener('click',e=>{
+    if(hoveredNode){
+      const n=agents.find(x=>x.id===hoveredNode);
+      document.getElementById('agents')?.scrollIntoView({behavior:'smooth'});
+    }
+  });
+
+  resize();initParticles();draw();
+  addEventListener('resize',()=>{resize();initParticles()});
+})();
+
+/* ════ NAV ════ */
+addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('up',scrollY>32));
+
+/* ════ TYPING ════ */
+(function(){
+  const el=document.getElementById('ty-t');
+  if(!el)return;
+  const phrases=['14 AI citizens working for you','Every repository a city','Every deployment expands the civilization','Ancient wisdom. Future intelligence.','Run garuda · Launch Arjun · Build the future'];
+  let pi=0,ci=0,del=false;
+  function tick(){
+    const p=phrases[pi];
+    if(!del){el.textContent=p.slice(0,++ci);if(ci===p.length){del=true;setTimeout(tick,2000);return}}
+    else{el.textContent=p.slice(0,--ci);if(ci===0){del=false;pi=(pi+1)%phrases.length}}
+    setTimeout(tick,del?40:75);
+  }tick();
+})();
+
+/* ════ LIVE TERMINAL ════ */
+(function(){
+  const el=document.getElementById('live-term');
+  if(!el)return;
+  const lines=[
+    '<span class="tp">brahma@astra:~$ </span><span style="color:var(--txt)">boot --civilization --all-agents</span>',
+    '<span class="to">  Loading BRAHMA Master Intelligence...</span>',
+    '<span class="tok">  ✓ BRAHMA online · CPU 95% · 8 tasks</span>',
+    '<span class="to">  Connecting Vajra automation engine...</span>',
+    '<span class="tok">  ✓ Vajra firing 9 active workflows</span>',
+    '<span class="to">  Garuda scanning 847 LinkedIn targets...</span>',
+    '<span class="tok">  ✓ 42 Series B–D companies identified</span>',
+    '<span class="tpu">  ↳ Vak scheduling content for Q3...</span>',
+    '<span class="tok">  ✓ 6 posts scheduled · Reach: 12K est.</span>',
+    '<span class="tw">  ⚡ Arjun: 3 interviews confirmed this week</span>',
+    '<span class="tok">  ✓ All 14 agents nominal · 530h saved</span>',
+    '<span class="tp">brahma@astra:~$ </span><span style="color:var(--txt)">status --live</span>',
+    '<span class="tok">  ✓ 14/14 agents online · 0 errors · Civilization expanding</span>',
+  ];
+  let i=0;
+  function addLine(){
+    if(i>=lines.length){el.innerHTML='';i=0}
+    const d=document.createElement('div');d.className='tl';d.innerHTML=lines[i++];
+    el.appendChild(d);el.parentElement.scrollTop=el.parentElement.scrollHeight;
+  }
+  addLine();setInterval(addLine,1800);
+})();
+
+/* ════ OBSERVER + COUNTERS ════ */
+(function(){
+  const io=new IntersectionObserver(entries=>entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    e.target.classList.add('vis');
+    e.target.querySelectorAll('[data-n]').forEach(el=>{
+      if(el.dataset.counted)return;el.dataset.counted='1';
+      const t=parseFloat(el.dataset.n),sf=el.dataset.s||'',step=t/52;let c=0;
+      const iv=setInterval(()=>{c=Math.min(c+step,t);el.textContent=(Number.isInteger(t)?Math.floor(c):c.toFixed(1))+sf;if(c>=t)clearInterval(iv)},18);
+    });
+  }),{threshold:.1});
+  document.querySelectorAll('.fi').forEach(e=>io.observe(e));
+})();
+
+/* ════ COMMAND PALETTE ════ */
+(function(){
+  const cmds=[
+    {i:'🏠',n:'Home',t:'nav',h:'#hero'},
+    {i:'🕸',n:'Agent Network Graph',t:'nav',h:'#network-section'},
+    {i:'📡',n:'Mission Control',t:'nav',h:'#mission'},
+    {i:'🤖',n:'14 AI Agents',t:'nav',h:'#agents'},
+    {i:'✦',n:'Project Constellation',t:'nav',h:'#builds'},
+    {i:'🚀',n:'Mission Timeline',t:'nav',h:'#timeline'},
+    {i:'🐙',n:'GitHub Repos',t:'nav',h:'#github'},
+    {i:'👤',n:'About Pranav',t:'nav',h:'#about'},
+    {i:'📬',n:'Contact',t:'nav',h:'#contact'},
+    {i:'⬡',n:'Open Console',t:'cmd',h:'console'},
+    {i:'🧠',n:'BRAHMA — Master Intelligence',t:'agent',h:'#agents'},
+    {i:'🎯',n:'Sarathi — Sales Intelligence',t:'agent',h:'#agents'},
+    {i:'🏹',n:'Arjun — Career Intelligence',t:'agent',h:'#agents'},
+    {i:'🗣',n:'Vak — Marketing Studio',t:'agent',h:'#agents'},
+    {i:'🦅',n:'Garuda — Research Intel',t:'agent',h:'#agents'},
+    {i:'🌍',n:'Vistara — Expansion Intel',t:'agent',h:'#agents'},
+    {i:'📊',n:'Sudarshan — Analytics',t:'agent',h:'#agents'},
+    {i:'📖',n:'Veda — Knowledge Hub',t:'agent',h:'#agents'},
+    {i:'⚡',n:'Vajra — Automation Engine',t:'agent',h:'#agents'},
+    {i:'🛡',n:'Kavach — Security Platform',t:'agent',h:'#agents'},
+    {i:'🌬',n:'Vayu — Personal Brand',t:'agent',h:'#agents'},
+    {i:'🤝',n:'Sangam — Partner Network',t:'agent',h:'#agents'},
+    {i:'🔥',n:'Agni — Developer Lab',t:'agent',h:'#agents'},
+    {i:'🌌',n:'Nakshatra — Orchestrator',t:'agent',h:'#agents'},
+    {i:'🌌',n:'Brahmaanda — ASTRA-LOKA',t:'project',h:'#builds'},
+    {i:'⚡',n:'Karmayoga — Career OS',t:'project',h:'#builds'},
+    {i:'👑',n:'Indraloka — Job Center',t:'project',h:'#builds'},
+    {i:'💰',n:'Vaishravana — Market Dash',t:'project',h:'#builds'},
+    {i:'🌸',n:'Lakshmi — MARKETO-AI',t:'project',h:'#builds'},
+    {i:'⭐',n:'Dhruva — Share Navigator',t:'project',h:'#builds'},
+    {i:'🔥',n:'Akhada — Arena Intel',t:'project',h:'#builds'},
+    {i:'🏺',n:'Kubera — Sales Dashboard',t:'project',h:'#builds'},
+    {i:'📡',n:'Sandesh — Channel-IH',t:'project',h:'#builds'},
+    {i:'👁',n:'Drishti — HEIMDALL-AI',t:'project',h:'#builds'},
+    {i:'🤝',n:'Mitra — LinkedIn Dash',t:'project',h:'#builds'},
+    {i:'✦',n:'Swayambhu — Portfolio',t:'project',h:'#builds'},
+  ];
+  const pal=document.getElementById('cp'),inp=document.getElementById('cp-in'),list=document.getElementById('cp-ls');
+  function open(){pal.classList.add('open');inp.value='';render('');setTimeout(()=>inp.focus(),50)}
+  function close(){pal.classList.remove('open')}
+  function render(q){
+    const fl=cmds.filter(c=>c.n.toLowerCase().includes(q.toLowerCase()));
+    list.innerHTML='';
+    [{k:'nav',l:'Navigation'},{k:'agent',l:'Agents'},{k:'project',l:'Projects'},{k:'cmd',l:'Commands'}].forEach(({k,l})=>{
+      const items=fl.filter(c=>c.t===k);if(!items.length)return;
+      const lbl=document.createElement('div');lbl.className='cp-hl';lbl.textContent=l;list.appendChild(lbl);
+      items.forEach(cmd=>{
+        const d=document.createElement('div');d.className='cp-r';
+        d.innerHTML=`<span class="cp-ri">${cmd.i}</span><span class="cp-rn">${cmd.n}</span><span class="cp-rt">${cmd.t}</span>`;
+        d.onclick=()=>{
+          close();
+          if(cmd.h==='console')toggleConsole();
+          else document.querySelector(cmd.h)?.scrollIntoView({behavior:'smooth'});
+        };
+        list.appendChild(d);
+      });
+    });
+  }
+  inp.addEventListener('input',()=>render(inp.value));
+  document.addEventListener('keydown',e=>{
+    if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();pal.classList.contains('open')?close():open()}
+    if(e.key==='Escape'){close();closeMatrix()}
+    if(e.key==='`'&&!pal.classList.contains('open'))toggleConsole();
+  });
+  pal.addEventListener('click',e=>{if(e.target===pal)close()});
+  document.getElementById('pal-btn').onclick=open;
+})();
+
+/* ════ PROJECT FILTER ════ */
+(function(){
+  const btns=document.querySelectorAll('.pf');
+  const cards=document.querySelectorAll('#pg .pc');
+  const cnt=document.getElementById('pc');
+  btns.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      btns.forEach(b=>b.classList.remove('on'));btn.classList.add('on');
+      const f=btn.dataset.f;let v=0;
+      cards.forEach(c=>{const show=f==='all'||c.dataset.c.includes(f);c.style.display=show?'':'none';if(show)v++});
+      cnt.textContent=v+' project'+(v!==1?'s':'');
+    });
+  });
+})();
+
+/* ════ CONSOLE ════ */
+const consoleOut=document.getElementById('console-out');
+const consoleInp=document.getElementById('console-inp');
+let consoleOpen=false;
+
+function toggleConsole(){
+  consoleOpen=!consoleOpen;
+  const cw=document.getElementById('console-wrap');
+  cw.classList.toggle('open',consoleOpen);
+  if(consoleOpen)setTimeout(()=>consoleInp.focus(),100);
+}
+
+function cLog(txt,color='var(--txt2)'){
+  const d=document.createElement('div');
+  d.style.cssText=`color:${color};font-size:.74rem;line-height:1.8;font-family:var(--fm)`;
+  d.innerHTML=txt;consoleOut.appendChild(d);
+  consoleOut.scrollTop=consoleOut.scrollHeight;
+}
+
+const cmds_console={
+  'help':()=>{cLog('Commands: list agents · run &lt;agent&gt; · status · clear · about · github','var(--cyan)')},
+  'list agents':()=>{cLog('🧠 BRAHMA · 🎯 Sarathi · 🏹 Arjun · 🗣 Vak · 🦅 Garuda · 🌍 Vistara<br>📊 Sudarshan · 📖 Veda · ⚡ Vajra · 🛡 Kavach · 🌬 Vayu · 🤝 Sangam · 🔥 Agni · 🌌 Nakshatra','var(--green)')},
+  'status':()=>{cLog('✓ 14/14 agents online · 530h saved · 147 applications · 32 projects built','var(--green)')},
+  'run garuda':()=>{cLog('🦅 Garuda online...<br>→ Scanning 847 companies<br>✓ 42 targets identified · 32 sources collected','var(--cyan)')},
+  'run arjun':()=>{cLog('🏹 Arjun online...<br>→ Optimizing ATS score<br>✓ Resume tailored · 3 interviews this week','var(--blue)')},
+  'run vajra':()=>{cLog('⚡ Vajra online...<br>→ Triggering workflows<br>✓ 9 automations active · 530h saved','var(--gold)')},
+  'run brahma':()=>{cLog('🧠 BRAHMA online...<br>→ Orchestrating all 13 agents<br>✓ Mission Control active · Civilization expanding','var(--purple)')},
+  'clear':()=>{consoleOut.innerHTML='';cLog('Console cleared.','var(--txt3)')},
+  'about':()=>{cLog('ASTRA LOKA v3.0 · Built by Pranav Kumar · Ancient Wisdom. Future Intelligence.','var(--cyan)')},
+  'github':()=>{window.open('https://connect-pranav.github.io','_blank');cLog('→ Opening GitHub · Connect-Pranav','var(--green)')},
+  'matrix':()=>{toggleConsole();openMatrix()},
+};
+
+consoleInp.addEventListener('keydown',e=>{
+  if(e.key!=='Enter')return;
+  const v=consoleInp.value.trim().toLowerCase();
+  if(!v)return;
+  cLog(`<span style="color:var(--cyan)">brahma@astra:~$</span> ${v}`,'var(--txt)');
+  const fn=cmds_console[v];
+  if(fn)fn();
+  else cLog(`Command not found: "${v}". Type "help" for commands.`,'var(--red)');
+  consoleInp.value='';
+});
+
+setTimeout(()=>cLog('ASTRA LOKA Console ready. Type "help" for commands.','var(--txt3)'),3200);
+
+/* ════ NOTIFICATIONS ════ */
+function initNotifs(){
+  const wrap=document.getElementById('nw');
+  const msgs=[
+    {t:'⚡ Vajra Active',b:'Outreach workflow · 9 messages sent'},
+    {t:'🦅 Garuda Report',b:'42 Series B–D companies identified'},
+    {t:'🏹 Arjun Update',b:'3 interviews confirmed this week'},
+    {t:'✦ ASTRA LOKA Online',b:'All 14 agents synchronized'},
+  ];
+  let i=0;
+  function show(){
+    if(i>=msgs.length)return;
+    const m=msgs[i++];
+    const el=document.createElement('div');el.className='notif-it';
+    el.innerHTML=`<div class="notif-ti">${m.t}</div><div class="notif-bd">${m.b}</div>`;
+    wrap.appendChild(el);
+    requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add('show')));
+    setTimeout(()=>{el.classList.remove('show');setTimeout(()=>el.remove(),400)},3600);
+    if(i<msgs.length)setTimeout(show,4400);
+  }
+  setTimeout(show,1000);
+}
+
+/* ════ MOUSE GLOW ════ */
+(function(){
+  const g=document.createElement('div');
+  Object.assign(g.style,{position:'fixed',width:'650px',height:'650px',borderRadius:'50%',background:'radial-gradient(circle,rgba(59,130,246,.032),transparent 68%)',pointerEvents:'none',zIndex:'1',transform:'translate(-50%,-50%)',transition:'left .16s ease,top .16s ease'});
+  document.body.appendChild(g);
+  document.addEventListener('mousemove',e=>{g.style.left=e.clientX+'px';g.style.top=e.clientY+'px'});
+})();
+
+/* ════ SMOOTH LINKS ════ */
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+  const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'})}
+}));
+
+/* ════ FAB ════ */
+document.getElementById('fab').onclick=()=>document.getElementById('mission')?.scrollIntoView({behavior:'smooth'});
+
+/* ════ KONAMI CODE EASTER EGG ════ */
+let konamiSeq=[];
+const KONAMI=[38,38,40,40,37,39,37,39,66,65];
+document.addEventListener('keydown',e=>{
+  konamiSeq.push(e.keyCode);
+  if(konamiSeq.length>10)konamiSeq.shift();
+  if(JSON.stringify(konamiSeq)===JSON.stringify(KONAMI))openMatrix();
+});
+
+function openMatrix(){
+  const overlay=document.getElementById('matrix-overlay');
+  overlay.classList.add('show');
+  const cv=document.getElementById('matrix-canvas');
+  const ctx=cv.getContext('2d');
+  cv.width=innerWidth;cv.height=innerHeight;
+  const cols=Math.floor(innerWidth/14);
+  const drops=Array(cols).fill(1);
+  const chars='ॐ अ आ इ ई उ ऊ ए ऐ ओ औ क ख ग घ ङ च छ ज झ ञ 0 1 ✦ ∞ △ ◯';
+  const charArr=chars.split(' ');
+  const iv=setInterval(()=>{
+    ctx.fillStyle='rgba(0,0,0,0.04)';ctx.fillRect(0,0,cv.width,cv.height);
+    ctx.fillStyle='#10b981';ctx.font='13px monospace';
+    drops.forEach((y,i)=>{
+      ctx.fillText(charArr[Math.floor(Math.random()*charArr.length)],i*14,y*14);
+      if(y*14>cv.height&&Math.random()>.975)drops[i]=0;
+      drops[i]++;
+    });
+  },40);
+  overlay._iv=iv;
+}
+
+function closeMatrix(){
+  const overlay=document.getElementById('matrix-overlay');
+  overlay.classList.remove('show');
+  if(overlay._iv)clearInterval(overlay._iv);
+  konamiSeq=[];
+}
+</script>
+</body>
+</html>
