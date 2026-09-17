@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<title>ASTRA LOKA — A Cinematic Digital Experience</title>
+<meta name="description" content="ASTRA LOKA — a cinematic, cursor-controlled mystical hero experience.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="hero" class="hero">
+
+  <!-- deep background -->
+  <div class="hero-bg"></div>
+
+  <!-- lightweight canvas for golden particles -->
+  <canvas id="particles" class="particles-canvas" aria-hidden="true"></canvas>
+
+  <!-- character stage: video + halo glow, tilts subtly with mouse Y -->
+  <div id="stage" class="stage">
+    <div class="halo-glow" aria-hidden="true"></div>
+
+    <video
+      id="character-video"
+      class="character-video"
+      src="assets/character-rotation.mp4"
+      preload="auto"
+      muted
+      playsinline
+      webkit-playsinline
+      disablepictureinpicture
+      disableremoteplayback
+      controlsList="nodownload noplaybackrate nofullscreen"
+      aria-label="Mystical deity character — controlled by cursor movement">
+    </video>
+  </div>
+
+  <!-- vignette + film grain overlays -->
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- text content -->
+  <div class="hero-copy">
+    <h1 id="hero-title" class="hero-title">ASTRA LOKA</h1>
+    <p id="hero-subtitle" class="hero-subtitle">A CINEMATIC DIGITAL EXPERIENCE</p>
+    <p id="hero-instruction" class="hero-instruction">Move your cursor to explore</p>
+  </div>
+
+  <!-- drag indicator (mobile-oriented, fades after first interaction) -->
+  <div id="drag-indicator" class="drag-indicator" aria-hidden="true">
+    <span class="drag-arrow drag-arrow-left">‹</span>
+    <span class="drag-dot"></span>
+    <span class="drag-arrow drag-arrow-right">›</span>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
